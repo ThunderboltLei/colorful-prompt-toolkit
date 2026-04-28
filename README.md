@@ -72,7 +72,6 @@ Copy the file prompt-color-<symbol>.sh of your own.
 
 $ vim my-colorful-prompt-toolkit.sh
 
-# 方便扩展属于自己的提示符 
 case $MY_COLORFUL_PROMPT_TYPE in
 1)
     source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-default.sh
