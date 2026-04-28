@@ -14,13 +14,13 @@ This is default style
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/Example\ 01.png" alt="Colorful Prompt Toolkit" width="200"/>
+    <img src="assets/Example 01.png" alt="Colorful Prompt Toolkit" width="200"/>
   </a>
 </p>
 
 ## Crumbs Style
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/Example\ 02.png" alt="Colorful Prompt Toolkit" width="200"/>
+    <img src="assets/Example 02.png" alt="Colorful Prompt Toolkit" width="200"/>
   </a>
 </p>
