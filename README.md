@@ -63,3 +63,28 @@ Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=2".
     <img src="assets/Example 02.png" alt="Colorful Prompt Toolkit"/>
   </a>
 </p>
+
+# Extensible to your own prompts
+```
+$ cd types
+
+Copy the file prompt-color-<symbol>.sh of your own.
+
+$ vim my-colorful-prompt-toolkit.sh
+
+# 方便扩展属于自己的提示符 
+case $MY_COLORFUL_PROMPT_TYPE in
+1)
+    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-default.sh
+    ;;
+2)
+    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-t2.sh
+    ;;
+<symbol>)
+    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-<symbol>.sh
+    ;;
+*)
+    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-default.sh
+    ;;
+esac
+``
