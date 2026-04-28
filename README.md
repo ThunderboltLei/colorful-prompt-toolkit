@@ -7,6 +7,37 @@
 # Colorful Prompt Toolkit
 Colorful Prompt Toolkit is an open-source project dedicated to beautifying terminal prompts. It transforms the plain command line into an intuitive and visually appealing interface by offering rich color schemes, custom icons, and dynamic information such as Git branches, execution time, and current directory. Compatible with various shells like Bash and Zsh, users can easily adjust themes to enhance both the development experience and visual enjoyment. Ideal for daily development, system administration, and presentation scenarios, it makes command-line operations more efficient and personalized.
 
+# Installation
+```
+$ git clone <colorful-prompt-toolkit>
+
+$ vim .zshrc
+# ===== 自定义绚彩提示符 =====
+source <your path>/colorful-prompt-toolkit/my-colorful-prompt-toolkit.sh
+
+$ source .zshrc
+```
+
+# Configuration
+The configuration is very simple. All you need to do is modify the configuration items in the prompt-settings.sh script in the configs directory, and then you can use the style you prefer on the terminal. Isn't it very simple?
+
+```text
+# type：1/2
+export MY_COLORFUL_PROMPT_TYPE=1
+
+# color number: You can select the line numbers of the styles to be used in the "colorful-style.txt" file under the "style" directory.
+export MY_COLORFUL_PROMPT_COLOR_NUMBER=3
+```
+
+# How to generate color combinations?
+The following prompt statements can be used in AI tools, such as DouBao, DeepSeek, etc.
+```
+List the top 50 color combinations for the prompt. The prompt consists of: serial number, topic, username, host, path, git branch, symbol and background. All the generated prompt contents should be separated by "|". The serial number content should increment from 1. The topic content is the prompt title. The colors of username, host, path, git branch, symbol and background are in HEX format. Generate plain text content. Generate the content strictly according to my requirements.
+```
+Copy the generated result to the "colorful-style.txt" file. Then, modify the value of the configuration item "MY_COLORFUL_PROMPT_COLOR_NUMBER" in the configuration file "prompt-settings.sh". Just enter any command in the terminal and you will see the brand new effect.
+
+Note: Before updating the content of the "colorful-style.txt" file, it is advisable to make a backup first.
+
 # Show Time
 ## Simple Style
 ```
