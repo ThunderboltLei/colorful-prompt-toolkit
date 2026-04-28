@@ -9,7 +9,7 @@ Colorful Prompt Toolkit is an open-source project dedicated to beautifying termi
 
 # Thanks
 Thank you to the authors of the Git project for providing the git-prompt script.
-Git(https://github.com/git/git)
+*[Git](https://github.com/git/git))
 
 # Installation
 ```
