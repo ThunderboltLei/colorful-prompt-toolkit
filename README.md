@@ -7,6 +7,10 @@
 # Colorful Prompt Toolkit
 Colorful Prompt Toolkit is an open-source project dedicated to beautifying terminal prompts. It transforms the plain command line into an intuitive and visually appealing interface by offering rich color schemes, custom icons, and dynamic information such as Git branches, execution time, and current directory. Compatible with various shells like Bash and Zsh, users can easily adjust themes to enhance both the development experience and visual enjoyment. Ideal for daily development, system administration, and presentation scenarios, it makes command-line operations more efficient and personalized.
 
+# Thanks
+Thank you to the authors of the Git project for providing the git-prompt script.
+Git(https://github.com/git/git)
+
 # Installation
 ```
 $ git clone <colorful-prompt-toolkit>
@@ -43,7 +47,7 @@ Copy the generated result to the "colorful-style.txt" file. Then, modify the val
 # Show Time
 ## Simple Style
 ```
-This is default style
+This is the default format. Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=1".
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
@@ -52,6 +56,9 @@ This is default style
 </p>
 
 ## Crumbs Style
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=2".
+```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
     <img src="assets/Example 02.png" alt="Colorful Prompt Toolkit"/>
