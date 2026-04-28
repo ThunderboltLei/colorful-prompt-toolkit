@@ -15,7 +15,6 @@ Thank you to the authors of the *[Git](https://github.com/git/git)* project for 
 $ git clone <colorful-prompt-toolkit>
 
 $ vim .zshrc
-# ===== 自定义绚彩提示符 =====
 source <your path>/colorful-prompt-toolkit/my-colorful-prompt-toolkit.sh
 
 $ source .zshrc
