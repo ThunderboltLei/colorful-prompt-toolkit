@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/colorful-prompt-toolkit.png" alt="Colorful Prompt Toolkit"/>
+    <img src="assets/colorful-prompt-toolkit.png" alt="Colorful Prompt Toolkit" width="500"/>
   </a>
 </p>
 
