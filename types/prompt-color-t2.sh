@@ -68,9 +68,9 @@ assemble_colorful_prompt() {
         PROMPT+='%F{${PATH_COLOR}}${RIGHT_ARROW} %f'
     else
         PROMPT+='%K{${GIT_COLOR}}%F{${PATH_COLOR}}${RIGHT_ARROW}${RESET}'
-        PROMPT+='%K{${GIT_COLOR}}%F{${BG_COLOR}}%B (%b${RESET}'
+        PROMPT+='%K{${GIT_COLOR}}%F{${BG_COLOR}}%B [%b${RESET}'
         PROMPT+='%K{${GIT_COLOR}}%F{${BG_COLOR}} $(__git_ps1 "%s") ${RESET}'
-        PROMPT+='%K{${GIT_COLOR}}%F{${BG_COLOR}}%B) %b${RESET}'
+        PROMPT+='%K{${GIT_COLOR}}%F{${BG_COLOR}}%B] %b${RESET}'
         PROMPT+='%F{${GIT_COLOR}}${RIGHT_ARROW} %f'  # 右三角边缘
     fi
 
