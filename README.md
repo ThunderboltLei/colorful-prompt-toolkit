@@ -36,7 +36,7 @@ List the top 50 color combinations for the prompt. The prompt consists of: seria
 ```
 Copy the generated result to the "colorful-style.txt" file. Then, modify the value of the configuration item "MY_COLORFUL_PROMPT_COLOR_NUMBER" in the configuration file "prompt-settings.sh". Just enter any command in the terminal and you will see the brand new effect.
 
-<span style="color: red;font-weight: bold;">Note: </span><br/>
+<font color=Red>Note: </font><br/>
 1、Before updating the content of the "colorful-style.txt" file, it is advisable to make a backup first.<br/>
 2、If the text cannot be displayed correctly in the terminal, you need to install the font that supports "Nerd".<br/>
 
