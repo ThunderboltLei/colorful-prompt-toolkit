@@ -99,7 +99,7 @@ precmd() {
     then
 
         # 重新生成完整提示符
-        assemble_colorful_prompt $j
+        assemble_colorful_prompt
 
         PROMPT_RESET_NEEDED=0
     fi
