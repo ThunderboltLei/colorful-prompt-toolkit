@@ -27,16 +27,4 @@ GIT_PS1_SHOWUNTRACKEDFILES="yes"      # 显示未跟踪文件（用 % 表示）
 GIT_PS1_SHOWSTASHSTATE="yes"          # 显示是否有 stash（用 $ 表示）
 
 # ===== 4. 自定义提示符样式 =====
-source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
-# 方便扩展属于自己的提示符 
-case $MY_COLORFUL_PROMPT_TYPE in
-1)
-    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-default.sh
-    ;;
-2)
-    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-t2.sh
-    ;;
-*)
-    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-default.sh
-    ;;
-esac
+source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-type-dispatch.sh

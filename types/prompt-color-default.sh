@@ -86,16 +86,31 @@ PROMPT_RESET_NEEDED=1
 preexec() {
     PROMPT_RESET_NEEDED=1
     
-    # 临时简单提示符
-    assemble_colorful_prompt
+    # === 计算时间 ===
+    ZSH_LAST_COMMAND_START=$EPOCHREALTIME
 }
 
 # 命令执行后恢复完整样式
 precmd() {
-    source $MY_COLORFUL_PROMPT_ROOT_PATH/my-colorful-prompt-toolkit.sh
+    # source $MY_COLORFUL_PROMPT_ROOT_PATH/my-colorful-prompt-toolkit.sh
 
     if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
     then
+        # === 计算时间 ===
+        if [[ -n "$ZSH_LAST_COMMAND_START" ]]; then
+            local end_time=$EPOCHREALTIME
+            if command -v bc >/dev/null 2>&1; then
+                local duration=$(echo "$end_time - $ZSH_LAST_COMMAND_START" | bc)
+            else
+                # 降级方案：只取整数部分
+                local duration=$((end_time - ZSH_LAST_COMMAND_START))
+            fi
+            ZSH_COMMAND_DURATION=$(format_duration "$duration")
+            ZSH_LAST_COMMAND_START=""
+        else
+            ZSH_COMMAND_DURATION=""
+        fi
+
         # 重新生成完整提示符
         assemble_colorful_prompt
         PROMPT_RESET_NEEDED=0

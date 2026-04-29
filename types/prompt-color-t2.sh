@@ -81,7 +81,7 @@ assemble_colorful_prompt() {
     RPROMPT+='%K{${SYMBOL_COLOR}}%F{${BG_COLOR}} $(get_command_status) ${RESET}'
 
     RPROMPT+='%K{${SYMBOL_COLOR}}%F{${PATH_COLOR}}${LEFT_ARROW}${RESET}'
-    RPROMPT+='%K{${PATH_COLOR}}%F{${USER_COLOR}} $(get_duration) ${RESET}'
+    RPROMPT+='%K{${PATH_COLOR}}%F{${USER_COLOR}} $(get_duration $ZSH_COMMAND_START_TIME) ${RESET}'
 
     RPROMPT+='%K{${PATH_COLOR}}%F{${USER_COLOR}}${LEFT_ARROW}${RESET}'
     RPROMPT+='%K{${USER_COLOR}}%F{${BG_COLOR}} %D{%H:%M:%S}${RESET}'
@@ -92,11 +92,17 @@ assemble_colorful_prompt() {
 # 设置一个标志变量
 PROMPT_RESET_NEEDED=1
 
+# # 初始化
+# zmodload zsh/datetime 2>/dev/null
+# typeset -g ZSH_COMMAND_DURATION=""
+# typeset -g ZSH_LAST_COMMAND_START=""
+
 # 命令执行前
 preexec() {
-
     PROMPT_RESET_NEEDED=1
 
+    # === 计算时间 ===
+    ZSH_LAST_COMMAND_START=$EPOCHREALTIME
 }
 
 # 命令执行后恢复完整样式
@@ -105,7 +111,22 @@ precmd() {
     if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
     then
 
-        # 重新生成完整提示符
+        # === 计算时间 ===
+        if [[ -n "$ZSH_LAST_COMMAND_START" ]]; then
+            local end_time=$EPOCHREALTIME
+            if command -v bc >/dev/null 2>&1; then
+                local duration=$(echo "$end_time - $ZSH_LAST_COMMAND_START" | bc)
+            else
+                # 只取整数部分
+                local duration=$((end_time - ZSH_LAST_COMMAND_START))
+            fi
+            ZSH_COMMAND_DURATION=$(format_duration "$duration")
+            ZSH_LAST_COMMAND_START=""
+        else
+            ZSH_COMMAND_DURATION=""
+        fi
+
+        # === 重新生成完整提示符 ===
         assemble_colorful_prompt
 
         PROMPT_RESET_NEEDED=0
