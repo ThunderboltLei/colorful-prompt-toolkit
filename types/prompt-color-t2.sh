@@ -7,7 +7,7 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-functions.sh
 
 # ===== 使用 git-prompt.sh =====
 assemble_colorful_prompt() {
-    
+
     # 颜色格式（可由 AI 生成最佳组合）
     # 用户名 | 主机 | 路径 | Git分支 | 符号 | 背景
     # 举例：_colors_str_="#BADFDB|#B4D3B2|#D0F0C0|#F4FCD9|#C0E0C0|#1A2F1D"
@@ -87,20 +87,21 @@ PROMPT_RESET_NEEDED=1
 
 # 命令执行前
 preexec() {
+
     PROMPT_RESET_NEEDED=1
-    
-    # 临时简单提示符
-    assemble_colorful_prompt
+
 }
 
 # 命令执行后恢复完整样式
 precmd() {
-    source $MY_COLORFUL_PROMPT_ROOT_PATH/my-colorful-prompt-toolkit.sh
-
+    
     if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
     then
+
         # 重新生成完整提示符
-        assemble_colorful_prompt
+        assemble_colorful_prompt $j
+
         PROMPT_RESET_NEEDED=0
     fi
 }
+

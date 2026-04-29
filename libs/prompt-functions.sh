@@ -128,10 +128,10 @@ get_prompt_color() {
 # 定义 precmd 函数
 get_command_status() {
     # 获取上一条命令的返回状态
-    local exit_code=$?
+    local _exit_code_=$?
     
     # 使用返回状态
-    if [[ $exit_code -eq 0 ]]; then
+    if [[ $_exit_code_ -eq 0 ]]; then
         echo "✅"
     else
         echo "❌"
