@@ -2,10 +2,7 @@
 
 # ===== 样式：面包屑 =====
 
-# 加载公共函数
-source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-functions.sh
-
-# ===== 使用 git-prompt.sh =====
+# === 使用 git-prompt.sh ===
 assemble_colorful_prompt() {
 
     # 颜色格式（可由 AI 生成最佳组合）

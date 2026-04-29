@@ -2,10 +2,7 @@
 
 # ===== 默认样式 =====
 
-# 加载公共函数
-source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-functions.sh
-
-# ===== 使用 git-prompt.sh =====
+# === 使用 git-prompt.sh ===
 assemble_colorful_prompt() {
     
     # 颜色格式（可由 AI 生成最佳组合）
@@ -73,9 +70,11 @@ assemble_colorful_prompt() {
     # 或者显示更详细的时间（日期+时间）
     RPROMPT=''
     RPROMPT+='${LEFT_COLOR}${LEFT_ARROW}%f' # 圆角边缘
-    RPROMPT+='${BG_COLOR}${SYMBOL_COLOR} $(get_command_status)${RESET}'
+    RPROMPT+='${BG_COLOR}${SYMBOL_COLOR} $(get_command_status) ${RESET}'
+    RPROMPT+='${BG_COLOR}${HOST_COLOR}|${RESET}'
     RPROMPT+='${BG_COLOR}${PATH_COLOR} $(get_duration) ${RESET}'
-    RPROMPT+='${BG_COLOR}${USER_COLOR}%D{%H:%M:%S}${RESET}'
+    RPROMPT+='${BG_COLOR}${HOST_COLOR}|${RESET}'
+    RPROMPT+='${BG_COLOR}${USER_COLOR} %D{%H:%M:%S}${RESET}'
     RPROMPT+='${RIGHT_COLOR}${ROUND_RIGHT}%f' # 圆角边缘
 }
 
