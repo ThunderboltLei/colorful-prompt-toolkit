@@ -73,7 +73,9 @@ assemble_colorful_prompt() {
     # 或者显示更详细的时间（日期+时间）
     RPROMPT=''
     RPROMPT+='${LEFT_COLOR}${LEFT_ARROW}%f' # 圆角边缘
-    RPROMPT+='${BG_COLOR}${SYMBOL_COLOR}%D{%Y-%m-%d %H:%M:%S} $(get_command_status)${RESET}'
+    RPROMPT+='${BG_COLOR}${SYMBOL_COLOR} $(get_command_status)${RESET}'
+    RPROMPT+='${BG_COLOR}${PATH_COLOR} $(get_duration) ${RESET}'
+    RPROMPT+='${BG_COLOR}${USER_COLOR}%D{%H:%M:%S}${RESET}'
     RPROMPT+='${RIGHT_COLOR}${ROUND_RIGHT}%f' # 圆角边缘
 }
 

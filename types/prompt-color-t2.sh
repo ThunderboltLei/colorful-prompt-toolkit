@@ -78,8 +78,15 @@ assemble_colorful_prompt() {
     # 或者显示更详细的时间（日期+时间）
     RPROMPT=''
     RPROMPT+='%F{${SYMBOL_COLOR}}${LEFT_ARROW}%f' # 左三角边缘
-    RPROMPT+='%K{${SYMBOL_COLOR}}%F{${BG_COLOR}} %D{%Y-%m-%d %H:%M:%S} $(get_command_status)${RESET}'
-    RPROMPT+='%F{${SYMBOL_COLOR}}${ROUND_RIGHT}%f' # 圆角边缘
+    RPROMPT+='%K{${SYMBOL_COLOR}}%F{${BG_COLOR}} $(get_command_status) ${RESET}'
+
+    RPROMPT+='%K{${SYMBOL_COLOR}}%F{${PATH_COLOR}}${LEFT_ARROW}${RESET}'
+    RPROMPT+='%K{${PATH_COLOR}}%F{${USER_COLOR}} $(get_duration) ${RESET}'
+
+    RPROMPT+='%K{${PATH_COLOR}}%F{${USER_COLOR}}${LEFT_ARROW}${RESET}'
+    RPROMPT+='%K{${USER_COLOR}}%F{${BG_COLOR}} %D{%H:%M:%S}${RESET}'
+    # RPROMPT+='%K{${USER_COLOR}}%F{${BG_COLOR}} %D{%Y-%m-%d %H:%M:%S} ${RESET}'
+    RPROMPT+='%F{${USER_COLOR}}${ROUND_RIGHT}%f' # 圆角边缘
 }
 
 # 设置一个标志变量

@@ -133,7 +133,27 @@ get_command_status() {
     # 使用返回状态
     if [[ $_exit_code_ -eq 0 ]]; then
         echo "✅"
+        # echo "🟢"
     else
         echo "❌"
+        # echo "🔴"
+    fi
+}
+
+# 获取执行时间
+get_duration() {
+    local start_time=$(date +%s%N)
+    "$@"
+    local end_time=$(date +%s%N)
+    local duration=$(( (end_time - start_time) / 1000000 ))
+    
+    if [[ $duration -lt 1000 ]]; then
+        echo "⏱️ ${duration}ms"
+    elif [[ $duration -lt 60000 ]]; then
+        echo "⏱️ $(echo "scale=2; $duration/1000" | bc)s"
+    else
+        local minutes=$((duration / 60000))
+        local seconds=$(((duration % 60000) / 1000))
+        echo "⏱️ ${minutes}m ${seconds}s"
     fi
 }
