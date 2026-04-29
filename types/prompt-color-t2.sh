@@ -89,11 +89,6 @@ assemble_colorful_prompt() {
 # 设置一个标志变量
 PROMPT_RESET_NEEDED=1
 
-# # 初始化
-# zmodload zsh/datetime 2>/dev/null
-# typeset -g ZSH_COMMAND_DURATION=""
-# typeset -g ZSH_LAST_COMMAND_START=""
-
 # 命令执行前
 preexec() {
     PROMPT_RESET_NEEDED=1
