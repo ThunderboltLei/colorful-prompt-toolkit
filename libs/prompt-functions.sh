@@ -118,8 +118,8 @@ read_colorful_style_infos() {
     return 0
 }
 
-# 获取 prompt color
-get_prompt_color() {
+# 获取 color style
+get_color_style() {
     local _rNo=$1
     local colors=`read_colorful_style_infos $MY_COLORFUL_PROMPT_ROOT_PATH/styles/colorful-style.txt $_rNo`
     echo $colors
@@ -179,4 +179,45 @@ get_duration() {
     else
         echo "$ZSH_COMMAND_DURATION"
     fi
+}
+
+# 获取颜色
+typeset -A colors
+get_prompt_color() {
+    
+
+    # 颜色格式（可由 AI 生成最佳组合）
+    # 用户名 | 主机 | 路径 | Git分支 | 符号 | 背景
+    # 举例：_colors_str_="#BADFDB|#B4D3B2|#D0F0C0|#F4FCD9|#C0E0C0|#1A2F1D"
+    local _colors_str_="`get_color_style $MY_COLORFUL_PROMPT_COLOR_NUMBER`"
+
+    # 颜色组合列表
+    local _splitted_colors_=(`split_colors $_colors_str_`)
+
+    if [[ ${#_splitted_colors_[@]} -ne 8 ]];
+    then
+        # 默认颜色
+        colors[USER_COLOR]="magenta"
+        colors[HOST_COLOR]="cyan"
+        colors[PATH_COLOR]="#079992"
+        colors[GIT_COLOR]="#98FB98}"
+        colors[SYMBOL_COLOR]="#C74D55"
+        colors[BG_COLOR]="#FFFDCB}"
+        colors[LEFT_COLOR]="#FFFDCB"
+        colors[RIGHT_COLOR]="#FFFDCB"
+        colors[RESET]="%f%k"
+    else
+        # 动态颜色
+        colors[USER_COLOR]="$(trim ${_splitted_colors_[3]})"
+        colors[HOST_COLOR]="$(trim ${_splitted_colors_[4]})"
+        colors[PATH_COLOR]="$(trim ${_splitted_colors_[5]})"
+        colors[GIT_COLOR]="$(trim ${_splitted_colors_[6]})"
+        colors[SYMBOL_COLOR]="$(trim ${_splitted_colors_[7]})"
+        colors[BG_COLOR]="$(trim ${_splitted_colors_[8]})"
+        colors[LEFT_COLOR]="$(trim ${_splitted_colors_[8]})"
+        colors[RIGHT_COLOR]="$(trim ${_splitted_colors_[8]})"
+        colors[RESET]="%f%k"
+    fi
+
+    return 0
 }

@@ -3,6 +3,9 @@
 # === 加载配置 ===
 source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
 
+# === 加载常量 ===
+source $MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-consts.sh
+
 # 加载公共函数
 source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-functions.sh
 
