@@ -42,7 +42,7 @@ assemble_colorful_prompt() {
     RPROMPT+="%K{${${colors[SYMBOL_COLOR]}}}%F{${${colors[BG_COLOR]}}} $(get_command_status) ${${colors[RESET]}}"
 
     RPROMPT+="%K{${${colors[SYMBOL_COLOR]}}}%F{${${colors[PATH_COLOR]}}}${LEFT_ARROW}${${colors[RESET]}}"
-    RPROMPT+="%K{${${colors[PATH_COLOR]}}}%F{${colors[USER_COLOR]}}} $(get_duration $ZSH_COMMAND_START_TIME) ${${colors[RESET]}}"
+    RPROMPT+="%K{${${colors[PATH_COLOR]}}}%F{${${colors[BG_COLOR]}}} $(get_duration $ZSH_COMMAND_START_TIME) ${${colors[RESET]}}"
 
     RPROMPT+="%K{${${colors[PATH_COLOR]}}}%F{${${colors[USER_COLOR]}}}${LEFT_ARROW}${${colors[RESET]}}"
     RPROMPT+="%K{${${colors[USER_COLOR]}}}%F{${${colors[BG_COLOR]}}} %D{%H:%M:%S}${${colors[RESET]}}"
