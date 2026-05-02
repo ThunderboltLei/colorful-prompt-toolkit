@@ -150,23 +150,23 @@ format_duration() {
     if [[ $int_part -ge 3600 ]]; then
         local hours=$((int_part / 3600))
         local minutes=$(((int_part % 3600) / 60))
-        echo "⏱️ ${hours}h${minutes}m"
+        echo "⏰ ${hours}h${minutes}m"
     elif [[ $int_part -ge 60 ]]; then
         local minutes=$((int_part / 60))
         local seconds=$((int_part % 60))
-        echo "⏱️ ${minutes}m${seconds}s"
+        echo "⏰ ${minutes}m${seconds}s"
     elif [[ $int_part -ge 1 ]]; then
-        echo "⏱️ ${int_part}.${frac_part:0:1}s"
+        echo "⏰ ${int_part}.${frac_part:0:1}s"
     elif [[ $duration != 0.* ]]; then
         local ms=$(printf "%.0f" $(echo "$duration * 1000" | bc 2>/dev/null || echo "0"))
         if [[ $ms -gt 0 ]]; then
-            echo "⏱️ ${ms}ms"
+            echo "⏰ ${ms}ms"
         else
             local us=$(printf "%.0f" $(echo "$duration * 1000000" | bc 2>/dev/null || echo "0"))
-            echo "⏱️ ${us}μs"
+            echo "⏰ ${us}μs"
         fi
     else
-        echo "⏱️ <1ms"
+        echo "⏰ <1ms"
     fi
 }
 
@@ -197,23 +197,23 @@ get_prompt_color() {
     if [[ ${#_splitted_colors_[@]} -ne 8 ]];
     then
         # 默认颜色
-        colors[USER_COLOR]="magenta"
-        colors[HOST_COLOR]="cyan"
-        colors[PATH_COLOR]="#079992"
-        colors[GIT_COLOR]="#98FB98}"
-        colors[SYMBOL_COLOR]="#C74D55"
-        colors[BG_COLOR]="#FFFDCB}"
+        colors[COLOR_01]="magenta"
+        colors[COLOR_02]="cyan"
+        colors[COLOR_03]="#079992"
+        colors[COLOR_04]="#98FB98}"
+        colors[COLOR_05]="#C74D55"
+        colors[COLOR_06]="#FFFDCB}" # bg_color
         colors[LEFT_COLOR]="#FFFDCB"
         colors[RIGHT_COLOR]="#FFFDCB"
         colors[RESET]="%f%k"
     else
         # 动态颜色
-        colors[USER_COLOR]="$(trim ${_splitted_colors_[3]})"
-        colors[HOST_COLOR]="$(trim ${_splitted_colors_[4]})"
-        colors[PATH_COLOR]="$(trim ${_splitted_colors_[5]})"
-        colors[GIT_COLOR]="$(trim ${_splitted_colors_[6]})"
-        colors[SYMBOL_COLOR]="$(trim ${_splitted_colors_[7]})"
-        colors[BG_COLOR]="$(trim ${_splitted_colors_[8]})"
+        colors[COLOR_01]="$(trim ${_splitted_colors_[3]})"
+        colors[COLOR_02]="$(trim ${_splitted_colors_[4]})"
+        colors[COLOR_03]="$(trim ${_splitted_colors_[5]})"
+        colors[COLOR_04]="$(trim ${_splitted_colors_[6]})"
+        colors[COLOR_05]="$(trim ${_splitted_colors_[7]})"
+        colors[COLOR_06]="$(trim ${_splitted_colors_[8]})"
         colors[LEFT_COLOR]="$(trim ${_splitted_colors_[8]})"
         colors[RIGHT_COLOR]="$(trim ${_splitted_colors_[8]})"
         colors[RESET]="%f%k"

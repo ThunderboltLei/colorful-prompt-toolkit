@@ -11,11 +11,11 @@ assemble_colorful_prompt() {
     # 定义左侧提示符
     PROMPT=" 🐞 "
     PROMPT+="%F{${${colors[LEFT_COLOR]}}}${ROUND_LEFT}%f" # 圆角边缘
-    PROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[USER_COLOR]}}}%n${${colors[RESET]}}"
-    PROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[SYMBOL_COLOR]}}}@${${colors[RESET]}}"
-    PROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[HOST_COLOR]}}}%M${${colors[RESET]}}"
-    PROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[SYMBOL_COLOR]}}}:${${colors[RESET]}}"
-    PROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[PATH_COLOR]}}}%c${${colors[RESET]}}"
+    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_01]}}}%n${${colors[RESET]}}"
+    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}}@${${colors[RESET]}}"
+    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_02]}}}%M${${colors[RESET]}}"
+    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}}:${${colors[RESET]}}"
+    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_03]}}}%c${${colors[RESET]}}"
 
     local branch=""
     # 不在 Git 仓库时静默返回空
@@ -23,11 +23,11 @@ assemble_colorful_prompt() {
 
     if [[ "$branch" == "" ]];
     then
-        PROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[SYMBOL_COLOR]}}} ${${colors[RESET]}}"
+        PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}} ${${colors[RESET]}}"
     else
-        PROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[SYMBOL_COLOR]}}} (${${colors[RESET]}}"
-        PROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[GIT_COLOR]}}} $(__git_ps1 "%s") ${${colors[RESET]}}"
-        PROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[SYMBOL_COLOR]}}}) ${${colors[RESET]}}"
+        PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}} (${${colors[RESET]}}"
+        PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_04]}}} $(__git_ps1 "%s") ${${colors[RESET]}}"
+        PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}}) ${${colors[RESET]}}"
     fi
     PROMPT+="%F{${${colors[RIGHT_COLOR]}}}${RIGHT_ARROW} %f" # 圆角边缘
 
@@ -35,11 +35,11 @@ assemble_colorful_prompt() {
     # 或者显示更详细的时间（日期+时间）
     RPROMPT=""
     RPROMPT+="%F{${${colors[LEFT_COLOR]}}}${LEFT_ARROW}%f" # 圆角边缘
-    RPROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[SYMBOL_COLOR]}}} $(get_command_status) ${${colors[RESET]}}"
-    RPROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[HOST_COLOR]}}}|${${colors[RESET]}}"
-    RPROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[PATH_COLOR]}}} $(get_duration) ${${colors[RESET]}}"
-    RPROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[HOST_COLOR]}}}|${${colors[RESET]}}"
-    RPROMPT+="%K{${${colors[BG_COLOR]}}}%F{${${colors[USER_COLOR]}}} %D{%H:%M:%S}${${colors[RESET]}}"
+    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}} $(get_command_status) ${${colors[RESET]}}"
+    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_04]}}}|${${colors[RESET]}}"
+    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_02]}}} $(get_duration) ${${colors[RESET]}}"
+    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_04]}}}|${${colors[RESET]}}"
+    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_01]}}} %D{%H:%M:%S}${${colors[RESET]}}"
     RPROMPT+="%F{${${colors[RIGHT_COLOR]}}}${ROUND_RIGHT}%f" # 圆角边缘
 }
 

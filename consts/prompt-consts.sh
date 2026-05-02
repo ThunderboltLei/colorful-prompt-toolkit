@@ -3,3 +3,24 @@ LEFT_ARROW=""  # 向左实心箭头
 RIGHT_ARROW=""  # 向右实心箭头 (需要 Powerline 字体)
 ROUND_LEFT=""   # 左侧圆角左边缘
 ROUND_RIGHT=""  # 右侧圆角右边缘
+
+DOUBLE_ANGEL_LEFT="《 "
+DOUBLE_ANGEL_RIGHT=" 》"
+ANGL_LEFT="〈 "
+ANGLE_RIGHT=" 〉"
+
+SQUARE_LEFT=" [ "
+SQUARE_RIGHT=" ] "
+
+LESS_THAN=" < "
+GREATER_THAN=" > "
+
+MEDIUM_LEFT=" ❨ "
+MEDIUM_RIGHT=" ❩ "
+MEDIUM_FLATTENED_LEFT=" ❪ "
+MEDIUM_FLATTENED_RIGHT=" ❫ "
+
+LEFT_CEILING="⌈"
+RIGHT_CEILING="⌉"
+LEFT_FLOOR="⌊"
+RIGHT_FLOOR="⌋"
