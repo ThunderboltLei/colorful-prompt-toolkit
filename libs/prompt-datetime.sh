@@ -2,7 +2,8 @@
 format_time() {
     # 优先使用 EPOCHREALTIME（如果支持）
     if (( $+EPOCHREALTIME )); then
-        date -r ${(z)EPOCHREALTIME//.*/} +"%Y-%m-%d %H:%M:%S"
+        # date -r ${(z)EPOCHREALTIME//.*/} +"%Y-%m-%d %H:%M:%S"
+        date -r ${(z)EPOCHREALTIME//.*/} +"%H:%M:%S"
     else
         date +"%H:%M:%S"
     fi
