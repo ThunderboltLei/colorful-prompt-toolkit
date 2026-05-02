@@ -9,12 +9,13 @@ assemble_colorful_prompt() {
     get_prompt_color
 
     # 定义左侧提示符
+    PROMPT=" 🍏 "
     # === user ===
-    PROMPT="%F{${${colors[COLOR_01]}}}${ROUND_LEFT}%f" # 圆角边缘
-    PROMPT+="%K{${${colors[COLOR_01]}}}%F{${${colors[COLOR_06]}}}🍏 %n ${${colors[RESET]}}"
+    PROMPT+="%F{${${colors[COLOR_01]}}}${ROUND_LEFT}%f" # 圆角边缘
+    PROMPT+="%K{${${colors[COLOR_01]}}}%F{${${colors[COLOR_06]}}}👤 %n ${${colors[RESET]}}"
     # === path ===
     PROMPT+="%K{${${colors[COLOR_02]}}}%F{${${colors[COLOR_01]}}}${RIGHT_ARROW}${${colors[RESET]}}"
-    PROMPT+="%K{${${colors[COLOR_02]}}}%F{${${colors[COLOR_06]}}} %c ${${colors[RESET]}}"
+    PROMPT+="%K{${${colors[COLOR_02]}}}%F{${${colors[COLOR_06]}}} 📂 %c ${${colors[RESET]}}"
 
     # === github ===
     local branch=""
@@ -25,7 +26,7 @@ assemble_colorful_prompt() {
         PROMPT+="%K{${${colors[COLOR_03]}}}%F{${${colors[COLOR_02]}}}${RIGHT_ARROW}${${colors[RESET]}}"
     else
         PROMPT+="%K{${${colors[COLOR_04]}}}%F{${${colors[COLOR_02]}}}${RIGHT_ARROW}${${colors[RESET]}}"
-        PROMPT+="%K{${${colors[COLOR_04]}}}%F{${${colors[COLOR_06]}}}%B${SQUARE_LEFT}%b${${colors[RESET]}}"
+        PROMPT+="%K{${${colors[COLOR_04]}}}%F{${${colors[COLOR_06]}}} 🔀 %B${SQUARE_LEFT}%b${${colors[RESET]}}"
         PROMPT+="%K{${${colors[COLOR_04]}}}%F{${${colors[COLOR_06]}}}$(__git_ps1 "%s")${${colors[RESET]}}"
         PROMPT+="%K{${${colors[COLOR_04]}}}%F{${${colors[COLOR_06]}}}%B${SQUARE_RIGHT}%b${${colors[RESET]}}"
         PROMPT+="%K{${${colors[COLOR_03]}}}%F{${${colors[COLOR_04]}}}${RIGHT_ARROW}${${colors[RESET]}}"
