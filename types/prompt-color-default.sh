@@ -3,19 +3,21 @@
 # ===== 默认样式 =====
 
 # === 使用 git-prompt.sh ===
+
+# 组装左提示符
 assemble_colorful_prompt() {
 
     # 获取提示符颜色
     get_prompt_color
     
     # 定义左侧提示符
-    PROMPT=" 🐞 "
-    PROMPT+="%F{${${colors[LEFT_COLOR]}}}${ROUND_LEFT}%f" # 圆角边缘
-    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_01]}}}%n${${colors[RESET]}}"
-    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}}@${${colors[RESET]}}"
-    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_02]}}}%M${${colors[RESET]}}"
-    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}}:${${colors[RESET]}}"
-    PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_03]}}}%c${${colors[RESET]}}"
+    echo -n " 🐞 "
+    echo -n "%F{${${colors[LEFT_COLOR]}}}${ROUND_LEFT}%f" # 圆角边缘
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_01]}}}%n${${colors[RESET]}}"
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}}@${${colors[RESET]}}"
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_02]}}}%M${${colors[RESET]}}"
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}}:${${colors[RESET]}}"
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_03]}}}%c${${colors[RESET]}}"
 
     local branch=""
     # 不在 Git 仓库时静默返回空
@@ -23,24 +25,31 @@ assemble_colorful_prompt() {
 
     if [[ "$branch" == "" ]];
     then
-        PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}} ${${colors[RESET]}}"
+        echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}} ${${colors[RESET]}}"
     else
-        PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}} (${${colors[RESET]}}"
-        PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_04]}}} $(__git_ps1 "%s") ${${colors[RESET]}}"
-        PROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}}) ${${colors[RESET]}}"
+        echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}} (${${colors[RESET]}}"
+        echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_04]}}} $(__git_ps1 "%s") ${${colors[RESET]}}"
+        echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}}) ${${colors[RESET]}}"
     fi
-    PROMPT+="%F{${${colors[RIGHT_COLOR]}}}${RIGHT_ARROW} %f" # 圆角边缘
+    echo -n "%F{${${colors[RIGHT_COLOR]}}}${RIGHT_ARROW} %f" # 圆角边缘
+}
+
+# 组装右提示符
+assemble_colorful_prompt_right() {
+
+    # 获取提示符颜色
+    get_prompt_color
 
     # 定义右侧提示符（在命令执行后显示）
     # 或者显示更详细的时间（日期+时间）
-    RPROMPT=""
-    RPROMPT+="%F{${${colors[LEFT_COLOR]}}}${LEFT_ARROW}%f" # 圆角边缘
-    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}} $(get_command_status) ${${colors[RESET]}}"
-    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_04]}}}|${${colors[RESET]}}"
-    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_02]}}} $(get_duration) ${${colors[RESET]}}"
-    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_04]}}}|${${colors[RESET]}}"
-    RPROMPT+="%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_01]}}} %D{%H:%M:%S}${${colors[RESET]}}"
-    RPROMPT+="%F{${${colors[RIGHT_COLOR]}}}${ROUND_RIGHT}%f" # 圆角边缘
+    echo -n ""
+    echo -n "%F{${${colors[LEFT_COLOR]}}}${LEFT_ARROW}%f" # 圆角边缘
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_05]}}} $(get_command_status) ${${colors[RESET]}}"
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_04]}}}|${${colors[RESET]}}"
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_02]}}} $(get_duration) ${${colors[RESET]}}"
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_04]}}}|${${colors[RESET]}}"
+    echo -n "%K{${${colors[COLOR_06]}}}%F{${${colors[COLOR_01]}}} ⏰ $(format_time)${${colors[RESET]}}"
+    echo -n "%F{${${colors[RIGHT_COLOR]}}}${ROUND_RIGHT}%f" # 圆角边缘
 }
 
 # 设置一个标志变量
@@ -56,7 +65,6 @@ preexec() {
 
 # 命令执行后恢复完整样式
 precmd() {
-    # source $MY_COLORFUL_PROMPT_ROOT_PATH/my-colorful-prompt-toolkit.sh
 
     if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
     then
@@ -75,9 +83,13 @@ precmd() {
             ZSH_COMMAND_DURATION=""
         fi
 
-        # 重新生成完整提示符
-        assemble_colorful_prompt
+        # === 重新生成完整提示符 ===
+        PROMPT='$(assemble_colorful_prompt)'
+        RPROMPT='$(assemble_colorful_prompt_right)'
+
         PROMPT_RESET_NEEDED=0
     fi
 }
 
+# 刷新提示符中时间
+refresh_prompt_datetime

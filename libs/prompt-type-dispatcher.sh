@@ -9,6 +9,9 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-consts.sh
 # 加载公共函数
 source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-functions.sh
 
+# 加载实时时间函数
+source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-datetime.sh
+
 # === 时间：初始化 ===
 zmodload zsh/datetime 2>/dev/null
 typeset -g ZSH_COMMAND_DURATION=""
