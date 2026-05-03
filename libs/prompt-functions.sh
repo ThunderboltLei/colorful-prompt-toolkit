@@ -132,10 +132,10 @@ get_command_status() {
     
     # 使用返回状态
     if [[ $_exit_code_ -eq 0 ]]; then
-        echo "✅"
+        echo "${CORRECT}"
         # echo "🟢"
     else
-        echo "❌"
+        echo "${WRONG}"
         # echo "🔴"
     fi
 }
