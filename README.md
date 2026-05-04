@@ -63,6 +63,9 @@ Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=2".
   </a>
 </p>
 
+<img width="2286" height="136" alt="image" src="https://github.com/user-attachments/assets/c85ffdc2-5b68-4ac0-897c-697ad96cf007" />
+
+
 # Extensible to your own prompts
 ```
 $ cd types
