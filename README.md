@@ -63,6 +63,19 @@ Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=2".
   </a>
 </p>
 
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=3".
+```
+<img width="1850" height="112" alt="image" src="https://github.com/user-attachments/assets/62e58b60-150d-4f7a-8f82-b294acb5c0d4" />
+
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=4".
+```
+<img width="1936" height="106" alt="image" src="https://github.com/user-attachments/assets/9e7bfb72-5dc9-4a4a-8481-c198f1e0e09c" />
+
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=5".
+```
 <img width="2286" height="136" alt="image" src="https://github.com/user-attachments/assets/c85ffdc2-5b68-4ac0-897c-697ad96cf007" />
 
 
