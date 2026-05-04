@@ -90,23 +90,6 @@ Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=5".
   </a>
 </p>
 
-```text
-Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=3".
-```
-<img width="1850" height="112" alt="image" src="https://github.com/user-attachments/assets/62e58b60-150d-4f7a-8f82-b294acb5c0d4" />
-
-```text
-Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=4".
-```
-<img width="1946" height="110" alt="image" src="https://github.com/user-attachments/assets/668a964f-67ee-439d-81af-fdbe443efb5c" />
-
-
-```text
-Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=5".
-```
-<img width="2286" height="136" alt="image" src="https://github.com/user-attachments/assets/c85ffdc2-5b68-4ac0-897c-697ad96cf007" />
-
-
 # Extensible to your own prompts
 ```
 $ cd types
