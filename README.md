@@ -49,7 +49,7 @@ This is the default format. Just set the configuration item "MY_COLORFUL_PROMPT_
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/Example 01.png" alt="Colorful Prompt Toolkit"/>
+    <img src="assets/t1-default.png" alt="Colorful Prompt Toolkit"/>
   </a>
 </p>
 
@@ -59,7 +59,34 @@ Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=2".
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/Example 02.png" alt="Colorful Prompt Toolkit"/>
+    <img src="assets/t2.png" alt="Colorful Prompt Toolkit"/>
+  </a>
+</p>
+
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=3".
+```
+<p align="center">
+  <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
+    <img src="assets/t3.png" alt="Colorful Prompt Toolkit"/>
+  </a>
+</p>
+
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=4".
+```
+<p align="center">
+  <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
+    <img src="assets/t4.png" alt="Colorful Prompt Toolkit"/>
+  </a>
+</p>
+
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=5".
+```
+<p align="center">
+  <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
+    <img src="assets/t5.png" alt="Colorful Prompt Toolkit"/>
   </a>
 </p>
 
