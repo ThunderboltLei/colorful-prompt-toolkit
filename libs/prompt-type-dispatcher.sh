@@ -31,6 +31,9 @@ case $MY_COLORFUL_PROMPT_TYPE in
 4)
     source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-t4.sh
     ;;
+5)
+    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-t5.sh
+    ;;
 *)
     source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-default.sh
     ;;
