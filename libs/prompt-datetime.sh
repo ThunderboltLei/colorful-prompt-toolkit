@@ -1,4 +1,4 @@
-# 5. 实时时间显示
+# 显示实时时间
 format_time() {
     # 优先使用 EPOCHREALTIME（如果支持）
     if (( $+EPOCHREALTIME )); then
@@ -9,6 +9,7 @@ format_time() {
     fi
 }
 
+# 刷新提示符中时间
 refresh_prompt_datetime() {
     
     # 自动刷新提示符的函数

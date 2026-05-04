@@ -41,6 +41,7 @@ assemble_colorful_prompt() {
     echo -n $'\n'
 
     echo -n "%F{${colors[COLOR_05]}}%B${GREATER_THAN}%b%f"
+    echo -n " "
 }
 
 # 组装右提示符

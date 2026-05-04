@@ -11,31 +11,32 @@ assemble_colorful_prompt() {
     get_prompt_color
     
     # 定义左侧提示符
+    # 第一行
     echo -n "%B"
     echo -n " "
-    echo -n "%F{${colors[COLOR_01]}}${RIGHT}%f"
+    echo -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
+    echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}}[$(format_time)]${colors[RESET]}"
+    echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_06]}}${RIGHT_ARROW}${colors[RESET]}"
     echo -n " "
-    echo -n "%F{${colors[COLOR_01]}}[$(format_time)]%f"
-    echo -n " "
-    echo -n "%F{${colors[COLOR_02]}}%/%f"
+    echo -n "%F{${colors[COLOR_02]}}%~%f"
     echo -n " "
 
     local branch=""
     # 不在 Git 仓库时静默返回空
     branch=`__git_ps1 "%s" 2>/dev/null`
-
-    if [[ "$branch" == "" ]];
+    if [[ "$branch" != "" ]];
     then
-        # echo -n " "
-    else
-        echo -n "%F{${colors[COLOR_01]}}git(%f"
-        echo -n "%F{${colors[COLOR_03]}}$(__git_ps1 "%s")%f"
-        echo -n "%F{${colors[COLOR_01]}})%f"
+        echo -n "%K{${colors[COLOR_03]}}%F{${SYSTEM_MODE}}${RIGHT_ARROW}${colors[RESET]}"
+        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}}git(${colors[RESET]}"
+        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_03]}}$(__git_ps1 "%s")${colors[RESET]}"
+        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}})${colors[RESET]}"
+        echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_03]}}${RIGHT_ARROW}${colors[RESET]}"
     fi
-    # echo -n "%F{${colors[RIGHT_COLOR]}}${RIGHT_ARROW} %f" # 圆角边缘
-
+    # 换行
     echo -n "\n"
-
+    # 第二行
+    echo -n " "
+    echo -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
     echo -n "%F{${colors[COLOR_04]}}${GREATER_THAN}%f"
     echo -n "%F{${colors[COLOR_05]}}${GREATER_THAN}%f"
     echo -n "%F{${colors[COLOR_06]}}${GREATER_THAN}%f"
@@ -82,6 +83,8 @@ precmd() {
         # === 重新生成完整提示符 ===
         PROMPT='$(assemble_colorful_prompt)'
         RPROMPT='$(assemble_colorful_prompt_right)'
+
+        # echo -e "$(assemble_colorful_prompt)"
 
         PROMPT_RESET_NEEDED=0
     fi
