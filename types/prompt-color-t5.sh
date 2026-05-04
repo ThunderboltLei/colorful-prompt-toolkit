@@ -27,9 +27,9 @@ assemble_colorful_prompt() {
     if [[ "$branch" != "" ]];
     then
         echo -n "%K{${colors[COLOR_03]}}%F{${SYSTEM_MODE}}${RIGHT_ARROW}${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}}git(${colors[RESET]}"
+        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}} git(${colors[RESET]}"
         echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_03]}}$(__git_ps1 "%s")${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}})${colors[RESET]}"
+        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}}) ${colors[RESET]}"
         echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_03]}}${RIGHT_ARROW}${colors[RESET]}"
     fi
     # 换行
