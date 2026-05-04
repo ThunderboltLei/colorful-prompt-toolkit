@@ -29,7 +29,7 @@ assemble_colorful_prompt() {
     else
         echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
         echo -n "%K{${colors[COLOR_04]}}%F{${SYSTEM_MODE}}${RIGHT_ARROW}${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} 🔃%B${SQUARE_LEFT}%b${colors[RESET]}"
+        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} 🔃 git%B${SQUARE_LEFT}%b${colors[RESET]}"
         echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}$(__git_ps1 "%s")${colors[RESET]}"
         echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}%B${SQUARE_RIGHT}%b${colors[RESET]}"
         echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_04]}}${RIGHT_ARROW}${colors[RESET]}"
@@ -39,10 +39,9 @@ assemble_colorful_prompt() {
     # === datetime ===
     echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ⏱️ $(format_time) ${colors[RESET]}"
     echo -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT} %f"
-
     echo -n $'\n'
-
     echo -n "%F{${colors[COLOR_05]}}%B${GREATER_THAN}%b%f"
+    echo -n " "
 }
 
 # 组装右提示符

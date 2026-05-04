@@ -27,8 +27,8 @@ assemble_colorful_prompt() {
     then
         echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} ${colors[RESET]}"
     else
-        echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} (${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_04]}} $(__git_ps1 "%s") ${colors[RESET]}"
+        echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} git(${colors[RESET]}"
+        echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_04]}}$(__git_ps1 "%s")${colors[RESET]}"
         echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}}) ${colors[RESET]}"
     fi
     echo -n "%F{${colors[RIGHT_COLOR]}}${RIGHT_ARROW} %f" # 圆角边缘
