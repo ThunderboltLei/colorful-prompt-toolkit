@@ -8,6 +8,7 @@ else
     # echo -e "light"
     SYSTEM_MODE="#FFFFFF"
 fi
+REVERSE_SYSTEM_MODE=`invert_color ${SYSTEM_MODE}`
 
 # 定义颜色和形状字符
 LEFT_ARROW=""  # 向左实心箭头
@@ -51,6 +52,10 @@ RIGHT_T="┤"
 TOP_T="┬"
 BOTTOM_T="┴"
 CROSS="┼"
+TRANSVERSE_LINE="–"
+HALF_MAIN_LINE_UP="╵"
+HALF_MAIN_LINE_RIGHT="-"
+HALF_MAIN_LINE_DOWN="╷"
 
 LEFT="←"
 RIGHT="→"

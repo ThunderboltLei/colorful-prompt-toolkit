@@ -43,50 +43,63 @@ Copy the generated result to the "colorful-style.txt" file. Then, modify the val
 2、If the text cannot be displayed correctly in the terminal, you need to install the font that supports "Nerd".<br/>
 
 # Show Time
-## Simple Style
+## Ninja
 ```
 This is the default format. Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=1".
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/t1-default.png" alt="Colorful Prompt Toolkit"/>
+    <img src="assets/t1-ninja.png" alt="Colorful Prompt Toolkit"/>
   </a>
 </p>
 
-## Crumbs Style
+## Triangle Crumbs
 ```text
 Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=2".
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/t2.png" alt="Colorful Prompt Toolkit"/>
+    <img src="assets/t2-triangle_crumbs.png" alt="Colorful Prompt Toolkit"/>
   </a>
 </p>
 
+## Finch
 ```text
 Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=3".
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/t3.png" alt="Colorful Prompt Toolkit"/>
+    <img src="assets/t3-finch.png" alt="Colorful Prompt Toolkit"/>
   </a>
 </p>
 
+## Interval Finch
 ```text
 Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=4".
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/t4.png" alt="Colorful Prompt Toolkit"/>
+    <img src="assets/t4-interval_finch.png" alt="Colorful Prompt Toolkit"/>
   </a>
 </p>
 
+## Long Path
 ```text
 Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=5".
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
-    <img src="assets/t5.png" alt="Colorful Prompt Toolkit"/>
+    <img src="assets/t5-long_path.png" alt="Colorful Prompt Toolkit"/>
+  </a>
+</p>
+
+## Sentence
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=5".
+```
+<p align="center">
+  <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
+    <img src="assets/t6-sentence.png" alt="Colorful Prompt Toolkit"/>
   </a>
 </p>
 
