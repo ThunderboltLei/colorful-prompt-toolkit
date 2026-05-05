@@ -95,7 +95,7 @@ Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=5".
 
 ## Sentence
 ```text
-Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=5".
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=6".
 ```
 <p align="center">
   <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
