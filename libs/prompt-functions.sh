@@ -2,6 +2,17 @@
 
 # ===== 公共函数 =====
 
+invert_color() {
+  local hex=${1#"#"}
+  local r=${hex:0:2}
+  local g=${hex:2:2}
+  local b=${hex:4:2}
+  local r_inv=$(( 255 - 16#${r} ))
+  local g_inv=$(( 255 - 16#${g} ))
+  local b_inv=$(( 255 - 16#${b} ))
+  echo "#%02X%02X%02X\n" $r_inv $g_inv $b_inv
+}
+
 # 分割颜色字符串并存储到数组
 split_colors() {
     local input="$1"
