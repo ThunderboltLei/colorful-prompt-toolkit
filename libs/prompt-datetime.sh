@@ -34,3 +34,44 @@ refresh_prompt_datetime() {
         TMOUT=1  # 重新设置定时器
     }
 }
+
+# 计算命令执行时间
+# 格式化时长（无外部依赖版本）
+format_duration() {
+    local duration=$1
+    local int_part=${duration%.*}
+    local frac_part=${duration#*.}
+    
+    if [[ $int_part -ge 3600 ]]; then
+        local hours=$((int_part / 3600))
+        local minutes=$(((int_part % 3600) / 60))
+        echo "⏰ ${hours}h${minutes}m"
+    elif [[ $int_part -ge 60 ]]; then
+        local minutes=$((int_part / 60))
+        local seconds=$((int_part % 60))
+        echo "⏰ ${minutes}m${seconds}s"
+    elif [[ $int_part -ge 1 ]]; then
+        echo "⏰ ${int_part}.${frac_part:0:1}s"
+    elif [[ $duration != 0.* ]]; then
+        local ms=$(printf "%.0f" $(echo "$duration * 1000" | bc 2>/dev/null || echo "0"))
+        if [[ $ms -gt 0 ]]; then
+            echo "⏰ ${ms}ms"
+        else
+            local us=$(printf "%.0f" $(echo "$duration * 1000000" | bc 2>/dev/null || echo "0"))
+            echo "⏰ ${us}μs"
+        fi
+    else
+        echo "⏰ <1ms"
+    fi
+}
+
+# 获取时长的函数
+get_duration() {
+
+    if [[ -z $ZSH_COMMAND_DURATION ]];
+    then
+        echo "⏱️ <1ms"
+    else
+        echo "$ZSH_COMMAND_DURATION"
+    fi
+}

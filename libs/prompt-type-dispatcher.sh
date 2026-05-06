@@ -1,16 +1,40 @@
+#!/bin/zsh
+
+# === File Description Format ===
+# 
+# Creator: Raymond-Magnus-Lei
+# Filename: 
+# Description:
+# 
+# 
+# === Function Description Format ===
+# 
+# Description: 
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+
 # =====  样式分派 =====
 
 # === 加载配置 ===
 source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
 
-# 加载公共函数
-source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-functions.sh
-
-# 加载实时时间函数
-source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-datetime.sh
-
 # === 加载常量 ===
 source $MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-consts.sh
+
+# 加载公共函数
+source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.sh
+
+# 加载文件操作文件
+source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-file.sh
+
+# 加载颜色函数
+source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.sh
+
+# 加载实时时间操作文件
+source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-datetime.sh
 
 # === 时间：初始化 ===
 zmodload zsh/datetime 2>/dev/null

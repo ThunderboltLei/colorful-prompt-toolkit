@@ -1,14 +1,20 @@
-SYSTEM_MODE=""
-if [[ "$.term.mode" == "dark" ]]; then
-    # 深色模式配色：使用亮色系
-    # echo -e "dark"
-    SYSTEM_MODE="#000000"
-else
-    # 浅色模式配色：使用深色系
-    # echo -e "light"
-    SYSTEM_MODE="#FFFFFF"
-fi
-REVERSE_SYSTEM_MODE=`invert_color ${SYSTEM_MODE}`
+#!/bin/zsh
+
+# === File Description Format ===
+# 
+# Creator: Raymond-Magnus-Lei
+# Filename: 
+# Description:
+# 
+# 
+# === Function Description Format ===
+# 
+# Description: 
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 
 # 定义颜色和形状字符
 LEFT_ARROW=""  # 向左实心箭头
