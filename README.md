@@ -103,6 +103,26 @@ Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=6".
   </a>
 </p>
 
+## Skaro
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=7".
+```
+<p align="center">
+  <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
+    <img src="assets/t7-skaro.png" alt="Colorful Prompt Toolkit"/>
+  </a>
+</p>
+
+## Skaro Doublet
+```text
+Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=8".
+```
+<p align="center">
+  <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
+    <img src="assets/t8-skaro_doublet.png" alt="Colorful Prompt Toolkit"/>
+  </a>
+</p>
+
 # Extensible to your own prompts
 ```
 $ cd types

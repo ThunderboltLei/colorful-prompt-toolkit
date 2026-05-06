@@ -37,6 +37,12 @@ case $MY_COLORFUL_PROMPT_TYPE in
 6)
     source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-t6-sentence.sh
     ;;
+7)
+    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-t7-skaro.sh
+    ;;
+8)
+    source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-t8-skaro_doublet.sh
+    ;;
 *)
     source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-t1-ninja.sh
     ;;
