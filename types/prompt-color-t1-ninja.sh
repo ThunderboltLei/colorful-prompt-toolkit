@@ -1,6 +1,21 @@
 #!/bin/zsh
 
-# ===== 默认样式：Ninja =====
+# === File Description ===
+# 
+# Creator: Raymond-Magnus-Lei
+# Filename: 
+# Description: 默认样式：Ninja
+# 
+
+
+# === Function Description Format ===
+# 
+# Description: 
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 
 # === 使用 git-prompt.sh ===
 

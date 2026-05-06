@@ -1,6 +1,22 @@
 #!/bin/zsh
 
-# ===== T2: triangle crumbs =====
+# === File Description ===
+# 
+# Creator: Raymond-Magnus-Lei
+# Filename: 
+# Description: T2: triangle crumbs
+# 
+
+
+# === Function Description Format ===
+# 
+# Description: 
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+
 
 # 组装左提示符
 assemble_colorful_prompt() {

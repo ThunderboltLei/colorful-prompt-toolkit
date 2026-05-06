@@ -1,6 +1,22 @@
 #!/bin/zsh
 
-# ===== T4: Interval Finch =====
+# === File Description ===
+# 
+# Creator: Raymond-Magnus-Lei
+# Filename: 
+# Description: T4: Interval Finch
+# 
+
+
+# === Function Description Format ===
+# 
+# Description: 
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+
 
 # 组装左提示符
 assemble_colorful_prompt() {

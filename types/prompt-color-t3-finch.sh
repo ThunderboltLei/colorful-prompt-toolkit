@@ -1,6 +1,23 @@
 #!/bin/zsh
 
-# ===== T3: Finch =====
+
+# === File Description ===
+# 
+# Creator: Raymond-Magnus-Lei
+# Filename: 
+# Description: T3: Finch
+# 
+
+
+# === Function Description Format ===
+# 
+# Description: 
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+
 
 # === 使用 git-prompt.sh ===
 

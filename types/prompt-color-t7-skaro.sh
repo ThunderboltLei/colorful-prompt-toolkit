@@ -1,10 +1,10 @@
 #!/bin/zsh
 
-# === File Description Format ===
+# === File Description ===
 # 
 # Creator: Raymond-Magnus-Lei
 # Filename: 
-# Description:
+# Description: T7: Skaro
 # 
 # 
 # === Function Description Format ===
@@ -16,7 +16,7 @@
 # Result: 
 # 
 
-# ===== T6: Sentence =====
+
 
 assemble_colorful_prompt() {
 

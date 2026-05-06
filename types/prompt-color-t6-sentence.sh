@@ -1,6 +1,24 @@
 #!/bin/zsh
 
-# ===== T6: Sentence =====
+
+# === File Description ===
+# 
+# Creator: Raymond-Magnus-Lei
+# Filename: 
+# Description: T6: Sentence
+# 
+
+
+# === Function Description Format ===
+# 
+# Description: 
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+
+
 
 assemble_colorful_prompt() {
 

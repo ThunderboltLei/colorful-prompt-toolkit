@@ -1,6 +1,22 @@
 #!/bin/zsh
 
-# ===== T5: Long Path =====
+# === File Description ===
+# 
+# Creator: Raymond-Magnus-Lei
+# Filename: 
+# Description: T5: Long Path
+# 
+
+
+# === Function Description Format ===
+# 
+# Description: 
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+
 
 # === 使用 git-prompt.sh ===
 

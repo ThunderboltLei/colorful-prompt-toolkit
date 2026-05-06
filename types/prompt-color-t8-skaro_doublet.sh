@@ -1,12 +1,12 @@
 #!/bin/zsh
 
-# === File Description Format ===
+# === File Description ===
 # 
 # Creator: Raymond-Magnus-Lei
 # Filename: 
-# Description:
-# 
-# 
+# Description: T8: Skaro Doublet
+
+
 # === Function Description Format ===
 # 
 # Description: 
@@ -16,7 +16,6 @@
 # Result: 
 # 
 
-# ===== T6: Sentence =====
 
 assemble_colorful_prompt() {
 
