@@ -16,7 +16,29 @@
 # Result: 
 # 
 
-# ===== 公共函数 =====
+# ===== 颜色函数 =====
+
+# Description: 定义颜色输出函数
+rgb_fg() {
+    local r g b
+    # 将 #50FA7B 转换为 RGB
+    if [[ $1 =~ ^#([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$ ]]; then
+        r=$((16#$match[1]))
+        g=$((16#$match[2]))
+        b=$((16#$match[3]))
+        printf '\033[38;2;%d;%d;%dm' $r $g $b
+    fi
+}
+
+rgb_bg() {
+    local r g b
+    if [[ $1 =~ ^#([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$ ]]; then
+        r=$((16#$match[1]))
+        g=$((16#$match[2]))
+        b=$((16#$match[3]))
+        printf '\033[48;2;%d;%d;%dm' $r $g $b
+    fi
+}
 
 # Description: 反转颜色
 # param1: 例, #FFFFFF

@@ -68,18 +68,7 @@ read_file_content_of_specified_line() {
     # 读取指定行
     local line=$(sed -n "$((target_line + 1))p" "$file")
     
-    # # 提取从第一个 # 开始的内容
-    # if [[ "$line" =~ \# ]]; then
-    #     # 提取从第一个 # 开始的内容（包括 #）
-    #     local result="${line#*#}"
-    #     result="#$result"  # 重新加上 # 号
-    #     echo "$result"
-    #     return 0
-    # else
-    #     # 如果没有 #，返回整行
-    #     echo "$line"
-    #     return 0
-    # fi
+    # 返回行内容
     echo $line
     return 0
 }

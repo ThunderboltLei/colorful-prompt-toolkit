@@ -18,23 +18,27 @@
 
 # =====  样式分派 =====
 
-# === 加载配置 ===
+# 加载配置项脚本
 source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
 
-# === 加载常量 ===
+# 加载常量脚本
 source $MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-consts.sh
 
-# 加载公共函数
+# 加载公共函数脚本
 source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.sh
 
-# 加载文件操作文件
+# 加载文件操作脚本
 source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-file.sh
 
-# 加载颜色函数
+# 加载颜色脚本
 source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.sh
 
-# 加载实时时间操作文件
+# 加载实时时间操作脚本
 source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-datetime.sh
+
+# 加载事件脚本
+source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-event.sh
+
 
 # === 时间：初始化 ===
 zmodload zsh/datetime 2>/dev/null

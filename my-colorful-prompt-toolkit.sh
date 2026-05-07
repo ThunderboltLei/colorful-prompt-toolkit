@@ -1,11 +1,9 @@
+#!/bin/zsh
+
 # ===== my-colorful-prompt-toolkit =====
 
 # 获取绚彩提示符脚本的根目录
 export MY_COLORFUL_PROMPT_ROOT_PATH="${0:a:h}"
-
-# ===== terminal prompt =====
-# 启用颜色
-autoload -U colors && colors
 
 # ===== git-prompt.sh =====
 ### 定义提示符中 git 内容（注：第三方插件，暂不用修改）
