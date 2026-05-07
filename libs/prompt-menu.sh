@@ -355,7 +355,7 @@ draw() {
     printf '\033[%d;1H' $term_height
     printf '\033[2K'
     printf '\033[1;30m'
-    printf "↑/↓:menu  ←/→:scroll  PgUp/PgDn:page  Home/End:top/bottom  r:refresh  q:quit"
+    printf "↑/↓:menu  ←/→:scroll  PgUp/PgDn:page  Home/End:top/bottom q:quit"
     if [[ $total_lines -gt $content_height ]]; then
         printf " [Y: %d/%d]" $scroll_offset_y $max_scroll_y
     fi
@@ -477,47 +477,6 @@ while true; do
                         ;;
                 esac
             fi
-            ;;
-        [hjkl])
-            case $key in
-                'j')
-                    if ((selected < ${#MENU_ITEMS[@]})); then
-                        ((selected++))
-                        scroll_offset_y=0
-                        scroll_offset_x=0
-                        draw $selected
-                    fi
-                    ;;
-                'k')
-                    if ((selected > 1)); then
-                        ((selected--))
-                        scroll_offset_y=0
-                        scroll_offset_x=0
-                        draw $selected
-                    fi
-                    ;;
-                'h')
-                    if [[ $scroll_offset_x -gt 0 ]]; then
-                        ((scroll_offset_x--))
-                        draw $selected
-                    fi
-                    ;;
-                'l')
-                    local term_width=$(tput cols)
-                    local right_width=$((term_width - 30 - 5))
-                    if [[ $right_width -lt 10 ]]; then
-                        right_width=10
-                    fi
-                    local max_scroll_x=$((max_line_length - right_width))
-                    if [[ $max_scroll_x -gt 0 && $scroll_offset_x -lt $max_scroll_x ]]; then
-                        ((scroll_offset_x++))
-                        draw $selected
-                    fi
-                    ;;
-            esac
-            ;;
-        'r'|'R')  # 手动刷新
-            draw $selected
             ;;
         q|Q)
             # 退出时清屏并恢复设置
