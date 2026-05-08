@@ -146,3 +146,17 @@ case $MY_COLORFUL_PROMPT_TYPE in
     ;;
 esac
 ``
+# Menu Function
+The menu function is an additional and powerful feature of Prompt. By default, it is set up so that the menu can be displayed by simply double-clicking on "h". In the menu function, users can customize the menu items, allowing them to integrate more query requirements and simplify the daily viewing of work for users.
+
+<p align="center">
+  <a href="https://github.com/ThunderboltLei/colorful-prompt-toolkit">
+    <img src="assets/prompt-menu.png" alt="Colorful Prompt Toolkit"/>
+  </a>
+</p>
+
+## Add custom menu items
+Just add the corresponding custom menus in the MENU_ITEMS and ORDER_ITEMS sections of the prompt-settings.sh file. 
+Explanation:
+MENU_ITEMS: Menu item name
+ORDER_ITEMS: Custom command
