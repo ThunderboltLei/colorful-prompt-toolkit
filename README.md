@@ -157,6 +157,19 @@ The menu function is an additional and powerful feature of Prompt. By default, i
 
 ## Add custom menu items
 Just add the corresponding custom menus in the MENU_ITEMS and ORDER_ITEMS sections of the prompt-settings.sh file. <br/>
+
 Note:<br/>
 MENU_ITEMS: Menu item name<br/>
 ORDER_ITEMS: Custom command<br/>
+```
+MENU_ITEMS=(
+    ......
+
+    "<Custom Menu Item>"
+)
+ORDER_ITEMS=(
+    ......
+
+    "<Custom Orders>"
+)
+```
