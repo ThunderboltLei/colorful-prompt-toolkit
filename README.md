@@ -145,7 +145,7 @@ case $MY_COLORFUL_PROMPT_TYPE in
     source $MY_COLORFUL_PROMPT_ROOT_PATH/types/prompt-color-default.sh
     ;;
 esac
-``
+```
 # Menu Function
 The menu function is an additional and powerful feature of Prompt. By default, it is set up so that the menu can be displayed by simply double-clicking on "h". In the menu function, users can customize the menu items, allowing them to integrate more query requirements and simplify the daily viewing of work for users.
 
