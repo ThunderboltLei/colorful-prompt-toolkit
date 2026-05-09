@@ -33,7 +33,7 @@ MENU_ITEMS=(
     "Network Info"
     "Running Processes"
     "Show Prompt Style"
-    "Documents"
+    "Dirs & Docs"
 )
 ORDER_ITEMS=(
     "$(uname -a; printf '\n'; cat /etc/os-release 2>/dev/null | head -n 3)"
@@ -47,15 +47,6 @@ ORDER_ITEMS=(
     "$(ps aux | head -n 15)"
  
     "$(cat $MY_COLORFUL_PROMPT_ROOT_PATH/styles/colorful-style.txt)"
-
-    # "$(ls -l | awk 'NR>1 {
-    #     # 定义月份映射
-    #     m["Jan"]=1; m["Feb"]=2; m["Mar"]=3; m["Apr"]=4;
-    #     m["May"]=5; m["Jun"]=6; m["Jul"]=7; m["Aug"]=8;
-    #     m["Sep"]=9; m["Oct"]=10; m["Nov"]=11; m["Dec"]=12;
-    #     # 输出添加数字月份的新记录
-    #     print $1, $2, $3, $4, m[$6], $7, $8, $9, $0
-    # }' | sort -k2nr -k5nr -k6nr -k7nr -k8r | cut -d' ' -f9-)"
 
     "$({
         # 定义颜色变量
