@@ -59,17 +59,18 @@ ORDER_ITEMS=(
 
     "$({
         # 定义颜色变量
-        local RED='\033[0;31m'
-        local GREEN='\033[0;32m'
-        local YELLOW='\033[1;33m'
-        local BLUE='\033[0;34m'
-        local CYAN='\033[0;36m'
-        local RESET='\033[0m'
+        local RED='\e[0;31m'
+        local GREEN='\e[0;32m'
+        local YELLOW='\e[1;33m'
+        local BLUE='\e[0;34m'
+        local CYAN='\e[0;36m'
+        local RESET='\e[0m'
+        local BOLD='\e[1m'
 
-        printf "${GREEN}>>> ${RED}Directory:${RESET}\n"
-        ls -ld -- */ | sort -k6r -k7r -k8r -k9r;   # 先列目录
+        printf "${GREEN} >>> ${RED}${BOLD}Directory List:${RESET}\n";
+        ([[ -n `ls -ld -- */ 2>/dev/null` ]] && ls -ld -- */ | sort -k6r -k7r -k8r -k9r || printf "No Directory Here ...\n"); # 先列目录
         echo;
-        printf "${GREEN}>>> ${CYAN}Document:${RESET}\n"
-        ls -l -- *(.) | sort -k6r -k7r -k8r -k9r;  # 再列文件
+        printf "${GREEN} >>> ${CYAN}${BOLD}Document List:${RESET}\n";
+        ([[ -n `ls -ld -- *(.) 2>/dev/null` ]] && ls -ld -- *(.) | sort -k6r -k7r -k8r -k9r || printf "No Document Here ...\n"); # 再列文件
     } 2>/dev/null | grep -v '^total')"
 )
