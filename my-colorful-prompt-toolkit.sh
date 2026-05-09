@@ -2,6 +2,9 @@
 
 # ===== my-colorful-prompt-toolkit =====
 
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
 # 获取绚彩提示符脚本的根目录
 export MY_COLORFUL_PROMPT_ROOT_PATH="${0:a:h}"
 
