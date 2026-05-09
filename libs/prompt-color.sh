@@ -106,7 +106,7 @@ trim() {
 # Result: 返回字符串，如"#BADFDB|#B4D3B2|#D0F0C0|#F4FCD9|#C0E0C0|#1A2F1D"
 get_color_style() {
     local _rNo=$1
-    local colors=`read_file_content_of_specified_line $MY_COLORFUL_PROMPT_ROOT_PATH/styles/colorful-style.txt $_rNo`
+    local colors=`read_file_content_of_specified_line $MY_COLORFUL_PROMPT_ROOT_PATH/resources/styles/colorful-style.txt $_rNo`
     echo $colors
 }
 

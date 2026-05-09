@@ -16,25 +16,6 @@
 # Result: 
 # 
 
-
-# 绑定到 F1 键或某个组合键
-run-menu-widget() {
-    # 记录第一次按下的时间
-    if [[ -z $_h_time ]] || (( EPOCHSECONDS - _h_time > 1 )); then
-        _h_time=$EPOCHSECONDS
-        zle self-insert
-        return
-    fi
-    
-    # 1秒内第二次按下 -> 双击
-    unset _h_time
-    zle backward-delete-char  # 删除第一次的h
-    show_menu   # 执行脚本
-    zle reset-prompt
-}
-zle -N run-menu-widget
-bindkey 'h' run-menu-widget # shift+u 键
-
 assemble_colorful_prompt() {
 
     # 获取提示符颜色

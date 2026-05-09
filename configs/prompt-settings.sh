@@ -17,10 +17,10 @@
 
 # ========== 配置项 ==========
 
-# === 使用何种样式 ===
+# === 设置提示符样式 ===
 MY_COLORFUL_PROMPT_TYPE=7
 
-# === 使用颜色组合的行号 ===
+# === 提示符使用的颜色组合的行号 ===
 MY_COLORFUL_PROMPT_COLOR_NUMBER=9
 
 # === 定义菜单项 ===
@@ -46,7 +46,7 @@ ORDER_ITEMS=(
 
     "$(ps aux | head -n 15)"
  
-    "$(cat $MY_COLORFUL_PROMPT_ROOT_PATH/styles/colorful-style.txt)"
+    "$(cat $MY_COLORFUL_PROMPT_ROOT_PATH/resources/styles/colorful-style.txt)"
 
     "$({
         # 定义颜色变量

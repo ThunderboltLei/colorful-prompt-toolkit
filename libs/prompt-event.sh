@@ -7,7 +7,6 @@
 # Description: 定义事件函数
 
 
-
 # === Function Description Format ===
 # 
 # Description: 创建可点击的用户名（使用 OSC 8 转义序列）
@@ -24,12 +23,22 @@ function show_menu() {
 
     # url="command://echo 'Clicked user: $USER'"
     # text="$USER"
-    
-    # # 输出可点击的用户名
-    # # echo -ne "\033]8;;$url\\"
-    # # echo -ne "\033[1;32m$USER\033[0m"  # 绿色粗体显示
-    # # echo -ne "\033]8;;\\"
-    # echo -n $'%{\e]8;;'"$url"$'\e\\%}'
-    # echo -n "%F{green}$text%f"
-    # echo -n $'%{\e]8;;\e\\%}'
 }
+
+# 绑定到 F1 键或某个组合键
+run-menu-widget() {
+    # 记录第一次按下的时间
+    if [[ -z $_h_time ]] || (( EPOCHSECONDS - _h_time > 0.8 )); then
+        _h_time=$EPOCHSECONDS
+        zle self-insert
+        return
+    fi
+    
+    # 0.8秒内第二次按下 -> 双击
+    unset _h_time
+    zle backward-delete-char  # 删除第一次的h
+    show_menu   # 执行脚本
+    zle reset-prompt
+}
+zle -N run-menu-widget
+bindkey 'h' run-menu-widget # shift+u 键
