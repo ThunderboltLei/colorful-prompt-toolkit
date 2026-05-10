@@ -26,10 +26,12 @@ menu_function() {
         local RESET='\e[0m'
         local BOLD='\e[1m'
 
+        printf " 🍏 当前目录：$(pwd) \n\n"
+
         printf "${GREEN} >>> ${RED}${BOLD}Directory List:${RESET}\n"
         # 使用 ls -lt 按时间排序目录
-        if ls -ld -- */ 2>/dev/null | grep -q .; then
-            ls -lt -- */ 2>/dev/null | grep -v '^total'
+        if ls -ld -- *(/) 2>/dev/null | grep -q .; then
+            ls -lt -- *(/) 2>/dev/null | grep -v '^total'
         else
             printf "No Directory Here ...\n"
         fi
