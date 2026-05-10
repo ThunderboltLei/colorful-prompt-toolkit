@@ -16,7 +16,7 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
 # 菜单数据
 typeset -A details
 for i in {1..${#MENU_ITEMS[@]}}; do
-    details["${MENU_ITEMS[i]}"]="${ORDER_ITEMS[i]}"
+    details["${MENU_ITEMS[i]}"]="`/bin/zsh $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[i]} menu_item`"
 done
 
 # 滚动状态
@@ -231,7 +231,8 @@ draw_menu_items() {
     for ((line=0; line<visible_lines; line++)); do
         move_cursor $((start_line + line)) 1
         
-        if (( line < ${#MENU_ITEMS[@]} )); then
+        # if (( line < ${#MENU_ITEMS[@]} )); then
+        if (( line < ${#details[@]} )); then
             local i=$((line + 1))
             if (( i == selected_idx )); then
                 printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "${MENU_ITEMS[i]}"
@@ -412,7 +413,8 @@ handle_arrow_keys() {
             }
             ;;
         'B')  # 下
-            (( selected < ${#MENU_ITEMS[@]} )) && {
+            # (( selected < ${#MENU_ITEMS[@]} )) && {
+            (( selected < ${#details[@]} )) && {
                 ((selected++))
                 scroll_offset_y=0
                 scroll_offset_x=0
