@@ -44,6 +44,6 @@ ORDER_ITEMS=(
     "network_info.sh"
     "running_processes.sh"
     "show_prompt_style.sh"
-    "dirs_&_docs.sh"
+    "dirs_and_docs.sh"
 )
 

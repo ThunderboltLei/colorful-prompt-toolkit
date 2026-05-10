@@ -16,8 +16,30 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
 # 菜单数据
 typeset -A details
 for i in {1..${#MENU_ITEMS[@]}}; do
-    details["${MENU_ITEMS[i]}"]="`/bin/zsh $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[i]} menu_item`"
+    details[${MENU_ITEMS[$i]}]="/bin/zsh $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[i]} menu_item"
 done
+
+# for k v in "${(@kv)details}"; do
+#     printf "\n --->>> k: $k, v: $v \n"
+# done
+
+# local selected_idx=2
+# printf "--->>> selected_item: $selected_idx \n"
+# # for i in {1..${#MENU_ITEMS[@]}}; do
+# #     echo "$i - ${MENU_ITEMS[$i]}"
+# #     echo "$i - ${MENU_ITEMS[$selected_idx]}"
+# # done
+
+# # local _selected_menu_item="${MENU_ITEMS[$selected_idx]}"
+# printf "--->>> _selected_menu_item: ${MENU_ITEMS[$selected_idx]} \n"
+# printf "--->>> [[ -n ${details[(e)${MENU_ITEMS[$selected_idx]}]} ]] \n"
+# printf "--->>> v: ${details[${MENU_ITEMS[$selected_idx]}]} \n"
+
+# # local _menu_item_content=$(eval "${details[${MENU_ITEMS[$selected_idx]}]}")
+# local _menu_item_content=$(eval ""/bin/zsh $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/dirs_and_docs.sh menu_item"")
+# printf "--->>> _menu_item_content: %s\n"  $_menu_item_content
+
+# exit
 
 # 滚动状态
 typeset -i scroll_offset_x=0
@@ -350,7 +372,10 @@ draw() {
     (( right_width < 10 )) && right_width=10
     
     # 准备内容
-    prepare_detail_lines "${details[\"${MENU_ITEMS[selected_idx]}\"]}"
+    # local _menu_item_content=$(${details[\"${MENU_ITEMS[selected_idx]}\"]})
+    local _menu_item_content=$(eval "${details[${MENU_ITEMS[$selected_idx]}]}")
+    # printf "--->>> _menu_item_content: %s\n"  $_menu_item_content
+    prepare_detail_lines $_menu_item_content
     
     # 计算可视区域
     local content_start=3
