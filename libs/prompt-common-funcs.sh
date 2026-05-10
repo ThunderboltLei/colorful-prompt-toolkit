@@ -18,6 +18,7 @@
 
 # ===== 公共函数 =====
 
+
 # Description: 定义 precmd 函数
 get_command_status() {
     # 获取上一条命令的返回状态
@@ -32,3 +33,35 @@ get_command_status() {
         # echo "${RED}"
     fi
 }
+
+
+# 
+# Description: 输出指定数量的符号
+# Params:
+#   param1: symbol
+#   param2: count
+# Result: 
+# 
+symbol_printf() {
+    local _symbol=$1
+    local _count=$2
+    printf "$_symbol%.0s" $(seq 1 $_count); echo
+}
+
+
+# 
+# Description: 输出指定数量的符号
+# Params:
+#   param1: symbol
+#   param2: count
+# Result: 
+# 
+sentents_printf() {
+    # 遍历所有传入的参数
+    for _content in "$@"; do
+        printf "%s" "$_content"
+    done
+    # echo 目的是去掉 printf 多出的 %
+    echo
+}
+
