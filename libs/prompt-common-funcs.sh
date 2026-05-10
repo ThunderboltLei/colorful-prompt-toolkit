@@ -26,9 +26,9 @@ get_command_status() {
     # 使用返回状态
     if [[ $_exit_code_ -eq 0 ]]; then
         echo "${CORRECT}"
-        # echo "🟢"
+        # echo "${GREEN}"
     else
         echo "${WRONG}"
-        # echo "🔴"
+        # echo "${RED}"
     fi
 }

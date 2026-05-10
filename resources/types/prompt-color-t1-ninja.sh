@@ -26,7 +26,7 @@ assemble_colorful_prompt() {
     get_prompt_color
     
     # 定义左侧提示符
-    echo -n " 🐞 "
+    echo -n " ${E_LADY_BUG} "
     echo -n "%F{${colors[LEFT_COLOR]}}${ROUND_LEFT}%f" # 圆角边缘
     echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}}%n${colors[RESET]}"
     echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}}@${colors[RESET]}"
@@ -63,7 +63,7 @@ assemble_colorful_prompt_right() {
     echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_04]}}|${${colors[RESET]}}"
     echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_02]}} $(get_duration) ${colors[RESET]}"
     echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_04]}}|${${colors[RESET]}}"
-    echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}} ⏰ $(format_time)${colors[RESET]}"
+    echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}} ${E_CLOCK} $(format_time)${colors[RESET]}"
     echo -n "%F{${colors[RIGHT_COLOR]}}${ROUND_RIGHT}%f" # 圆角边缘
 }
 

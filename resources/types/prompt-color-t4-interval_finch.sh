@@ -25,14 +25,14 @@ assemble_colorful_prompt() {
     get_prompt_color
 
     # 定义左侧提示符
-    echo -n " 🍏 "
+    echo -n " ${E_APPLE} "
     echo -n "%F{${colors[COLOR_01]}}${ROUND_LEFT}%f" # 圆角边缘
     # === user ===
-    echo -n "%K{${colors[COLOR_01]}}%F{${colors[COLOR_06]}} 👤 %n ${colors[RESET]}"
+    echo -n "%K{${colors[COLOR_01]}}%F{${colors[COLOR_06]}} ${E_USER} %n ${colors[RESET]}"
     echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_01]}}${RIGHT_ARROW}${colors[RESET]}"
     echo -n "%K{${colors[COLOR_02]}}%F{${SYSTEM_MODE}}${RIGHT_ARROW}${colors[RESET]}"
     # === path ===
-    echo -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_06]}} 📁 %c ${colors[RESET]}"
+    echo -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_06]}} ${E_DOCUMENT} %c ${colors[RESET]}"
 
     # === github ===
     local branch=""
@@ -45,7 +45,7 @@ assemble_colorful_prompt() {
     else
         echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
         echo -n "%K{${colors[COLOR_04]}}%F{${SYSTEM_MODE}}${RIGHT_ARROW}${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} 🔃 git%B${SQUARE_LEFT}%b${colors[RESET]}"
+        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} ${E_GITHUB} git%B${SQUARE_LEFT}%b${colors[RESET]}"
         echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}$(__git_ps1 "%s")${colors[RESET]}"
         echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}%B${SQUARE_RIGHT}%b${colors[RESET]}"
         echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_04]}}${RIGHT_ARROW}${colors[RESET]}"
@@ -53,7 +53,7 @@ assemble_colorful_prompt() {
     fi
 
     # === datetime ===
-    echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ⏱️ $(format_time) ${colors[RESET]}"
+    echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${E_WATCH} $(format_time) ${colors[RESET]}"
     echo -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT} %f"
     echo -n $'\n'
     echo -n "%F{${colors[COLOR_05]}}%B${GREATER_THAN}%b%f"

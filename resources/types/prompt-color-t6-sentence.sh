@@ -26,7 +26,7 @@ assemble_colorful_prompt() {
     get_prompt_color
     
     # 定义左侧提示符
-    echo -n "%B 🐞 "
+    echo -n "%B ${E_LADY_BUG} "
 
     echo -n "%F{${colors[COLOR_01]}}%n%f"
     echo -n "%F{${REVERSE_SYSTEM_MODE}} @%f"

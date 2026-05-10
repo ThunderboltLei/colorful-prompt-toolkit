@@ -19,28 +19,6 @@ for i in {1..${#MENU_ITEMS[@]}}; do
     details[${MENU_ITEMS[$i]}]="/bin/zsh $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[i]} menu_item"
 done
 
-# for k v in "${(@kv)details}"; do
-#     printf "\n --->>> k: $k, v: $v \n"
-# done
-
-# local selected_idx=2
-# printf "--->>> selected_item: $selected_idx \n"
-# # for i in {1..${#MENU_ITEMS[@]}}; do
-# #     echo "$i - ${MENU_ITEMS[$i]}"
-# #     echo "$i - ${MENU_ITEMS[$selected_idx]}"
-# # done
-
-# # local _selected_menu_item="${MENU_ITEMS[$selected_idx]}"
-# printf "--->>> _selected_menu_item: ${MENU_ITEMS[$selected_idx]} \n"
-# printf "--->>> [[ -n ${details[(e)${MENU_ITEMS[$selected_idx]}]} ]] \n"
-# printf "--->>> v: ${details[${MENU_ITEMS[$selected_idx]}]} \n"
-
-# # local _menu_item_content=$(eval "${details[${MENU_ITEMS[$selected_idx]}]}")
-# local _menu_item_content=$(eval ""/bin/zsh $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/dirs_and_docs.sh menu_item"")
-# printf "--->>> _menu_item_content: %s\n"  $_menu_item_content
-
-# exit
-
 # 滚动状态
 typeset -i scroll_offset_x=0
 typeset -i scroll_offset_y=0

@@ -45,23 +45,23 @@ format_duration() {
     if [[ $int_part -ge 3600 ]]; then
         local hours=$((int_part / 3600))
         local minutes=$(((int_part % 3600) / 60))
-        echo "⏰ ${hours}h${minutes}m"
+        echo "${E_CLOCK} ${hours}h${minutes}m"
     elif [[ $int_part -ge 60 ]]; then
         local minutes=$((int_part / 60))
         local seconds=$((int_part % 60))
-        echo "⏰ ${minutes}m${seconds}s"
+        echo "${E_CLOCK} ${minutes}m${seconds}s"
     elif [[ $int_part -ge 1 ]]; then
-        echo "⏰ ${int_part}.${frac_part:0:1}s"
+        echo "${E_CLOCK} ${int_part}.${frac_part:0:1}s"
     elif [[ $duration != 0.* ]]; then
         local ms=$(printf "%.0f" $(echo "$duration * 1000" | bc 2>/dev/null || echo "0"))
         if [[ $ms -gt 0 ]]; then
-            echo "⏰ ${ms}ms"
+            echo "${E_CLOCK} ${ms}ms"
         else
             local us=$(printf "%.0f" $(echo "$duration * 1000000" | bc 2>/dev/null || echo "0"))
-            echo "⏰ ${us}μs"
+            echo "${E_CLOCK} ${us}μs"
         fi
     else
-        echo "⏰ <1ms"
+        echo "${E_CLOCK} <1ms"
     fi
 }
 
@@ -70,7 +70,7 @@ get_duration() {
 
     if [[ -z $ZSH_COMMAND_DURATION ]];
     then
-        echo "⏱️ <1ms"
+        echo "${E_WATCH} <1ms"
     else
         echo "$ZSH_COMMAND_DURATION"
     fi
