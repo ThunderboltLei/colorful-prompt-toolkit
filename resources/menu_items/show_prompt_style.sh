@@ -51,14 +51,14 @@ process_color_line() {
         ((i++))
     done
     
-    echo "$output"
+    print -n "$output"
 }
 
 process_file_content() {
     local file="$1"
     
     if [[ ! -f "$file" ]]; then
-        echo "错误: 文件 $file 不存在"
+         "错误: 文件 $file 不存在"
         return 1
     fi
     

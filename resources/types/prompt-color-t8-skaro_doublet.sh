@@ -23,11 +23,11 @@ assemble_colorful_prompt() {
     get_prompt_color
     
     # 定义左侧提示符
-    echo -n "%B"
-    echo -n "%F{${colors[COLOR_01]}}${LEFT_CEILING_DOUBLET}%f"
-    echo -n "%F{${colors[COLOR_01]}}${MEDIUM_LEFT_DOUBLET}%f"
-    echo -n "%F{${colors[COLOR_02]}}%~%f"
-    echo -n "%F{${colors[COLOR_01]}}${MEDIUM_RIGHT_DOUBLET}%f"
+    print -n "%B"
+    print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_01]}}${MEDIUM_LEFT_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_02]}}%~%f"
+    print -n "%F{${colors[COLOR_01]}}${MEDIUM_RIGHT_DOUBLET}%f"
 
     local branch=""
     # 不在 Git 仓库时静默返回空
@@ -35,23 +35,23 @@ assemble_colorful_prompt() {
 
     if [[ "$branch" != "" ]];
     then
-        echo -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
-        echo -n "%F{${colors[COLOR_01]}}${MEDIUM_LEFT_DOUBLET}%f"
-        echo -n "%F{${colors[COLOR_03]}}$(__git_ps1 "%s")%f"
-        echo -n "%F{${colors[COLOR_01]}}${MEDIUM_RIGHT_DOUBLET}%f"
+        print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
+        print -n "%F{${colors[COLOR_01]}}${MEDIUM_LEFT_DOUBLET}%f"
+        print -n "%F{${colors[COLOR_03]}}$(__git_ps1 "%s")%f"
+        print -n "%F{${colors[COLOR_01]}}${MEDIUM_RIGHT_DOUBLET}%f"
     fi
-    echo -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
-        echo -n "%F{${colors[COLOR_01]}}${MEDIUM_LEFT_DOUBLET}%f"
-    echo -n "%F{${colors[COLOR_04]}}$(format_time)%f"
-    echo -n "%F{${colors[COLOR_01]}}${MEDIUM_RIGHT_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
+        print -n "%F{${colors[COLOR_01]}}${MEDIUM_LEFT_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_04]}}$(format_time)%f"
+    print -n "%F{${colors[COLOR_01]}}${MEDIUM_RIGHT_DOUBLET}%f"
 
-    echo -n "\n"
-    echo -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR_DOUBLET}%f"
-    echo -n "%F{${colors[COLOR_01]}}${MEDIUM_LEFT_DOUBLET}%f"
-    echo -n "%F{${colors[COLOR_05]}}${SNOW}%f"
-    echo -n "%F{${colors[COLOR_01]}}${MEDIUM_RIGHT_DOUBLET} %f"
+    print -n "\n"
+    print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_01]}}${MEDIUM_LEFT_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_05]}}${SNOW}%f"
+    print -n "%F{${colors[COLOR_01]}}${MEDIUM_RIGHT_DOUBLET} %f"
 
-    echo -n "%b"
+    print -n "%b"
 }
 
 # 组装右提示符

@@ -26,13 +26,13 @@ assemble_colorful_prompt() {
     get_prompt_color
     
     # 定义左侧提示符
-    echo -n "%B ${E_LADY_BUG} "
+    print -n "%B ${E_LADY_BUG} "
 
-    echo -n "%F{${colors[COLOR_01]}}%n%f"
-    echo -n "%F{${REVERSE_SYSTEM_MODE}} @%f"
-    echo -n "%F{${colors[COLOR_02]}} %M%f"
-    echo -n "%F{${REVERSE_SYSTEM_MODE}} in%f"
-    echo -n "%F{${colors[COLOR_03]}} %~%f"
+    print -n "%F{${colors[COLOR_01]}}%n%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}} @%f"
+    print -n "%F{${colors[COLOR_02]}} %M%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}} in%f"
+    print -n "%F{${colors[COLOR_03]}} %~%f"
 
     local branch=""
     # 不在 Git 仓库时静默返回空
@@ -40,16 +40,16 @@ assemble_colorful_prompt() {
 
     if [[ "$branch" != "" ]];
     then
-        echo -n "%F{${REVERSE_SYSTEM_MODE}} on git:%f"
-        echo -n "%F{${colors[COLOR_04]}}$(__git_ps1 "%s")%f"
+        print -n "%F{${REVERSE_SYSTEM_MODE}} on git:%f"
+        print -n "%F{${colors[COLOR_04]}}$(__git_ps1 "%s")%f"
     fi
-    echo -n "%F{${REVERSE_SYSTEM_MODE}} as%f"
-    echo -n "%F{${colors[COLOR_05]}} ${SQUARE_LEFT}$(format_time)${SQUARE_RIGHT}%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}} as%f"
+    print -n "%F{${colors[COLOR_05]}} ${SQUARE_LEFT}$(format_time)${SQUARE_RIGHT}%f"
 
-    echo -n "\n"
-    echo -n "%F{${REVERSE_SYSTEM_MODE}} ${TRIANGLE_RIGHT} %f"
+    print -n "\n"
+    print -n "%F{${REVERSE_SYSTEM_MODE}} ${TRIANGLE_RIGHT} %f"
 
-    echo -n "%b"
+    print -n "%b"
 }
 
 # 组装右提示符

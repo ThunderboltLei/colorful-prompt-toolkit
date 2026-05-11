@@ -25,16 +25,16 @@ assemble_colorful_prompt() {
     get_prompt_color
 
     # 定义左侧提示符
-    echo -n " ${E_LADY_BUG} "
-    echo -n "%F{${${colors[COLOR_01]}}}${ROUND_LEFT}%f" # 圆角边缘
+    print -n " ${E_LADY_BUG} "
+    print -n "%F{${${colors[COLOR_01]}}}${ROUND_LEFT}%f" # 圆角边缘
 
-    echo -n "%K{${colors[COLOR_01]}}%F{${colors[COLOR_06]}}%n ${colors[RESET]}"
-    echo -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_01]}}${RIGHT_ARROW}${colors[RESET]}"
+    print -n "%K{${colors[COLOR_01]}}%F{${colors[COLOR_06]}}%n ${colors[RESET]}"
+    print -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_01]}}${RIGHT_ARROW}${colors[RESET]}"
 
-    echo -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_06]}} %M ${${colors[RESET]}}"
-    echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
+    print -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_06]}} %M ${${colors[RESET]}}"
+    print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
 
-    echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} %c ${colors[RESET]}"
+    print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} %c ${colors[RESET]}"
 
     local branch=""
     # 不在 Git 仓库时静默返回空
@@ -42,13 +42,13 @@ assemble_colorful_prompt() {
 
     if [[ "$branch" == "" ]];
     then
-        echo -n "%F{${colors[COLOR_03]}}${RIGHT_ARROW} %f"
+        print -n "%F{${colors[COLOR_03]}}${RIGHT_ARROW} %f"
     else
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_03]}}${RIGHT_ARROW}${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} git%B[%b${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} $(__git_ps1 "%s") ${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}%B] %b${colors[RESET]}"
-        echo -n "%F{${colors[COLOR_04]}}${RIGHT_ARROW} %f"  # 右三角边缘
+        print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_03]}}${RIGHT_ARROW}${colors[RESET]}"
+        print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} git%B[%b${colors[RESET]}"
+        print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} $(__git_ps1 "%s") ${colors[RESET]}"
+        print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}%B] %b${colors[RESET]}"
+        print -n "%F{${colors[COLOR_04]}}${RIGHT_ARROW} %f"  # 右三角边缘
     fi
 
     
@@ -62,17 +62,17 @@ assemble_colorful_prompt_right() {
 
     # 定义右侧提示符（在命令执行后显示）
     # 或者显示更详细的时间（日期+时间）
-    echo -n ""
-    echo -n "%F{${colors[COLOR_05]}}${LEFT_ARROW}%f" # 左三角边缘
-    echo -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_06]}} $(get_command_status) ${colors[RESET]}"
+    print -n ""
+    print -n "%F{${colors[COLOR_05]}}${LEFT_ARROW}%f" # 左三角边缘
+    print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_06]}} $(get_command_status) ${colors[RESET]}"
 
-    echo -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_04]}}${LEFT_ARROW}${colors[RESET]}"
-    echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} $(get_duration $ZSH_COMMAND_START_TIME) ${colors[RESET]}"
+    print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_04]}}${LEFT_ARROW}${colors[RESET]}"
+    print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} $(get_duration $ZSH_COMMAND_START_TIME) ${colors[RESET]}"
 
-    echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_03]}}${LEFT_ARROW}${colors[RESET]}"
-    echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${CLOCK} $(format_time)${colors[RESET]}"
-    # echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} %D{%Y-%m-%d %H:%M:%S} ${colors[RESET]}"
-    echo -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT}%f" # 圆角边缘
+    print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_03]}}${LEFT_ARROW}${colors[RESET]}"
+    print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${CLOCK} $(format_time)${colors[RESET]}"
+    # print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} %D{%Y-%m-%d %H:%M:%S} ${colors[RESET]}"
+    print -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT}%f" # 圆角边缘
 }
 
 # 设置一个标志变量

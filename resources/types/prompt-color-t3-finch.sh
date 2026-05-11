@@ -28,13 +28,13 @@ assemble_colorful_prompt() {
     get_prompt_color
 
     # 定义左侧提示符
-    echo -n " ${APPLE} "
+    print -n " ${APPLE} "
     # === user ===
-    echo -n "%F{${colors[COLOR_01]}}${ROUND_LEFT}%f" # 圆角边缘
-    echo -n "%K{${colors[COLOR_01]}}%F{${colors[COLOR_06]}} ${E_USER} %n ${colors[RESET]}"
+    print -n "%F{${colors[COLOR_01]}}${ROUND_LEFT}%f" # 圆角边缘
+    print -n "%K{${colors[COLOR_01]}}%F{${colors[COLOR_06]}} ${E_USER} %n ${colors[RESET]}"
     # === path ===
-    echo -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_01]}}${RIGHT_ARROW}${colors[RESET]}"
-    echo -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_06]}} ${E_DOCUMENT} %c ${colors[RESET]}"
+    print -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_01]}}${RIGHT_ARROW}${colors[RESET]}"
+    print -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_06]}} ${E_DOCUMENT} %c ${colors[RESET]}"
 
     # === github ===
     local branch=""
@@ -42,23 +42,23 @@ assemble_colorful_prompt() {
     branch=`__git_ps1 "%s" 2>/dev/null`
     if [[ "$branch" == "" ]];
     then
-        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
+        print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
     else
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} ${E_GITHUB} git%B${SQUARE_LEFT}%b${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}$(__git_ps1 "%s")${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}%B${SQUARE_RIGHT}%b${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_04]}}${RIGHT_ARROW}${colors[RESET]}"
+        print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
+        print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} ${E_GITHUB} git%B${SQUARE_LEFT}%b${colors[RESET]}"
+        print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}$(__git_ps1 "%s")${colors[RESET]}"
+        print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}}%B${SQUARE_RIGHT}%b${colors[RESET]}"
+        print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_04]}}${RIGHT_ARROW}${colors[RESET]}"
     fi
 
     # === datetime ===
-    echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${E_CLOCK} $(format_time)${colors[RESET]}"
-    echo -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT} %f"
+    print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${E_CLOCK} $(format_time)${colors[RESET]}"
+    print -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT} %f"
 
-    echo -n $'\n'
+    print -n $'\n'
 
-    echo -n "%F{${colors[COLOR_05]}}%B${GREATER_THAN}%b%f"
-    echo -n " "
+    print -n "%F{${colors[COLOR_05]}}%B${GREATER_THAN}%b%f"
+    print -n " "
 }
 
 # 组装右提示符

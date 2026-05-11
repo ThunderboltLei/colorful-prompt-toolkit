@@ -28,37 +28,37 @@ assemble_colorful_prompt() {
     
     # 定义左侧提示符
     # 第一行
-    echo -n "%B"
-    echo -n " "
-    echo -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
-    echo -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}}${SQUARE_LEFT}$(format_time)${SQUARE_RIGHT}${colors[RESET]}"
-    echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_06]}}${RIGHT_ARROW}${colors[RESET]}"
-    echo -n " "
-    echo -n "%F{${colors[COLOR_02]}}%~%f"
-    echo -n " "
+    print -n "%B"
+    print -n " "
+    print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
+    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}}${SQUARE_LEFT}$(format_time)${SQUARE_RIGHT}${colors[RESET]}"
+    print -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_06]}}${RIGHT_ARROW}${colors[RESET]}"
+    print -n " "
+    print -n "%F{${colors[COLOR_02]}}%~%f"
+    print -n " "
 
     local branch=""
     # 不在 Git 仓库时静默返回空
     branch=`__git_ps1 "%s" 2>/dev/null`
     if [[ "$branch" != "" ]];
     then
-        echo -n "%K{${colors[COLOR_03]}}%F{${SYSTEM_MODE}}${RIGHT_ARROW}${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}} git(${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_03]}}$(__git_ps1 "%s")${colors[RESET]}"
-        echo -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}}) ${colors[RESET]}"
-        echo -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_03]}}${RIGHT_ARROW}${colors[RESET]}"
+        print -n "%K{${colors[COLOR_03]}}%F{${SYSTEM_MODE}}${RIGHT_ARROW}${colors[RESET]}"
+        print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}} git(${colors[RESET]}"
+        print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_03]}}$(__git_ps1 "%s")${colors[RESET]}"
+        print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_01]}}) ${colors[RESET]}"
+        print -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_03]}}${RIGHT_ARROW}${colors[RESET]}"
     fi
     # 换行
-    echo -n "\n"
+    print -n "\n"
     # 第二行
-    echo -n " "
-    echo -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
-    # echo -n "%F{${colors[COLOR_04]}}${GREATER_THAN}%f"
-    # echo -n "%F{${colors[COLOR_05]}}${GREATER_THAN}%f"
-    # echo -n "%F{${colors[COLOR_06]}}${GREATER_THAN}%f"
-    echo -n "%F{${colors[COLOR_04]}}${TRIANGLE_RIGHT}%f"
-    echo -n " "
-    echo -n "%b"
+    print -n " "
+    print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
+    # print -n "%F{${colors[COLOR_04]}}${GREATER_THAN}%f"
+    # print -n "%F{${colors[COLOR_05]}}${GREATER_THAN}%f"
+    # print -n "%F{${colors[COLOR_06]}}${GREATER_THAN}%f"
+    print -n "%F{${colors[COLOR_04]}}${TRIANGLE_RIGHT}%f"
+    print -n " "
+    print -n "%b"
 }
 
 # 组装右提示符
