@@ -41,6 +41,7 @@ get_command_status() {
 #   param1: symbol
 #   param2: count
 # Result: 
+#   example: ----------
 # 
 symbol_printf() {
     local _symbol=$1

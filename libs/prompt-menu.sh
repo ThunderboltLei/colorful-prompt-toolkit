@@ -84,7 +84,7 @@ move_cursor() { printf "${ESC}[%d;%dH" "$1" "$2"; }
 # 获取终端尺寸
 get_term_size() {
     current_height=$(tput lines)
-    current_width=$(tput cols)
+    current_width=$(($(tput cols) * 1.5))
 }
 
 #===========================================
@@ -96,6 +96,27 @@ get_term_size() {
 #   Param1: 详细内容
 # Result: 
 prepare_detail_lines() {
+    # local content="$1"
+    
+    # # 清空缓存
+    # detail_lines=()
+    # max_line_length=0
+    
+    # # 处理空内容
+    # [[ -z "$content" ]] && {
+    #     detail_lines=("")
+    #     return
+    # }
+    
+    # # 分割内容
+    # while IFS= read -r line; do
+    #     detail_lines+=("$line")
+    #     (( ${#line} > max_line_length )) && max_line_length=${#line}
+    # done <<< "$content"
+    
+    # # 确保至少有一行
+    # (( ${#detail_lines[@]} == 0 )) && detail_lines=("")
+
     local content="$1"
     
     # 清空缓存
@@ -103,16 +124,25 @@ prepare_detail_lines() {
     max_line_length=0
     
     # 处理空内容
-    [[ -z "$content" ]] && {
+    if [[ -z "$content" ]]; then
         detail_lines=("")
         return
-    }
+    fi
     
-    # 分割内容
-    while IFS= read -r line; do
-        detail_lines+=("$line")
+    # 方法1：使用 printf 保留所有换行和空格
+    local lines=()
+    while IFS= read -r line || [[ -n "$line" ]]; do
+        lines+=("$line")
         (( ${#line} > max_line_length )) && max_line_length=${#line}
-    done <<< "$content"
+    done < <(printf "%s\n" "$content")
+    
+    # 如果没有换行符，content 作为单行处理
+    if (( ${#lines[@]} == 0 )); then
+        lines=("$content")
+        max_line_length=${#content}
+    fi
+    
+    detail_lines=("${lines[@]}")
     
     # 确保至少有一行
     (( ${#detail_lines[@]} == 0 )) && detail_lines=("")
@@ -349,11 +379,19 @@ draw() {
     local right_width=$((current_width - left_width - 5))
     (( right_width < 10 )) && right_width=10
     
-    # 准备内容
-    # local _menu_item_content=$(${details[\"${MENU_ITEMS[selected_idx]}\"]})
-    local _menu_item_content=$(eval "${details[${MENU_ITEMS[$selected_idx]}]}")
-    # printf "--->>> _menu_item_content: %s\n"  $_menu_item_content
-    prepare_detail_lines $_menu_item_content
+    # # 准备内容
+    # # local _menu_item_content=$(${details[\"${MENU_ITEMS[selected_idx]}\"]})
+    # local _menu_item_content=$(eval "${details[${MENU_ITEMS[$selected_idx]}]}")
+    # # printf "--->>> _menu_item_content: %s\n"  $_menu_item_content
+    # prepare_detail_lines "$_menu_item_content"
+
+    # 修复：使用引号保护内容
+    local cmd="${details[${MENU_ITEMS[$selected_idx]}]}"
+    local _menu_item_content
+    _menu_item_content=$(eval "$cmd" 2>&1)  # 捕获 stderr 也
+    
+    # 修复：传递时加引号
+    prepare_detail_lines "$_menu_item_content"
     
     # 计算可视区域
     local content_start=3

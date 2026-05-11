@@ -75,3 +75,5 @@ LEFT="←"
 RIGHT="→"
 UP="↑"
 DOWN="↓"
+
+WIDTH_CURSOR="█"

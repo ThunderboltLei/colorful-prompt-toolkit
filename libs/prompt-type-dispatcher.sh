@@ -22,6 +22,7 @@
 source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
 
 # 加载常量脚本
+source $MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-ansi.sh
 source $MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-symbols.sh
 source $MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-emojis.sh
 

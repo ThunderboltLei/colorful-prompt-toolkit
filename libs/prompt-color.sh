@@ -26,7 +26,7 @@ rgb_fg() {
         r=$((16#$match[1]))
         g=$((16#$match[2]))
         b=$((16#$match[3]))
-        printf '\033[38;2;%d;%d;%dm' $r $g $b
+        printf '\033[38;2;%d;%d;%dm' $r $g $b; echo
     fi
 }
 
@@ -36,7 +36,7 @@ rgb_bg() {
         r=$((16#$match[1]))
         g=$((16#$match[2]))
         b=$((16#$match[3]))
-        printf '\033[48;2;%d;%d;%dm' $r $g $b
+        printf '\033[48;2;%d;%d;%dm' $r $g $b; echo
     fi
 }
 
