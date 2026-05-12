@@ -16,7 +16,7 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
 # 菜单数据
 typeset -A details
 for i in {1..${#MENU_ITEMS[@]}}; do
-    details[${MENU_ITEMS[$i]}]="/bin/zsh $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[i]} menu_item"
+    details[${MENU_ITEMS[$i]}]="source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[i]} menu_item"
 done
 
 # 滚动状态

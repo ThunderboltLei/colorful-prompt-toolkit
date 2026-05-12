@@ -96,8 +96,6 @@ process_file_content() {
 
 
 menu_function() {
-    # local info="`cat $MY_COLORFUL_PROMPT_ROOT_PATH/resources/styles/colorful-style.txt`"
-    # printf "%s\n" $info
 
     # 确保变量存在
     if [[ -z "$MY_COLORFUL_PROMPT_ROOT_PATH" ]]; then
@@ -116,12 +114,17 @@ menu_function() {
     [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-ansi.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-ansi.sh"
     [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-symbols.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-symbols.sh"
     [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.sh"
+    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-file.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-file.sh"
+    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.sh"
+
+    local _colors_str_="`get_color_style $MY_COLORFUL_PROMPT_COLOR_NUMBER`"
+    printf " 🍏 当前配色方案：$(process_color_line $_colors_str_)\n\n"
 
     process_file_content "$style_file"
 }
 
 
-# 如果脚本有参数且第一个参数是 "menu"
+# # 如果脚本有参数且第一个参数是 "menu"
 if [[ "$1" == "menu_item" ]]; then
     menu_function
 fi
