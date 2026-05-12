@@ -1,20 +1,5 @@
 #!/bin/zsh
 
-# === File Description Format ===
-# 
-# Creator: Raymond-Magnus-Lei
-# Filename: 
-# Description:
-
-# === Function Description Format ===
-# 
-# Description: 
-# Params:
-#   param1: 
-#   param2: 
-# Result: 
-# 
-
 # ========== 配置项 ==========
 
 # === 设置提示符样式 ===
