@@ -57,7 +57,7 @@ assemble_colorful_prompt() {
 
     print -n $'\n'
 
-    print -n "%F{${colors[COLOR_05]}}%B${GREATER_THAN}%b%f"
+    print -n "%F{${colors[COLOR_05]}}%B${ANGLE_RIGHT}${TRIANGLE_RIGHT}%b%f"
     print -n " "
 }
 

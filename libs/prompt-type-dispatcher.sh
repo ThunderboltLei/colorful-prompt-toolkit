@@ -41,6 +41,8 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-datetime.sh
 # 加载事件脚本
 source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-event.sh
 
+# 加载命令脚本
+source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/orders/prompt-orders.sh
 
 # === 时间：初始化 ===
 zmodload zsh/datetime 2>/dev/null

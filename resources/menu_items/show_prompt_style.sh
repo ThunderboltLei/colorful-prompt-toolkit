@@ -28,6 +28,14 @@ hex_to_ansi() {
     printf "$BEGIN%d;%d;%dm%s${RESET}" "0x${hex:0:2}" "0x${hex:2:2}" "0x${hex:4:2}" "$1"
 }
 
+
+# 
+# Description: 处理每行颜色内容
+# Params:
+#   param1: 行内容
+#   param2: 
+# Result: 输出带 ansi 形式的行内容
+# 
 process_color_line() {
     local line=$1
     local parts=("${(@s:|:)line}")
@@ -51,14 +59,21 @@ process_color_line() {
         ((i++))
     done
     
-    print -n "$output"
+    print -P "$output"
 }
 
+# 
+# Description: 处理文件内容
+# Params:
+#   param1: 文件路径
+#   param2: 
+# Result: 
+# 
 process_file_content() {
     local file="$1"
     
     if [[ ! -f "$file" ]]; then
-         "错误: 文件 $file 不存在"
+        print -P "错误: 文件 $file 不存在"
         return 1
     fi
     

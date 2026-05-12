@@ -56,7 +56,7 @@ assemble_colorful_prompt() {
     print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${E_WATCH} $(format_time) ${colors[RESET]}"
     print -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT} %f"
     print -n $'\n'
-    print -n "%F{${colors[COLOR_05]}}%B${GREATER_THAN}%b%f"
+    print -n "%F{${colors[COLOR_05]}}%B${ANGLE_RIGHT}${TRIANGLE_RIGHT}%b%f"
     print -n " "
 }
 

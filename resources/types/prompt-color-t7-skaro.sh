@@ -46,9 +46,9 @@ assemble_colorful_prompt() {
 
     print -n "\n"
     print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
-    print -n "%F{${colors[COLOR_01]}}${SQUARE_LEFT}%f"
-    print -n "%F{${colors[COLOR_05]}}${SNOW}%f"
-    print -n "%F{${colors[COLOR_01]}}${SQUARE_RIGHT} %f"
+    print -n "%F{${colors[COLOR_01]}}${ANGLE_RIGHT}%f"
+    # print -n "%F{${colors[COLOR_05]}}${FLOWER}%f"
+    print -n "%F{${colors[COLOR_01]}}${TRIANGLE_RIGHT} %f"
 
     print -n "%b"
 }
