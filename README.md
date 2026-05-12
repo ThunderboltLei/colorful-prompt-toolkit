@@ -124,7 +124,7 @@ Just set the configuration item "MY_COLORFUL_PROMPT_TYPE=8".
 </p>
 
 # Extensible to your own prompts
-```
+```text
 $ cd types
 
 Copy the file prompt-color-<symbol>.sh of your own.
@@ -161,7 +161,7 @@ Just add the corresponding custom menus in the MENU_ITEMS and ORDER_ITEMS sectio
 Note:<br/>
 MENU_ITEMS: Menu item name<br/>
 ORDER_ITEMS: Custom command<br/>
-```
+```text
 MENU_ITEMS=(
     ......
 
@@ -173,3 +173,24 @@ ORDER_ITEMS=(
     "<Custom Orders>"
 )
 ```
+
+Each "order_item" is a shell script, and the specific functions it performs are up to the user to implement. It is necessary to implement strictly in accordance with the function specifications in the "resources/menu_items/template-menu_item.sh" script.
+```text
+# Description: 菜单项对应的业务函数
+# Params: 无
+#   param1: 
+#   param2: 
+# Result: 输出要显示的内容
+# 
+menu_function() {
+    # 菜单项执行的业务逻辑
+}
+
+# 不要修改，固定写法
+if [[ "$1" == "menu_item" ]]; then
+    menu_function
+fi
+```
+
+Note: <br>
+The scripts for the added menu items should not implement overly complex business logic; otherwise, it may cause the project to get stuck.
