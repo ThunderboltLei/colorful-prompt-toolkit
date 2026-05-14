@@ -26,8 +26,8 @@ assemble_colorful_prompt() {
     get_prompt_color
     
     # 定义左侧提示符
+    print -n "\n"
     print -n "%B ${E_LADY_BUG} "
-
     print -n "%F{${colors[COLOR_01]}}%n%f"
     print -n "%F{${REVERSE_SYSTEM_MODE}} @%f"
     print -n "%F{${colors[COLOR_02]}} %M%f"

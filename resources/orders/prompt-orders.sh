@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-lst() {
+ll() {
     {
        # 定义颜色变量
        local RED='\033[0;31m'

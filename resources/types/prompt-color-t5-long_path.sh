@@ -28,6 +28,7 @@ assemble_colorful_prompt() {
     
     # 定义左侧提示符
     # 第一行
+    print -n "\n"
     print -n "%B"
     print -n " "
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"

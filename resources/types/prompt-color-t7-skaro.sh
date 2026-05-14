@@ -22,6 +22,7 @@ assemble_colorful_prompt() {
     get_prompt_color
     
     # 定义左侧提示符
+    print -n "\n"
     print -n "%B"
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
     print -n "%F{${colors[COLOR_01]}}${SQUARE_LEFT}%f"

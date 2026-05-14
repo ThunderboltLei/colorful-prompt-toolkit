@@ -26,6 +26,7 @@ assemble_colorful_prompt() {
     get_prompt_color
     
     # 定义左侧提示符
+    print -n "\n"
     print -n " ${E_LADY_BUG} "
     print -n "%F{${colors[LEFT_COLOR]}}${ROUND_LEFT}%f" # 圆角边缘
     print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}}%n${colors[RESET]}"
