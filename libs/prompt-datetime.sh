@@ -1,13 +1,21 @@
+#!/bin/zsh
+
+# 初始化时加载模块
+zmodload zsh/datetime 2>/dev/null
+
+
 # 显示实时时间
 format_time() {
     # 优先使用 EPOCHREALTIME（如果支持）
     if (( $+EPOCHREALTIME )); then
-        # date -r ${(z)EPOCHREALTIME//.*/} +"%Y-%m-%d %H:%M:%S"
-        date -r ${(z)EPOCHREALTIME//.*/} +"%H:%M:%S"
+        # zsh 原生方式：使用内置的 strftime
+        # 需要加载模块：zmodload zsh/datetime
+        strftime "%H:%M:%S" "${EPOCHREALTIME%.*}"
     else
         date +"%H:%M:%S"
     fi
 }
+
 
 # 刷新提示符中时间
 refresh_prompt_datetime() {
@@ -34,6 +42,7 @@ refresh_prompt_datetime() {
         TMOUT=1  # 重新设置定时器
     }
 }
+
 
 # 计算命令执行时间
 # 格式化时长（无外部依赖版本）
@@ -65,9 +74,9 @@ format_duration() {
     fi
 }
 
+
 # 获取时长的函数
 get_duration() {
-
     if [[ -z $ZSH_COMMAND_DURATION ]];
     then
         echo "${E_WATCH} <1ms"

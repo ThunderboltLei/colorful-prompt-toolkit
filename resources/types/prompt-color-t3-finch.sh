@@ -73,4 +73,6 @@ precmd() {
 }
 
 # 刷新提示符中时间
-refresh_prompt_datetime
+if [[ $MY_COLORFUL_PROMPT_REFRESH_DATETIME -eq 1 ]]; then
+    refresh_prompt_datetime
+fi

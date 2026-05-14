@@ -67,8 +67,8 @@ PROMPT_RESET_NEEDED=1
 preexec() {
     PROMPT_RESET_NEEDED=1
     
-    # === 计算时间 ===
-    ZSH_LAST_COMMAND_START=$EPOCHREALTIME
+    # # === 计算时间 ===
+    # ZSH_LAST_COMMAND_START=$EPOCHREALTIME
 }
 
 # 命令执行后恢复完整样式
@@ -76,20 +76,20 @@ precmd() {
 
     if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
     then
-        # === 计算时间 ===
-        if [[ -n "$ZSH_LAST_COMMAND_START" ]]; then
-            local end_time=$EPOCHREALTIME
-            if command -v bc >/dev/null 2>&1; then
-                local duration=$(echo "$end_time - $ZSH_LAST_COMMAND_START" | bc)
-            else
-                # 降级方案：只取整数部分
-                local duration=$((end_time - ZSH_LAST_COMMAND_START))
-            fi
-            ZSH_COMMAND_DURATION=$(format_duration "$duration")
-            ZSH_LAST_COMMAND_START=""
-        else
-            ZSH_COMMAND_DURATION=""
-        fi
+        # # === 计算时间 ===
+        # if [[ -n "$ZSH_LAST_COMMAND_START" ]]; then
+        #     local end_time=$EPOCHREALTIME
+        #     if command -v bc >/dev/null 2>&1; then
+        #         local duration=$(echo "$end_time - $ZSH_LAST_COMMAND_START" | bc)
+        #     else
+        #         # 降级方案：只取整数部分
+        #         local duration=$((end_time - ZSH_LAST_COMMAND_START))
+        #     fi
+        #     ZSH_COMMAND_DURATION=$(format_duration "$duration")
+        #     ZSH_LAST_COMMAND_START=""
+        # else
+        #     ZSH_COMMAND_DURATION=""
+        # fi
 
         # === 重新生成完整提示符 ===
         PROMPT='$(assemble_colorful_prompt)'
@@ -102,4 +102,6 @@ precmd() {
 }
 
 # 刷新提示符中时间
-refresh_prompt_datetime
+if [[ $MY_COLORFUL_PROMPT_REFRESH_DATETIME -eq 1 ]]; then
+    refresh_prompt_datetime
+fi
