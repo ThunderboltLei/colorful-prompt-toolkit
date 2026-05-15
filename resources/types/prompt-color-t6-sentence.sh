@@ -19,7 +19,6 @@
 # 
 
 
-
 assemble_colorful_prompt() {
 
     # 获取提示符颜色
@@ -38,8 +37,7 @@ assemble_colorful_prompt() {
     # 不在 Git 仓库时静默返回空
     branch=`__git_ps1 "%s" 2>/dev/null`
 
-    if [[ "$branch" != "" ]];
-    then
+    if [[ "$branch" != "" ]]; then
         print -n "%F{${REVERSE_SYSTEM_MODE}} on git:%f"
         print -n "%F{${colors[COLOR_04]}}$(__git_ps1 "%s")%f"
     fi
@@ -68,8 +66,7 @@ preexec() {
 # 命令执行后恢复完整样式
 precmd() {
 
-    if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
-    then
+    if [[ $PROMPT_RESET_NEEDED -eq 1 ]]; then
 
         # === 重新生成完整提示符 ===
         PROMPT='$(assemble_colorful_prompt)'

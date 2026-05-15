@@ -124,8 +124,7 @@ get_prompt_color() {
     # 颜色组合列表
     local _splitted_colors_=(`split_colors $_colors_str_`)
 
-    if [[ ${#_splitted_colors_[@]} -ne 8 ]];
-    then
+    if [[ ${#_splitted_colors_[@]} -ne 8 ]]; then
         # 默认颜色
         colors[COLOR_01]="magenta"
         colors[COLOR_02]="cyan"

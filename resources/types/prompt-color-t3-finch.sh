@@ -41,8 +41,7 @@ assemble_colorful_prompt() {
     local branch=""
     # 不在 Git 仓库时静默返回空
     branch=`__git_ps1 "%s" 2>/dev/null`
-    if [[ "$branch" == "" ]];
-    then
+    if [[ "$branch" == "" ]]; then
         print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
     else
         print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"

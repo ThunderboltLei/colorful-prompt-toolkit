@@ -39,8 +39,7 @@ assemble_colorful_prompt() {
     # 不在 Git 仓库时静默返回空
     branch=`__git_ps1 "%s" 2>/dev/null`
 
-    if [[ "$branch" == "" ]];
-    then
+    if [[ "$branch" == "" ]]; then
         print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} ${colors[RESET]}"
     else
         print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} git(${colors[RESET]}"
@@ -82,8 +81,7 @@ preexec() {
 # 命令执行后恢复完整样式
 precmd() {
 
-    if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
-    then
+    if [[ $PROMPT_RESET_NEEDED -eq 1 ]]; then
         # === 显示命令耗时：计算 ===
         calu_duration $ZSH_LAST_COMMAND_START
 

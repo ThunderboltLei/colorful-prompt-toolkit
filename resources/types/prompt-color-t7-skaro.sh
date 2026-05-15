@@ -32,8 +32,7 @@ assemble_colorful_prompt() {
     # 不在 Git 仓库时静默返回空
     branch=`__git_ps1 "%s" 2>/dev/null`
 
-    if [[ "$branch" != "" ]];
-    then
+    if [[ "$branch" != "" ]]; then
         print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
         print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
         print -n "%F{${colors[COLOR_03]}}$(__git_ps1 "%s")%f"
@@ -67,8 +66,7 @@ preexec() {
 # 命令执行后恢复完整样式
 precmd() {
 
-    if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
-    then
+    if [[ $PROMPT_RESET_NEEDED -eq 1 ]]; then
         
         # === 重新生成完整提示符 ===
         PROMPT='$(assemble_colorful_prompt)'

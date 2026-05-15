@@ -81,18 +81,15 @@ read_file_content_of_specified_line() {
 read_colorful_style_infos() {
     local file="$1"
     
-    if [[ ! -f "$file" ]];
-    then
+    if [[ ! -f "$file" ]]; then
         echo "错误: 文件 $file 不存在" >&2
         return 1
     fi
     
     local _r=0
-    while IFS= read -r line;
-    do
+    while IFS= read -r line; do
         # 查找第一个 # 的位置
-        if [[ "$line" =~ \# ]];
-        then
+        if [[ "$line" =~ \# ]]; then
             # 提取从第一个 # 开始的内容（包括 #）
             local result="${line#*#}"
             result="#$result"  # 重新加上 # 号
