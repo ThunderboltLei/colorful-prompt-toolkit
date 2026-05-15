@@ -71,13 +71,20 @@ PROMPT_RESET_NEEDED=1
 
 # 命令执行前
 preexec() {
+    PROMPT_RESET_NEEDED=1
 }
 
 # 命令执行后恢复完整样式
 precmd() {
-    # === 重新生成完整提示符 ===
-    PROMPT='$(assemble_colorful_prompt)'
-    RPROMPT='$(assemble_colorful_prompt_right)'
+
+    if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
+    then
+        # === 重新生成完整提示符 ===
+        PROMPT='$(assemble_colorful_prompt)'
+        RPROMPT='$(assemble_colorful_prompt_right)'
+
+        PROMPT_RESET_NEEDED=0
+    fi
 }
 
 

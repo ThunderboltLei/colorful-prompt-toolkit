@@ -22,12 +22,11 @@ assemble_colorful_prompt() {
     get_prompt_color
     
     # 定义左侧提示符
-    print -n "\n"
     print -n "%B"
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
-    print -n "%F{${colors[COLOR_01]}}${SQUARE_LEFT}%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
     print -n "%F{${colors[COLOR_02]}}%~%f"
-    print -n "%F{${colors[COLOR_01]}}${SQUARE_RIGHT}%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_RIGHT}%f"
 
     local branch=""
     # 不在 Git 仓库时静默返回空
@@ -36,21 +35,19 @@ assemble_colorful_prompt() {
     if [[ "$branch" != "" ]];
     then
         print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
-        print -n "%F{${colors[COLOR_01]}}${SQUARE_LEFT}%f"
+        print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
         print -n "%F{${colors[COLOR_03]}}$(__git_ps1 "%s")%f"
-        print -n "%F{${colors[COLOR_01]}}${SQUARE_RIGHT}%f"
+        print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_RIGHT}%f"
     fi
     print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
-    print -n "%F{${colors[COLOR_01]}}${SQUARE_LEFT}%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
     print -n "%F{${colors[COLOR_04]}}$(format_time)%f"
-    print -n "%F{${colors[COLOR_01]}}${SQUARE_RIGHT}%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_RIGHT}%f"
 
     print -n "\n"
     print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
-    print -n "%F{${colors[COLOR_01]}}${ANGLE_RIGHT}%f"
-    # print -n "%F{${colors[COLOR_05]}}${FLOWER}%f"
-    print -n "%F{${colors[COLOR_01]}}${TRIANGLE_RIGHT} %f"
-
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${ANGLE_RIGHT}%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${TRIANGLE_RIGHT} %f"
     print -n "%b"
 }
 
@@ -65,9 +62,6 @@ PROMPT_RESET_NEEDED=1
 # 命令执行前
 preexec() {
     PROMPT_RESET_NEEDED=1
-    
-    # # === 计算时间 ===
-    # ZSH_LAST_COMMAND_START=$EPOCHREALTIME
 }
 
 # 命令执行后恢复完整样式
@@ -75,26 +69,10 @@ precmd() {
 
     if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
     then
-        # # === 计算时间 ===
-        # if [[ -n "$ZSH_LAST_COMMAND_START" ]]; then
-        #     local end_time=$EPOCHREALTIME
-        #     if command -v bc >/dev/null 2>&1; then
-        #         local duration=$(echo "$end_time - $ZSH_LAST_COMMAND_START" | bc)
-        #     else
-        #         # 降级方案：只取整数部分
-        #         local duration=$((end_time - ZSH_LAST_COMMAND_START))
-        #     fi
-        #     ZSH_COMMAND_DURATION=$(format_duration "$duration")
-        #     ZSH_LAST_COMMAND_START=""
-        # else
-        #     ZSH_COMMAND_DURATION=""
-        # fi
-
+        
         # === 重新生成完整提示符 ===
         PROMPT='$(assemble_colorful_prompt)'
         RPROMPT='$(assemble_colorful_prompt_right)'
-
-        # echo -e "$(assemble_colorful_prompt)"
 
         PROMPT_RESET_NEEDED=0
     fi

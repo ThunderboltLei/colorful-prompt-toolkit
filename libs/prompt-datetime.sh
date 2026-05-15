@@ -77,10 +77,27 @@ format_duration() {
 
 # 获取时长的函数
 get_duration() {
-    if [[ -z $ZSH_COMMAND_DURATION ]];
-    then
+    if [[ -z $ZSH_COMMAND_DURATION ]]; then
         echo "${E_WATCH} <1ms"
     else
         echo "$ZSH_COMMAND_DURATION"
+    fi
+}
+
+
+# === 计算命令耗时 ===
+calu_duration(){
+    if [[ -n "$ZSH_LAST_COMMAND_START" ]]; then
+        local end_time=$EPOCHREALTIME
+        if command -v bc >/dev/null 2>&1; then
+            local duration=$(echo "$end_time - $ZSH_LAST_COMMAND_START" | bc)
+        else
+            # 降级方案：只取整数部分
+            local duration=$((end_time - ZSH_LAST_COMMAND_START))
+        fi
+        ZSH_COMMAND_DURATION=$(format_duration "$duration")
+        ZSH_LAST_COMMAND_START=""
+    else
+        ZSH_COMMAND_DURATION=""
     fi
 }

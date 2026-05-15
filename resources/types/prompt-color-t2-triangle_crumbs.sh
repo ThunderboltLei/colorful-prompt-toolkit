@@ -52,7 +52,6 @@ assemble_colorful_prompt() {
         print -n "%F{${colors[COLOR_04]}}${RIGHT_ARROW} %f"  # 右三角边缘
     fi
 
-    
 }
 
 # 组装右提示符
@@ -68,12 +67,14 @@ assemble_colorful_prompt_right() {
     print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_06]}} $(get_command_status) ${colors[RESET]}"
 
     print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_04]}}${LEFT_ARROW}${colors[RESET]}"
+    # === 显示命令耗时：显示 ===
     print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} $(get_duration $ZSH_COMMAND_START_TIME) ${colors[RESET]}"
 
     print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_03]}}${LEFT_ARROW}${colors[RESET]}"
     print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${CLOCK} $(format_time)${colors[RESET]}"
     # print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} %D{%Y-%m-%d %H:%M:%S} ${colors[RESET]}"
     print -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT}%f" # 圆角边缘
+    
 }
 
 # 设置一个标志变量
@@ -83,8 +84,8 @@ PROMPT_RESET_NEEDED=1
 preexec() {
     PROMPT_RESET_NEEDED=1
 
-    # === 计算时间 ===
-    ZSH_LAST_COMMAND_START=$EPOCHREALTIME
+    # # === 显示命令耗时：起始时间 ===
+    # ZSH_LAST_COMMAND_START=$EPOCHREALTIME
 }
 
 # 命令执行后恢复完整样式
@@ -92,20 +93,8 @@ precmd() {
     
     if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
     then
-        # === 计算时间 ===
-        if [[ -n "$ZSH_LAST_COMMAND_START" ]]; then
-            local end_time=$EPOCHREALTIME
-            if command -v bc >/dev/null 2>&1; then
-                local duration=$(echo "$end_time - $ZSH_LAST_COMMAND_START" | bc)
-            else
-                # 只取整数部分
-                local duration=$((end_time - ZSH_LAST_COMMAND_START))
-            fi
-            ZSH_COMMAND_DURATION=$(format_duration "$duration")
-            ZSH_LAST_COMMAND_START=""
-        else
-            ZSH_COMMAND_DURATION=""
-        fi
+        # # === 显示命令耗时：计算 ===
+        # calu_duration $ZSH_LAST_COMMAND_START
 
         # === 重新生成完整提示符 ===
         PROMPT='$(assemble_colorful_prompt)'
