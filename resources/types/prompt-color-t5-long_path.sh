@@ -28,7 +28,6 @@ assemble_colorful_prompt() {
     
     # 定义左侧提示符
     # 第一行
-    print -n "\n"
     print -n "%B"
     print -n " "
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
@@ -64,25 +63,27 @@ assemble_colorful_prompt_right() {
     # skip over
 }
 
-# 设置一个标志变量
-PROMPT_RESET_NEEDED=1
 
 # 命令执行前
 preexec() {
-    PROMPT_RESET_NEEDED=1
+
+    # === 显示命令耗时：起始时间 ===
+    G_ZSH_LAST_COMMAND_START=$EPOCHREALTIME
 }
 
 # 命令执行后恢复完整样式
 precmd() {
 
-    if [[ $PROMPT_RESET_NEEDED -eq 1 ]];
-    then
-        # === 重新生成完整提示符 ===
-        PROMPT='$(assemble_colorful_prompt)'
-        RPROMPT='$(assemble_colorful_prompt_right)'
+    # === 显示命令耗时：计算 ===
+    calu_duration $G_ZSH_LAST_COMMAND_START
 
-        PROMPT_RESET_NEEDED=0
-    fi
+    # === 重新生成完整提示符 ===
+    PROMPT='$(assemble_colorful_prompt)'
+    RPROMPT='$(assemble_colorful_prompt_right)'
+
+    # === 提示符：命令结束后显示耗时 === 
+    config_prompt_eol_mark
+    PROMPT_RESET_NEEDED=0
 }
 
 # 刷新提示符中时间

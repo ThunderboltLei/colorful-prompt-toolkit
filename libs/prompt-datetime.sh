@@ -4,7 +4,12 @@
 zmodload zsh/datetime 2>/dev/null
 
 
-# 显示实时时间
+# Description: 显示实时时间
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 format_time() {
     # 优先使用 EPOCHREALTIME（如果支持）
     if (( $+EPOCHREALTIME )); then
@@ -17,7 +22,12 @@ format_time() {
 }
 
 
-# 刷新提示符中时间
+# Description: 刷新提示符中时间
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 refresh_prompt_datetime() {
     
     # 自动刷新提示符的函数
@@ -44,60 +54,109 @@ refresh_prompt_datetime() {
 }
 
 
-# 计算命令执行时间
-# 格式化时长（无外部依赖版本）
+# 
+# Description: 计算命令执行时间，格式化时长（无外部依赖版本）
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+# 改进的格式化函数
 format_duration() {
     local duration=$1
-    local int_part=${duration%.*}
-    local frac_part=${duration#*.}
     
-    if [[ $int_part -ge 3600 ]]; then
-        local hours=$((int_part / 3600))
-        local minutes=$(((int_part % 3600) / 60))
-        echo "${E_CLOCK} ${hours}h${minutes}m"
-    elif [[ $int_part -ge 60 ]]; then
-        local minutes=$((int_part / 60))
-        local seconds=$((int_part % 60))
-        echo "${E_CLOCK} ${minutes}m${seconds}s"
-    elif [[ $int_part -ge 1 ]]; then
-        echo "${E_CLOCK} ${int_part}.${frac_part:0:1}s"
-    elif [[ $duration != 0.* ]]; then
-        local ms=$(printf "%.0f" $(echo "$duration * 1000" | bc 2>/dev/null || echo "0"))
-        if [[ $ms -gt 0 ]]; then
-            echo "${E_CLOCK} ${ms}ms"
+    # 输入验证
+    if [[ -z $duration ]] || ! [[ $duration =~ ^[0-9]*\.?[0-9]+$ ]]; then
+        echo "0μs"
+        return
+    fi
+    
+    # 使用 bc 进行浮点数比较
+    local is_ge() {
+        (( $(echo "$1 >= $2" | bc 2>/dev/null) ))
+    }
+    
+    if is_ge $duration 3600; then
+        # 小时
+        local h=$(echo "$duration / 3600" | bc)
+        local m=$(echo "($duration % 3600) / 60" | bc)
+        local s=$(echo "$duration % 60" | bc)
+        if is_ge $m 1 && is_ge $s 1; then
+            printf "%dh%dm%.0fs" $h $m $s
+        elif is_ge $m 1; then
+            printf "%dh%dm" $h $m
         else
-            local us=$(printf "%.0f" $(echo "$duration * 1000000" | bc 2>/dev/null || echo "0"))
-            echo "${E_CLOCK} ${us}μs"
+            printf "%dh%.0fs" $h $s
         fi
+        
+    elif is_ge $duration 60; then
+        # 分钟
+        local m=$(echo "$duration / 60" | bc)
+        local s=$(echo "$duration % 60" | bc)
+        if is_ge $s 1; then
+            printf "%dm%.0fs" $m $s
+        else
+            printf "%dm" $m
+        fi
+        
+    elif is_ge $duration 1; then
+        # 秒（1-59.999）
+        printf "%.2fs" $duration
+        
+    elif is_ge $duration 0.001; then
+        # 毫秒
+        local ms=$(echo "$duration * 1000" | bc)
+        printf "%.0fms" $ms
+        
+    elif is_ge $duration 0.000001; then
+        # 微秒
+        local us=$(echo "$duration * 1000000" | bc)
+        printf "%.0fμs" $us
+        
     else
-        echo "${E_CLOCK} <1ms"
+        echo "<1μs"
     fi
 }
 
 
-# 获取时长的函数
+# Description: 获取时长的函数
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 get_duration() {
-    if [[ -z $ZSH_COMMAND_DURATION ]]; then
-        echo "${E_WATCH} <1ms"
+    if [[ -z $G_ZSH_COMMAND_DURATION ]]; then
+        echo "<1ms [empty] - G_ZSH_COMMAND_DURATION: $G_ZSH_COMMAND_DURATION"
     else
-        echo "$ZSH_COMMAND_DURATION"
+        echo "$G_ZSH_COMMAND_DURATION [not empty]"
     fi
 }
 
 
-# === 计算命令耗时 ===
-calu_duration(){
-    if [[ -n "$ZSH_LAST_COMMAND_START" ]]; then
+# Description: === 计算命令耗时 ===
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+calcu_duration(){
+
+    if [[ -n "$G_ZSH_LAST_COMMAND_START" ]]; then
+        # 读取：开始时间
+        local start_time=$G_ZSH_LAST_COMMAND_START
+        # 读取：结束时间
         local end_time=$EPOCHREALTIME
-        if command -v bc >/dev/null 2>&1; then
-            local duration=$(echo "$end_time - $ZSH_LAST_COMMAND_START" | bc)
-        else
-            # 降级方案：只取整数部分
-            local duration=$((end_time - ZSH_LAST_COMMAND_START))
-        fi
-        ZSH_COMMAND_DURATION=$(format_duration "$duration")
-        ZSH_LAST_COMMAND_START=""
+        # 计算耗时
+        local duration=$(echo "$end_time - $start_time" | bc)
+
+        # 赋值全局变量：耗时时长
+        G_ZSH_COMMAND_DURATION="$(format_duration $duration)"
+
+        # 赋值全局变量：清空开始时间
+        G_ZSH_LAST_COMMAND_START=""
     else
-        ZSH_COMMAND_DURATION=""
+        G_ZSH_COMMAND_DURATION=""
     fi
 }
+

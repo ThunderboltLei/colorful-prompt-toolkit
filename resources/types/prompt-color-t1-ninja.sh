@@ -8,25 +8,18 @@
 # 
 
 
-# === Function Description Format ===
-# 
-# Description: 
+# Description: 组装左提示符
 # Params:
 #   param1: 
 #   param2: 
 # Result: 
 # 
-
-# === 使用 git-prompt.sh ===
-
-# 组装左提示符
 assemble_colorful_prompt() {
 
     # 获取提示符颜色
     get_prompt_color
     
     # 定义左侧提示符
-    print -n "\n"
     print -n " ${E_LADY_BUG} "
     print -n "%F{${colors[LEFT_COLOR]}}${ROUND_LEFT}%f" # 圆角边缘
     print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}}%n${colors[RESET]}"
@@ -47,9 +40,17 @@ assemble_colorful_prompt() {
         print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}}) ${colors[RESET]}"
     fi
     print -n "%F{${colors[RIGHT_COLOR]}}${RIGHT_ARROW} %f" # 圆角边缘
+
+    # print -n " >>> G_ZSH_LAST_COMMAND_START:$G_ZSH_LAST_COMMAND_START \n"
 }
 
-# 组装右提示符
+
+# Description: 组装右提示符
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 assemble_colorful_prompt_right() {
 
     # 获取提示符颜色
@@ -61,39 +62,71 @@ assemble_colorful_prompt_right() {
     print -n "%F{${colors[LEFT_COLOR]}}${LEFT_ARROW}%f" # 圆角边缘
     print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} $(get_command_status) ${colors[RESET]}"
     print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_04]}}|${${colors[RESET]}}"
-    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_02]}} $(get_duration) ${colors[RESET]}"
-    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_04]}}|${${colors[RESET]}}"
     print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}} ${E_CLOCK} $(format_time)${colors[RESET]}"
     print -n "%F{${colors[RIGHT_COLOR]}}${ROUND_RIGHT}%f" # 圆角边缘
 }
 
-# 设置一个标志变量
-PROMPT_RESET_NEEDED=1
 
-# 命令执行前
-preexec() {
-    PROMPT_RESET_NEEDED=1
-    
-    # === 显示命令耗时：起始时间 ===
-    ZSH_LAST_COMMAND_START=$EPOCHREALTIME
-}
-
-# 命令执行后恢复完整样式
-precmd() {
-
-    if [[ $PROMPT_RESET_NEEDED -eq 1 ]]; then
-        # === 显示命令耗时：计算 ===
-        calu_duration $ZSH_LAST_COMMAND_START
-
-        # === 重新生成完整提示符 ===
-        PROMPT='$(assemble_colorful_prompt)'
-        RPROMPT='$(assemble_colorful_prompt_right)'
-
-        PROMPT_RESET_NEEDED=0
+assemble_prompt_eol_mark() {
+    if [[ -n "$G_ZSH_COMMAND_DURATION" ]]; then
+        G_PROMPT_EOL_MARK="\n%B%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "-" 15) Cost: $G_ZSH_COMMAND_DURATION $(symbol_printf "-" 15) ↩%f%b\n"
+        print -P $G_PROMPT_EOL_MARK
     fi
 }
 
-# 刷新提示符中时间
+
+# Description: 命令执行前
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+preexec() {
+    
+    # === 显示命令耗时：起始时间 ===
+    G_ZSH_LAST_COMMAND_START=$EPOCHREALTIME
+
+    # echo "DEBUG: preexec 被调用"
+    # echo "DEBUG: 命令 = $1"
+    # echo "DEBUG: 旧开始时间 = $G_ZSH_LAST_COMMAND_START"
+    # G_ZSH_LAST_COMMAND_START=$EPOCHREALTIME
+    # echo "DEBUG: 新开始时间 = $G_ZSH_LAST_COMMAND_START"
+    # echo "---"
+}
+
+
+# Description: 命令执行后恢复完整样式
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+precmd() {
+
+    # echo "DEBUG: precmd 被调用"
+
+    # === 显示命令耗时：计算 ===
+    calcu_duration
+    
+    # === 重新生成完整提示符 ===
+    PROMPT='$(assemble_colorful_prompt)'
+    RPROMPT='$(assemble_colorful_prompt_right)'
+
+    # === 提示符：命令结束后显示耗时 === 
+    # config_prompt_eol_mark
+    assemble_prompt_eol_mark
+
+    # echo "DEBUG: 计算后 duration = $G_ZSH_COMMAND_DURATION"
+    # echo "==="
+}
+
+
+# Description: 刷新提示符中时间
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+#
 if [[ $MY_COLORFUL_PROMPT_REFRESH_DATETIME -eq 1 ]]; then
     refresh_prompt_datetime
 fi

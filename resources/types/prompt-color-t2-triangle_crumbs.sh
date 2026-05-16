@@ -25,7 +25,6 @@ assemble_colorful_prompt() {
     get_prompt_color
 
     # 定义左侧提示符
-    print -n "\n"
     print -n " ${E_LADY_BUG} "
     print -n "%F{${${colors[COLOR_01]}}}${ROUND_LEFT}%f" # 圆角边缘
 
@@ -65,41 +64,34 @@ assemble_colorful_prompt_right() {
     print -n "%F{${colors[COLOR_05]}}${LEFT_ARROW}%f" # 左三角边缘
     print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_06]}} $(get_command_status) ${colors[RESET]}"
 
-    print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_04]}}${LEFT_ARROW}${colors[RESET]}"
-    # === 显示命令耗时：显示 ===
-    print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} $(get_duration $ZSH_COMMAND_START_TIME) ${colors[RESET]}"
+    # print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_04]}}${LEFT_ARROW}${colors[RESET]}"
+    # # === 显示命令耗时：显示 ===
+    # print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} $(get_duration $ZSH_COMMAND_START_TIME) ${colors[RESET]}"
 
-    print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_03]}}${LEFT_ARROW}${colors[RESET]}"
+    print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_03]}}${LEFT_ARROW}${colors[RESET]}"
     print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${CLOCK} $(format_time)${colors[RESET]}"
-    # print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} %D{%Y-%m-%d %H:%M:%S} ${colors[RESET]}"
     print -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT}%f" # 圆角边缘
-    
 }
 
-# 设置一个标志变量
-PROMPT_RESET_NEEDED=1
 
 # 命令执行前
 preexec() {
-    PROMPT_RESET_NEEDED=1
-
-    # # === 显示命令耗时：起始时间 ===
-    # ZSH_LAST_COMMAND_START=$EPOCHREALTIME
+    # === 显示命令耗时：起始时间 ===
+    G_ZSH_LAST_COMMAND_START=$EPOCHREALTIME
 }
 
 # 命令执行后恢复完整样式
 precmd() {
     
-    if [[ $PROMPT_RESET_NEEDED -eq 1 ]]; then
-        # # === 显示命令耗时：计算 ===
-        # calu_duration $ZSH_LAST_COMMAND_START
+    # === 提示符：重新生成 ===
+    PROMPT='$(assemble_colorful_prompt)'
+    RPROMPT='$(assemble_colorful_prompt_right)'
 
-        # === 重新生成完整提示符 ===
-        PROMPT='$(assemble_colorful_prompt)'
-        RPROMPT='$(assemble_colorful_prompt_right)'
+    # === 提示符：命令结束后显示耗时 === 
+    config_prompt_eol_mark
 
-        PROMPT_RESET_NEEDED=0
-    fi
+    # === 显示命令耗时：计算 ===
+    calu_duration
 }
 
 # 刷新提示符中时间

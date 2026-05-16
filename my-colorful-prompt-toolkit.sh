@@ -13,6 +13,9 @@ export MY_COLORFUL_PROMPT_ROOT_PATH="${0:a:h}"
 # === 1.启用 zsh 的 PROMPT_SUBST 选项 ===
 # 让提示符中的 $(命令) 能被动态执行 ===
 setopt PROMPT_SUBST
+# 开启提示符间距控制
+setopt PROMPT_CR
+setopt PROMPT_SP
 # 告诉 git-prompt.sh 我们处于 pcmode
 GIT_PS1_PCMODE=yes
 

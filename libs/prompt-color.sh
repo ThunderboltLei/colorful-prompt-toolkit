@@ -65,6 +65,7 @@ else
     SYSTEM_MODE="#FFFFFF"
 fi
 REVERSE_SYSTEM_MODE=`invert_color ${SYSTEM_MODE}`
+PROMPT_EOL_MARK_MOD="#6499CF"
 
 
 # Description: 分割颜色字符串并存储到数组
