@@ -1,20 +1,11 @@
 #!/bin/zsh
 
-# === File Description Format ===
-# 
+
 # Creator: Raymond-Magnus-Lei
-# Filename: 
-# Description:
+# Filename: prompt-symbols.sh
+# Description: 定义 symbols
 # 
-# 
-# === Function Description Format ===
-# 
-# Description: 
-# Params:
-#   param1: 
-#   param2: 
-# Result: 
-# 
+
 
 # 定义颜色和形状字符
 LEFT_ARROW=""  # 向左实心箭头

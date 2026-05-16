@@ -8,17 +8,12 @@
 # 
 
 
-# === Function Description Format ===
-# 
-# Description: 
+# Description: 组装左提示符
 # Params:
 #   param1: 
 #   param2: 
 # Result: 
 # 
-
-
-# 组装左提示符
 assemble_colorful_prompt() {
 
     # 获取提示符颜色
@@ -59,7 +54,13 @@ assemble_colorful_prompt() {
     print -n " "
 }
 
-# 组装右提示符
+
+# Description: 组装右提示符
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 assemble_colorful_prompt_right() {
     # skip over
 }
@@ -98,7 +99,12 @@ preexec() {
 }
 
 
-# 命令执行后恢复完整样式
+# Description: 命令执行后恢复完整样式
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 precmd() {
     # === 显示命令耗时：计算 ===
     calcu_duration
@@ -112,7 +118,12 @@ precmd() {
 }
 
 
-# 刷新提示符中时间
+# Description: 刷新提示符中时间
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+#
 if [[ $MY_COLORFUL_PROMPT_REFRESH_DATETIME -eq 1 ]]; then
     refresh_prompt_datetime
 fi

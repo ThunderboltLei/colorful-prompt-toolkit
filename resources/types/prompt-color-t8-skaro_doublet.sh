@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+
 # === File Description ===
 # 
 # Creator: Raymond-Magnus-Lei
@@ -7,16 +8,12 @@
 # Description: T8: Skaro Doublet
 
 
-# === Function Description Format ===
-# 
-# Description: 
+# Description: 组装右提示符
 # Params:
 #   param1: 
 #   param2: 
 # Result: 
-# 
-
-
+#
 assemble_colorful_prompt() {
 
     # 获取提示符颜色
@@ -53,7 +50,13 @@ assemble_colorful_prompt() {
     print -n "%b"
 }
 
-# 组装右提示符
+
+# Description: 组装右提示符
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+#
 assemble_colorful_prompt_right() {
     # skip over
 }
@@ -69,9 +72,9 @@ assemble_prompt_eol_mark() {
     if [[ -n "$G_ZSH_COMMAND_DURATION" ]]; then
         G_PROMPT_EOL_MARK="\n"
         G_PROMPT_EOL_MARK+="%B"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$SNOW" 15)%f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$LEFT" 15)%f"
         G_PROMPT_EOL_MARK+="%F{$REVERSE_SYSTEM_MODE} Cost: $G_ZSH_COMMAND_DURATION %f"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$SNOW" 15) ↩%f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$RIGHT" 15) ↩%f"
         G_PROMPT_EOL_MARK+="%b"
         G_PROMPT_EOL_MARK+="\n"
         print -P $G_PROMPT_EOL_MARK
@@ -92,7 +95,12 @@ preexec() {
 }
 
 
-# 命令执行后恢复完整样式
+# Description: 命令执行后恢复完整样式
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 precmd() {
     # === 显示命令耗时：计算 ===
     calcu_duration
@@ -105,7 +113,13 @@ precmd() {
     assemble_prompt_eol_mark
 }
 
-# 刷新提示符中时间
+
+# Description: 刷新提示符中时间
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 if [[ $MY_COLORFUL_PROMPT_REFRESH_DATETIME -eq 1 ]]; then
     refresh_prompt_datetime
 fi
