@@ -33,10 +33,23 @@ assemble_colorful_prompt_right() {
 # 命令执行前
 preexec() {
     # 处理逻辑
+
+    # # === DEBUG ===
+    # echo "DEBUG: preexec 被调用"
+    # echo "DEBUG: 命令 = $1"
+    # echo "DEBUG: 旧开始时间 = $G_ZSH_LAST_COMMAND_START"
+    # G_ZSH_LAST_COMMAND_START=$EPOCHREALTIME
+    # echo "DEBUG: 新开始时间 = $G_ZSH_LAST_COMMAND_START"
+    # echo "---"
 }
 
 # 命令执行后恢复完整样式
 precmd() {
     # 处理逻辑
+
+    # # === DEBUG ===
+    # echo "DEBUG: precmd 被调用"
+    # echo "DEBUG: 计算后 duration = $G_ZSH_COMMAND_DURATION"
+    # echo "==="
 }
 

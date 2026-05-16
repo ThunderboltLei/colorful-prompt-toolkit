@@ -67,9 +67,21 @@ assemble_colorful_prompt_right() {
 }
 
 
+# Description: 组装耗时内容
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
 assemble_prompt_eol_mark() {
     if [[ -n "$G_ZSH_COMMAND_DURATION" ]]; then
-        G_PROMPT_EOL_MARK="\n%B%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "-" 15) Cost: $G_ZSH_COMMAND_DURATION $(symbol_printf "-" 15) ↩%f%b\n"
+        G_PROMPT_EOL_MARK="\n"
+        G_PROMPT_EOL_MARK+="%B"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$TRIANGLE_LEFT" 15)%f"
+        G_PROMPT_EOL_MARK+="%F{$REVERSE_SYSTEM_MODE} Cost: $G_ZSH_COMMAND_DURATION %f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$TRIANGLE_RIGHT" 15) ↩%f"
+        G_PROMPT_EOL_MARK+="%b"
+        G_PROMPT_EOL_MARK+="\n"
         print -P $G_PROMPT_EOL_MARK
     fi
 }
@@ -85,13 +97,6 @@ preexec() {
     
     # === 显示命令耗时：起始时间 ===
     G_ZSH_LAST_COMMAND_START=$EPOCHREALTIME
-
-    # echo "DEBUG: preexec 被调用"
-    # echo "DEBUG: 命令 = $1"
-    # echo "DEBUG: 旧开始时间 = $G_ZSH_LAST_COMMAND_START"
-    # G_ZSH_LAST_COMMAND_START=$EPOCHREALTIME
-    # echo "DEBUG: 新开始时间 = $G_ZSH_LAST_COMMAND_START"
-    # echo "---"
 }
 
 
@@ -102,9 +107,6 @@ preexec() {
 # Result: 
 # 
 precmd() {
-
-    # echo "DEBUG: precmd 被调用"
-
     # === 显示命令耗时：计算 ===
     calcu_duration
     
@@ -113,11 +115,7 @@ precmd() {
     RPROMPT='$(assemble_colorful_prompt_right)'
 
     # === 提示符：命令结束后显示耗时 === 
-    # config_prompt_eol_mark
     assemble_prompt_eol_mark
-
-    # echo "DEBUG: 计算后 duration = $G_ZSH_COMMAND_DURATION"
-    # echo "==="
 }
 
 
