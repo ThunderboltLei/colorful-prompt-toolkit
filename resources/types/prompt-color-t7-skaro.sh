@@ -70,9 +70,9 @@ assemble_prompt_eol_mark() {
     if [[ -n "$G_ZSH_COMMAND_DURATION" ]]; then
         G_PROMPT_EOL_MARK="\n"
         G_PROMPT_EOL_MARK+="%B"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$LESS_THAN" 15)%f"
-        G_PROMPT_EOL_MARK+="%F{$REVERSE_SYSTEM_MODE} Cost: $G_ZSH_COMMAND_DURATION %f"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$GREATER_THAN" 15) ↩%f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$HOLLOW_STAR" 15)%f"
+        G_PROMPT_EOL_MARK+="%F{$REVERSE_SYSTEM_MODE} $E_WATCH Cost: $G_ZSH_COMMAND_DURATION %f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$HOLLOW_STAR" 15)↩%f"
         G_PROMPT_EOL_MARK+="%b"
         G_PROMPT_EOL_MARK+="\n"
         print -P $G_PROMPT_EOL_MARK
