@@ -119,21 +119,6 @@ format_duration() {
 }
 
 
-# Description: 获取时长的函数
-# Params:
-#   param1: 
-#   param2: 
-# Result: 
-# 
-get_duration() {
-    if [[ -z $G_ZSH_COMMAND_DURATION ]]; then
-        echo "<1ms [empty] - G_ZSH_COMMAND_DURATION: $G_ZSH_COMMAND_DURATION"
-    else
-        echo "$G_ZSH_COMMAND_DURATION [not empty]"
-    fi
-}
-
-
 # Description: === 计算命令耗时 ===
 # Params:
 #   param1: 

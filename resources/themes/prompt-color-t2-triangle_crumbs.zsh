@@ -65,10 +65,6 @@ assemble_colorful_prompt_right() {
     print -n "%F{${colors[COLOR_05]}}${LEFT_ARROW}%f" # 左三角边缘
     print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_06]}} $(get_command_status) ${colors[RESET]}"
 
-    # print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_04]}}${LEFT_ARROW}${colors[RESET]}"
-    # # === 显示命令耗时：显示 ===
-    # print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_06]}} $(get_duration $ZSH_COMMAND_START_TIME) ${colors[RESET]}"
-
     print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_03]}}${LEFT_ARROW}${colors[RESET]}"
     print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${CLOCK} $(format_time)${colors[RESET]}"
     print -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT}%f" # 圆角边缘

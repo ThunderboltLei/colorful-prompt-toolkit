@@ -18,7 +18,7 @@ function show_menu() {
     # echo  -n ">>> show_menu"
     # 构建 command:// 协议的 URL
     # 注意：实际支持取决于终端；这里作为示例
-    $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-menu.sh
+    $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-menu.zsh
     # zle reset-prompt
 
     # url="command://echo 'Clicked user: $USER'"

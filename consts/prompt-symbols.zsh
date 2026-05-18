@@ -2,7 +2,7 @@
 
 
 # Creator: Raymond-Magnus-Lei
-# Filename: prompt-symbols.sh
+# Filename: prompt-symbols.zsh
 # Description: 定义 symbols
 # 
 

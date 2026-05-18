@@ -7,7 +7,7 @@ if [[ $ZSH_VERSION != 5.9* ]]; then
 fi
 
 # 加载配置
-source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
+source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.zsh
 
 #===========================================
 # 全局变量

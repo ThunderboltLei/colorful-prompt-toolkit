@@ -26,12 +26,12 @@ MENU_ITEMS=(
 )
 ORDER_ITEMS=(
     # "<自定义菜单项对应的脚本>"
-    "system_info.sh"
-    "disk_usage.sh"
-    "memory_status.sh"
-    "network_info.sh"
-    "running_processes.sh"
-    "show_prompt_style.sh"
-    "dirs_and_docs.sh"
+    "system_info.zsh"
+    "disk_usage.zsh"
+    "memory_status.zsh"
+    "network_info.zsh"
+    "running_processes.zsh"
+    "show_prompt_style.zsh"
+    "dirs_and_docs.zsh"
 )
 

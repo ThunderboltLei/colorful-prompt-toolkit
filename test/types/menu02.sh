@@ -5,7 +5,7 @@ if [[ $ZSH_VERSION != 5.9* ]]; then
     echo "Warning: designed for zsh 5.9, current version $ZSH_VERSION"
 fi
 
-source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.sh
+source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.zsh
 
 # 定义每个菜单项对应的详细内容 (使用 zsh 兼容的关联数组)
 typeset -A details

@@ -111,14 +111,14 @@ menu_function() {
     fi
 
     # 只在文件存在时source
-    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-ansi.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-ansi.sh"
-    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-symbols.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-symbols.sh"
-    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.sh"
-    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-file.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-file.sh"
-    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.sh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.sh"
+    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-ansi.zsh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-ansi.zsh"
+    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-symbols.zsh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-symbols.zsh"
+    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.zsh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.zsh"
+    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-file.zsh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-file.zsh"
+    [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.zsh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.zsh"
 
     local _colors_str_="`get_color_style $MY_COLORFUL_PROMPT_COLOR_NUMBER`"
-    printf " 🍏 当前配色方案：$(process_color_line $_colors_str_)\n\n"
+    printf " $E_APPLE 当前配色方案：$(process_color_line $_colors_str_)\n\n"
 
     process_file_content "$style_file"
 }

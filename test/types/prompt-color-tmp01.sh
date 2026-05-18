@@ -8,7 +8,7 @@ make_clickable_user() {
     # local url="command://https://www.baidu.com"
 
         # 创建一个临时脚本
-    local script="/tmp/click_user_$$.sh"
+    local script="/tmp/click_user_$$.zsh"
     cat > "$script" << EOF
 #!/bin/bash
 osascript -e 'display dialog "点击了用户: $USER" buttons {"OK"}'
