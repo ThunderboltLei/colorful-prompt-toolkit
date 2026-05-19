@@ -17,7 +17,7 @@
 assemble_colorful_prompt() {
 
     # 获取提示符颜色
-    get_prompt_color
+    _cpt_get_prompt_color
     
     # 定义左侧提示符
     print -n " ${E_LADY_BUG} "
@@ -54,15 +54,15 @@ assemble_colorful_prompt() {
 assemble_colorful_prompt_right() {
 
     # 获取提示符颜色
-    get_prompt_color
+    _cpt_get_prompt_color
 
     # 定义右侧提示符（在命令执行后显示）
     # 或者显示更详细的时间（日期+时间）
     print -n ""
     print -n "%F{${colors[LEFT_COLOR]}}${LEFT_ARROW}%f" # 圆角边缘
-    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} $(get_command_status) ${colors[RESET]}"
+    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} $(_cpt_get_command_status) ${colors[RESET]}"
     print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_04]}}|${${colors[RESET]}}"
-    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}} ${E_CLOCK} $(format_time)${colors[RESET]}"
+    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}} ${E_CLOCK} $(_cpt_format_time)${colors[RESET]}"
     print -n "%F{${colors[RIGHT_COLOR]}}${ROUND_RIGHT}%f" # 圆角边缘
 }
 
@@ -77,9 +77,9 @@ assemble_prompt_eol_mark() {
     if [[ -n "$G_ZSH_COMMAND_DURATION" ]]; then
         G_PROMPT_EOL_MARK="\n"
         G_PROMPT_EOL_MARK+="%B"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$TRIANGLE_LEFT" 15)%f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(_cpt_symbol_printf "$TRIANGLE_LEFT" 15)%f"
         G_PROMPT_EOL_MARK+="%F{$REVERSE_SYSTEM_MODE} Cost: $G_ZSH_COMMAND_DURATION %f"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$TRIANGLE_RIGHT" 15) ↩%f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(_cpt_symbol_printf "$TRIANGLE_RIGHT" 15) ↩%f"
         G_PROMPT_EOL_MARK+="%b"
         G_PROMPT_EOL_MARK+="\n"
         print -P $G_PROMPT_EOL_MARK

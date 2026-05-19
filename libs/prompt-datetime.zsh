@@ -10,7 +10,7 @@ zmodload zsh/datetime 2>/dev/null
 #   param2: 
 # Result: 
 # 
-format_time() {
+_cpt_format_time() {
     # 优先使用 EPOCHREALTIME（如果支持）
     if (( $+EPOCHREALTIME )); then
         # zsh 原生方式：使用内置的 strftime
@@ -145,3 +145,49 @@ calcu_duration(){
     fi
 }
 
+# Description: 将 EPOCHREALTIME 转换为可读格式（高精度）
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+_cpt_epoch_to_datetime() {
+    local epoch=$1
+    local format=${2:-"%Y-%m-%d %H:%M:%S"}
+    
+    local seconds=${epoch%.*}
+    local nanos=${epoch#*.}
+    
+    # 使用 strftime（zsh 内置，最快）
+    if (( $+functions[strftime] )); then
+        local datetime=$(strftime "$format" $seconds)
+        echo "${datetime}.${nanos:0:3}"  # 显示毫秒
+    else
+        # 降级方案：使用 date 命令
+        local datetime=$(date -r $seconds +"$format" 2>/dev/null || date -d "@$seconds" +"$format")
+        echo "${datetime}.${nanos:0:3}"
+    fi
+}
+
+
+# Description: 将日期时间转换为 EPOCHREALTIME
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+_cpt_datetime_to_epoch() {
+    local datetime=$1
+    local seconds
+    
+    # macOS
+    if [[ "$OSTYPE" == darwin* ]]; then
+        seconds=$(date -j -f "%Y-%m-%d %H:%M:%S" "$datetime" +"%s" 2>/dev/null)
+    else
+        # Linux
+        seconds=$(date -d "$datetime" +"%s" 2>/dev/null)
+    fi
+    
+    # 添加纳秒部分（默认 .000000000）
+    echo "${seconds}.000000000"
+}

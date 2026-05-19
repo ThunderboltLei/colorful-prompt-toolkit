@@ -23,7 +23,7 @@
 #   Param1: filepath
 #   Param2: row number
 # Result: row content
-read_file_content_of_specified_line() {
+_cpt_read_file_content_of_specified_line() {
     local file="$1"
     local target_line="$2"  # 可选：要获取的行号
     
@@ -78,7 +78,7 @@ read_file_content_of_specified_line() {
 # Param
 #   Param1: file path
 # Result: file content
-read_colorful_style_infos() {
+_cpt_read_colorful_style_infos() {
     local file="$1"
     
     if [[ ! -f "$file" ]]; then

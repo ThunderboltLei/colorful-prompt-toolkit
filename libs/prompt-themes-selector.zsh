@@ -3,7 +3,7 @@
 # === File Description Format ===
 # 
 # Creator: Raymond-Magnus-Lei
-# Filename: prompt-type-dispatcher.zsh
+# Filename: prompt-type-selector.zsh
 # Description:
 # 
 
@@ -47,6 +47,7 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-init.zsh
 
 # 加载命令脚本
 source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/orders/prompt-orders.zsh
+source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/orders/prompt-homebrew.zsh
 
 
 # === 时间：初始化 ===

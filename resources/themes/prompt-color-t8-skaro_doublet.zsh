@@ -17,7 +17,7 @@
 assemble_colorful_prompt() {
 
     # 获取提示符颜色
-    get_prompt_color
+    _cpt_get_prompt_color
     
     # 定义左侧提示符
     print -n "%B"
@@ -38,7 +38,7 @@ assemble_colorful_prompt() {
     fi
     print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
     print -n "%F{${colors[COLOR_06]}}${MEDIUM_LEFT_DOUBLET}%f"
-    print -n "%F{${colors[COLOR_04]}}$(format_time)%f"
+    print -n "%F{${colors[COLOR_04]}}$(_cpt_format_time)%f"
     print -n "%F{${colors[COLOR_06]}}${MEDIUM_RIGHT_DOUBLET}%f"
 
     print -n "\n"
@@ -72,9 +72,9 @@ assemble_prompt_eol_mark() {
     if [[ -n "$G_ZSH_COMMAND_DURATION" ]]; then
         G_PROMPT_EOL_MARK="\n"
         G_PROMPT_EOL_MARK+="%B"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$LEFT" 15)%f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(_cpt_symbol_printf "$LEFT" 15)%f"
         G_PROMPT_EOL_MARK+="%F{$REVERSE_SYSTEM_MODE} Cost: $G_ZSH_COMMAND_DURATION %f"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$RIGHT" 15) ↩%f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(_cpt_symbol_printf "$RIGHT" 15) ↩%f"
         G_PROMPT_EOL_MARK+="%b"
         G_PROMPT_EOL_MARK+="\n"
         print -P $G_PROMPT_EOL_MARK

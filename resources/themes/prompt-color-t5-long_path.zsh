@@ -17,14 +17,14 @@
 assemble_colorful_prompt() {
 
     # 获取提示符颜色
-    get_prompt_color
+    _cpt_get_prompt_color
     
     # 定义左侧提示符
     # 第一行
     print -n "%B"
     print -n " "
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
-    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}}${SQUARE_LEFT}$(format_time)${SQUARE_RIGHT}${colors[RESET]}"
+    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}}${SQUARE_LEFT}$(_cpt_format_time)${SQUARE_RIGHT}${colors[RESET]}"
     print -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_06]}}${RIGHT_ARROW}${colors[RESET]}"
     print -n " "
     print -n "%F{${colors[COLOR_02]}}%~%f"
@@ -73,9 +73,9 @@ assemble_prompt_eol_mark() {
     if [[ -n "$G_ZSH_COMMAND_DURATION" ]]; then
         G_PROMPT_EOL_MARK="\n"
         G_PROMPT_EOL_MARK+="%B"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$SNOW" 15)%f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(_cpt_symbol_printf "$SNOW" 15)%f"
         G_PROMPT_EOL_MARK+="%F{$REVERSE_SYSTEM_MODE} Cost: $G_ZSH_COMMAND_DURATION %f"
-        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(symbol_printf "$SNOW" 15) ↩%f"
+        G_PROMPT_EOL_MARK+="%F{$PROMPT_EOL_MARK_MOD}$(_cpt_symbol_printf "$SNOW" 15) ↩%f"
         G_PROMPT_EOL_MARK+="%b"
         G_PROMPT_EOL_MARK+="\n"
         print -P $G_PROMPT_EOL_MARK

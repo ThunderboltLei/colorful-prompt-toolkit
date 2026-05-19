@@ -14,7 +14,7 @@
 #   param1: 无
 #   param2: 无
 # Result: 显示菜单
-function show_menu() {
+_cpt_show_menu() {
     # echo  -n ">>> show_menu"
     # 构建 command:// 协议的 URL
     # 注意：实际支持取决于终端；这里作为示例
@@ -26,7 +26,7 @@ function show_menu() {
 }
 
 # 绑定到 F1 键或某个组合键
-run-menu-widget() {
+_cpt_run_menu_widget() {
     # 记录第一次按下的时间
     if [[ -z $_h_time ]] || (( EPOCHSECONDS - _h_time > 0.8 )); then
         _h_time=$EPOCHSECONDS
@@ -37,8 +37,8 @@ run-menu-widget() {
     # 0.8秒内第二次按下 -> 双击
     unset _h_time
     zle backward-delete-char  # 删除第一次的h
-    show_menu   # 执行脚本
+    _cpt_show_menu   # 执行脚本
     zle reset-prompt
 }
-zle -N run-menu-widget
-bindkey 'h' run-menu-widget # shift+u 键
+zle -N _cpt_run_menu_widget
+bindkey 'h' _cpt_run_menu_widget # shift+u 键

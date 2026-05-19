@@ -18,7 +18,7 @@
 assemble_colorful_prompt() {
 
     # 获取提示符颜色
-    get_prompt_color
+    _cpt_get_prompt_color
     
     # 定义左侧提示符
     print -n "%B ${E_LADY_BUG} "
@@ -37,7 +37,7 @@ assemble_colorful_prompt() {
         print -n "%F{${colors[COLOR_04]}}$(__git_ps1 "%s")%f"
     fi
     print -n "%F{${REVERSE_SYSTEM_MODE}} as%f"
-    print -n "%F{${colors[COLOR_05]}} ${SQUARE_LEFT}$(format_time)${SQUARE_RIGHT}%f"
+    print -n "%F{${colors[COLOR_05]}} ${SQUARE_LEFT}$(_cpt_format_time)${SQUARE_RIGHT}%f"
 
     print -n "\n"
     print -n "%F{${REVERSE_SYSTEM_MODE}} ${TRIANGLE_RIGHT} %f"

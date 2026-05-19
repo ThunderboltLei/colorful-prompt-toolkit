@@ -27,7 +27,7 @@
 # Result: 
 #   example: ----------
 # 
-get_command_status() {
+_cpt_get_command_status() {
     # 获取上一条命令的返回状态
     local _exit_code_=$?
     
@@ -50,7 +50,7 @@ get_command_status() {
 # Result: 
 #   example: ----------
 # 
-symbol_printf() {
+_cpt_symbol_printf() {
     local _symbol=$1
     local _count=$2
     printf "$_symbol%.0s" $(seq 1 $_count); print -P

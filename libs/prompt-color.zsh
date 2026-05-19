@@ -19,7 +19,7 @@
 # ===== 颜色函数 =====
 
 # Description: 定义颜色输出函数
-rgb_fg() {
+_cpt_rgb_fg() {
     local r g b
     # 将 #50FA7B 转换为 RGB
     if [[ $1 =~ ^#([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$ ]]; then
@@ -30,7 +30,7 @@ rgb_fg() {
     fi
 }
 
-rgb_bg() {
+_cpt_rgb_bg() {
     local r g b
     if [[ $1 =~ ^#([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$ ]]; then
         r=$((16#$match[1]))
@@ -42,7 +42,7 @@ rgb_bg() {
 
 # Description: 反转颜色
 # param1: 例, #FFFFFF
-invert_color() {
+_cpt_invert_color() {
   local hex=${1#"#"}
   local r=${hex:0:2}
   local g=${hex:2:2}
@@ -64,13 +64,13 @@ else
     # echo -e "light"
     SYSTEM_MODE="#FFFFFF"
 fi
-REVERSE_SYSTEM_MODE=`invert_color ${SYSTEM_MODE}`
+REVERSE_SYSTEM_MODE=`_cpt_invert_color ${SYSTEM_MODE}`
 PROMPT_EOL_MARK_MOD="#6499CF"
 
 
 # Description: 分割颜色字符串并存储到数组
 # param1: 要进行分割的字符串
-split_colors() {
+_cpt_split_colors() {
     local input="$1"
     local -a colors
 
@@ -82,7 +82,7 @@ split_colors() {
 
 # Description: 定义去除空格函数（支持多种用法）
 # param1: 要去除两端空格的字符串
-trim() {
+_cpt_trim() {
     local str="$1"
     
     # 如果没有参数，从标准输入读取
@@ -105,9 +105,9 @@ trim() {
 #   param1: colorful-style.txt
 #   param2: 指定的行号
 # Result: 返回字符串，如"#BADFDB|#B4D3B2|#D0F0C0|#F4FCD9|#C0E0C0|#1A2F1D"
-get_color_style() {
+_cpt_get_color_style() {
     local _rNo=$1
-    local colors=`read_file_content_of_specified_line $MY_COLORFUL_PROMPT_ROOT_PATH/resources/styles/colorful-style.txt $_rNo`
+    local colors=`_cpt_read_file_content_of_specified_line $MY_COLORFUL_PROMPT_ROOT_PATH/resources/styles/colorful-style.txt $_rNo`
     echo $colors
 }
 
@@ -115,15 +115,15 @@ get_color_style() {
 # Description: 获取颜色
 # Result: 返回颜色字典
 typeset -A colors
-get_prompt_color() {
+_cpt_get_prompt_color() {
     
     # 颜色格式（可由 AI 生成最佳组合）
     # 用户名 | 主机 | 路径 | Git分支 | 符号 | 背景
     # 举例：_colors_str_="#BADFDB|#B4D3B2|#D0F0C0|#F4FCD9|#C0E0C0|#1A2F1D"
-    local _colors_str_="`get_color_style $MY_COLORFUL_PROMPT_COLOR_NUMBER`"
+    local _colors_str_="`_cpt_get_color_style $MY_COLORFUL_PROMPT_COLOR_NUMBER`"
 
     # 颜色组合列表
-    local _splitted_colors_=(`split_colors $_colors_str_`)
+    local _splitted_colors_=(`_cpt_split_colors $_colors_str_`)
 
     if [[ ${#_splitted_colors_[@]} -ne 8 ]]; then
         # 默认颜色
@@ -138,14 +138,14 @@ get_prompt_color() {
         colors[RESET]="%f%k"
     else
         # 动态颜色
-        colors[COLOR_01]="$(trim ${_splitted_colors_[3]})"
-        colors[COLOR_02]="$(trim ${_splitted_colors_[4]})"
-        colors[COLOR_03]="$(trim ${_splitted_colors_[5]})"
-        colors[COLOR_04]="$(trim ${_splitted_colors_[6]})"
-        colors[COLOR_05]="$(trim ${_splitted_colors_[7]})"
-        colors[COLOR_06]="$(trim ${_splitted_colors_[8]})"
-        colors[LEFT_COLOR]="$(trim ${_splitted_colors_[8]})"
-        colors[RIGHT_COLOR]="$(trim ${_splitted_colors_[8]})"
+        colors[COLOR_01]="$(_cpt_trim ${_splitted_colors_[3]})"
+        colors[COLOR_02]="$(_cpt_trim ${_splitted_colors_[4]})"
+        colors[COLOR_03]="$(_cpt_trim ${_splitted_colors_[5]})"
+        colors[COLOR_04]="$(_cpt_trim ${_splitted_colors_[6]})"
+        colors[COLOR_05]="$(_cpt_trim ${_splitted_colors_[7]})"
+        colors[COLOR_06]="$(_cpt_trim ${_splitted_colors_[8]})"
+        colors[LEFT_COLOR]="$(_cpt_trim ${_splitted_colors_[8]})"
+        colors[RIGHT_COLOR]="$(_cpt_trim ${_splitted_colors_[8]})"
         colors[RESET]="%f%k"
     fi
 
