@@ -16,15 +16,13 @@
 # 
 _cpt_get_command_status() {
     # 获取上一条命令的返回状态
-    local _exit_code_=$?
+    local _exit_code=$1
     
     # 使用返回状态
-    if [[ $_exit_code_ -eq 0 ]]; then
-        print -P "${CORRECT}"
-        # echo "${GREEN}"
+    if [[ $_exit_code -eq 0 ]]; then
+        print -n "%F{green}${CORRECT}%f"
     else
-        print -P "${WRONG}"
-        # echo "${RED}"
+        print -n "%F{red}${WRONG}%f"
     fi
 }
 
@@ -66,7 +64,7 @@ _cpt_print_color() {
 # 
 _cpt_simple_print() {
     local color_code=$1
-    print -P "$1"; echo
+    print -n "$1"; echo
 }
 
 

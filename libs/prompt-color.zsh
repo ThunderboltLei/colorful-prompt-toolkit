@@ -50,7 +50,8 @@ _cpt_invert_color() {
   local r_inv=$(( 255 - 16#${r} ))
   local g_inv=$(( 255 - 16#${g} ))
   local b_inv=$(( 255 - 16#${b} ))
-  echo "#%02X%02X%02X\n" $r_inv $g_inv $b_inv
+  # echo "#%02X%02X%02X\n" $r_inv $g_inv $b_inv
+  print -n "#%02X%02X%02X" $r_inv $g_inv $b_inv
 }
 
 

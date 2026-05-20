@@ -90,7 +90,6 @@ assemble_prompt_eol_mark() {
 # Result: 
 # 
 preexec() {
-    
     # === 显示命令耗时：起始时间 ===
     G_ZSH_LAST_COMMAND_START=$EPOCHREALTIME
 }
@@ -107,8 +106,8 @@ precmd() {
     calcu_duration
 
     # === 重新生成完整提示符 ===
-    PROMPT='$(assemble_colorful_prompt)'
-    RPROMPT='$(assemble_colorful_prompt_right)'
+    PROMPT="$(assemble_colorful_prompt)"
+    RPROMPT="$(assemble_colorful_prompt_right)"
 
     # === 提示符：命令结束后显示耗时 === 
     assemble_prompt_eol_mark

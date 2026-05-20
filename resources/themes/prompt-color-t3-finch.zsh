@@ -109,7 +109,7 @@ precmd() {
     calcu_duration
 
     # === 重新生成完整提示符 ===
-    PROMPT='$(assemble_colorful_prompt)'
+    PROMPT="$(assemble_colorful_prompt)"
 
     # === 提示符：命令结束后显示耗时 === 
     assemble_prompt_eol_mark

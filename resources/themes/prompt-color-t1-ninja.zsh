@@ -53,6 +53,8 @@ assemble_colorful_prompt() {
 # 
 assemble_colorful_prompt_right() {
 
+    local _last_order_result=$1
+
     # 获取提示符颜色
     _cpt_get_prompt_color
 
@@ -60,8 +62,8 @@ assemble_colorful_prompt_right() {
     # 或者显示更详细的时间（日期+时间）
     print -n ""
     print -n "%F{${colors[LEFT_COLOR]}}${LEFT_ARROW}%f" # 圆角边缘
-    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} $(_cpt_get_command_status) ${colors[RESET]}"
-    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_04]}}|${${colors[RESET]}}"
+    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_05]}} $(_cpt_get_command_status $_last_order_result) ${colors[RESET]}"
+    print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_04]}}${VERTICAL_LINE}${${colors[RESET]}}"
     print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}} ${E_CLOCK} $(_cpt_format_time)${colors[RESET]}"
     print -n "%F{${colors[RIGHT_COLOR]}}${ROUND_RIGHT}%f" # 圆角边缘
 }
@@ -94,7 +96,6 @@ assemble_prompt_eol_mark() {
 # Result: 
 # 
 preexec() {
-    
     # === 显示命令耗时：起始时间 ===
     G_ZSH_LAST_COMMAND_START=$EPOCHREALTIME
 }
@@ -107,12 +108,15 @@ preexec() {
 # Result: 
 # 
 precmd() {
+    # 获取上一条命令结果
+    local _last_order_result=$?
+
     # === 显示命令耗时：计算 ===
     calcu_duration
     
     # === 重新生成完整提示符 ===
-    PROMPT='$(assemble_colorful_prompt)'
-    RPROMPT='$(assemble_colorful_prompt_right)'
+    PROMPT="$(assemble_colorful_prompt)"
+    RPROMPT="$(assemble_colorful_prompt_right $_last_order_result)"
 
     # === 提示符：命令结束后显示耗时 === 
     assemble_prompt_eol_mark
