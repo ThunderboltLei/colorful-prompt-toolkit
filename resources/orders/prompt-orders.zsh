@@ -18,6 +18,8 @@ alias clear=_cpt_clear
 _cpt_clean_history() {
     # 清除记录
     fc -p
+
+    _cpt_clear
 }
 alias history-c=_cpt_clean_history
 
