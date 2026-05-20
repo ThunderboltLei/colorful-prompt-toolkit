@@ -6,7 +6,7 @@ E_APPLE="🍏"
 E_LADY_BUG="🐞"
 
 # goods
-E_RING=""
+E_RING="🔔"
 E_CLOCK="⏰"
 E_WATCH="⏱️"
 E_DOCUMENT="📂"

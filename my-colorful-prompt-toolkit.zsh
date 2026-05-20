@@ -11,10 +11,10 @@
 
 # ===== my-colorful-prompt-toolkit =====
 
+
 # === 获取绚彩提示符脚本的根目录 ===
-if [ -z "$MY_COLORFUL_PROMPT_ROOT_PATH" ]; then
-    export MY_COLORFUL_PROMPT_ROOT_PATH="${0:a:h}"
-fi
+target_path="${0:a:h}"
+[[ "${MY_COLORFUL_PROMPT_ROOT_PATH}" != "$target_path" ]] && export MY_COLORFUL_PROMPT_ROOT_PATH="$target_path"
 
 
 # === 自定义提示符样式 ===

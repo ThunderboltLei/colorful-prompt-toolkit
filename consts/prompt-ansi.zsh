@@ -2,5 +2,23 @@
 BEGIN="\033[38;2;"
 RESET="\033[0m"
 
-RED="\033[31m"
-GREEN="\033[32m"
+
+# 颜色
+RED='\e[0;31m'
+GREEN='\e[0;32m'
+YELLOW='\e[1;33m'
+BLUE='\e[0;34m'
+CYAN='\e[0;36m'
+RESET='\e[0m'
+BOLD='\e[1m'
+
+
+# 粗体颜色
+BOLD_BLACK="\033[1;30m"
+BOLD_RED="\033[1;31m"
+BOLD_GREEN="\033[1;32m"
+BOLD_YELLOW="\033[1;33m"
+BOLD_BLUE="\033[1;34m"
+BOLD_MAGENTA="\033[1;35m"
+BOLD_CYAN="\033[1;36m"
+BOLD_WHITE="\033[1;37m"

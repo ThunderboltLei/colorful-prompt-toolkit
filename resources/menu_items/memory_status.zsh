@@ -6,18 +6,19 @@
 # Filename: 
 # Description:
 
-# === Function Description Format ===
-# 
+
+source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.zsh
+
+
 # Description: 
 # Params:
 #   param1: 
 #   param2: 
 # Result: 
 # 
-
 menu_function() {
-    info=`free -h 2>/dev/null || vm_stat 2>/dev/null || echo 'free/vm_stat not available'`
-    printf "%s\n" $info
+    local info=`free -h 2>/dev/null || vm_stat 2>/dev/null || echo 'free/vm_stat not available'`
+    _cpt_simple_print "$info"
 }
 
 # 如果脚本有参数且第一个参数是 "menu"

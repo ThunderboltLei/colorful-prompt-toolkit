@@ -23,6 +23,7 @@ MENU_ITEMS=(
     "Running Processes"
     "Show Prompt Style"
     "Dirs & Docs"
+    "Git Log Graph"
 )
 ORDER_ITEMS=(
     # "<自定义菜单项对应的脚本>"
@@ -33,5 +34,6 @@ ORDER_ITEMS=(
     "running_processes.zsh"
     "show_prompt_style.zsh"
     "dirs_and_docs.zsh"
+    "git_log_graph.zsh"
 )
 
