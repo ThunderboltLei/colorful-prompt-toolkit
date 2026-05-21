@@ -51,7 +51,7 @@ _cpt_symbol_printf() {
 _cpt_print_color() {
     local color_code=$1
     local message=$2
-    print -P "\033[${color_code}m ${message} \033[0m"; echo
+    print -P "\033[${color_code}m${message}\033[0m"; echo
 }
 
 

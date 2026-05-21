@@ -118,7 +118,7 @@ menu_function() {
     [[ -f "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.zsh" ]] && source "$MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-color.zsh"
 
     local _colors_str_="`_cpt_get_color_style $MY_COLORFUL_PROMPT_COLOR_NUMBER`"
-    printf " $E_APPLE 当前配色方案：$(process_color_line $_colors_str_)\n\n"
+    printf "$E_APPLE 当前配色方案：$(process_color_line $_colors_str_)\n\n"
 
     process_file_content "$style_file"
 }

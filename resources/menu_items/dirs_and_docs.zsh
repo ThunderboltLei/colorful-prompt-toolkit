@@ -23,7 +23,7 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.zsh
 menu_function() {
     local info="$({
 
-        _cpt_print_color "34" " ${E_APPLE} 当前目录：$(pwd)"
+        _cpt_print_color "34" "${E_DOCUMENT} 当前目录：$(pwd)"
 
         _cpt_simple_print "${GREEN} >>> ${RED}${BOLD}Directory List:${RESET}"
         # 使用 ls -lt 按时间排序目录

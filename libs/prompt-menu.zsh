@@ -18,32 +18,29 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.zsh
 
 # 菜单数据
 
-# 定义函数
+# Description: 解析菜单项
+# Param
+#   Param1: 索引值
+# Result: 返回菜单项各部分内容
+# 
 parse_menu_item() {
     local index=$1
     local menu_infos="${MENU_ITEMS[$index]}"
     local parts=(${(s/:/)menu_infos})
 
     print -r -- "${parts[1]}"
-    print -r -- "${parts[2]}"
+    print -r -- ${parts[2]}
     print -r -- "${parts[3]}"
 }
 
+# 菜单名称与脚本的对应关系
 typeset -A details
 local item_counter=1  # 用于跟踪 MenuItem 的索引
 for i in {1..${#MENU_ITEMS[@]}}; do
-    # details[${MENU_ITEMS[$i]}]="source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[$i]} menu_item"
-    # print -n ">>>>> i: $i\n"
-
-    # local menu_infos="${MENU_ITEMS[$i]}"
-    # local parts=(${(s/:/)menu_infos})
-    # local name="${parts[1]}"
-    # local level="${parts[2]}"
-    # local type="${parts[3]}"
 
     local result=(${(f)"$(parse_menu_item $i)"})
     local name="${result[1]}"
-    local level="${result[2]}"
+    local level=${result[2]}
     local type="${result[3]}"
 
     if [[ "$type" == "MenuItem" ]]; then
@@ -70,7 +67,8 @@ typeset -i current_width=0
 # UI 状态
 typeset -i selected=1
 typeset -i need_redraw=1
-typeset -g _selected_menu_item="System"
+# 菜单-初始值（第一个）
+typeset -g _selected_menu_item="${${(f)"$(parse_menu_item 1)"}[1]}"
 
 #===========================================
 # ANSI 转义序列常量
@@ -132,28 +130,8 @@ get_term_size() {
 # Param
 #   Param1: 详细内容
 # Result: 
+# 
 prepare_detail_lines() {
-    # local content="$1"
-    
-    # # 清空缓存
-    # detail_lines=()
-    # max_line_length=0
-    
-    # # 处理空内容
-    # [[ -z "$content" ]] && {
-    #     detail_lines=("")
-    #     return
-    # }
-    
-    # # 分割内容
-    # while IFS= read -r line; do
-    #     detail_lines+=("$line")
-    #     (( ${#line} > max_line_length )) && max_line_length=${#line}
-    # done <<< "$content"
-    
-    # # 确保至少有一行
-    # (( ${#detail_lines[@]} == 0 )) && detail_lines=("")
-
     local content="$1"
     
     # 清空缓存
@@ -283,7 +261,6 @@ draw_border_line() {
     
     printf "${COLOR_BORDER}"
     for ((i=0; i<left_width; i++)); do printf "${HORIZON_LINE}"; done
-    # printf "┼"
     printf "${CROSS}"
     for ((i=0; i<right_width; i++)); do printf "${HORIZON_LINE}"; done
     printf "${COLOR_RESET}\n"
@@ -310,36 +287,24 @@ draw_menu_items() {
         if (( line < $(( ${#details[@]} + 1 )) )); then
             local i=$((line + 1))
 
+            # 菜单-根节点
             if [[ $line -eq 0 ]]; then
                 printf " %-$(($left_width-2))s" "${E_LADY_BUG} Menu"
                 printf "${VERTICAL_LINE}"
                 continue
             fi
 
-            # local menu_infos="${MENU_ITEMS[$line]}"
-            # local parts=(${(s/:/)menu_infos})
-            # local name="${parts[1]}"
-            # local level="${parts[2]}"
-            # local type="${parts[3]}"
-
             local result=(${(f)"$(parse_menu_item $line)"})
-            local name="${result[1]}"
-            local level="${result[2]}"
-            local type="${result[3]}"
+            local name="${result[1]}"   # 菜单名称
+            local level=${result[2]}    # 菜单层级，用于处理缩进
+            local type="${result[3]}"   # 菜单类型，用于显示节点图标 
+            local symbol="$([[ $type == "MenuItem" ]] && echo "${LEFT_FLOOR}" || echo "${TRIANGLE_RIGHT}")"
 
             if (( i == selected_idx )); then
-                # printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "${MENU_ITEMS[i]}"
-
-                # printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "${first}"
-
                 _selected_menu_item="${name}"
-                printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "$(_cpt_symbol_printf ' ' ${level}) ${LEFT_FLOOR} ${name}"
+                printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "$(_cpt_symbol_printf ' ' ${level}) ${symbol} ${name}"
             else
-                # printf " %-$(($left_width-1))s" "${MENU_ITEMS[i]}"
-
-                # printf " %-$(($left_width-1))s" "${first}"
-
-                printf " %-$(($left_width-1))s" "$(_cpt_symbol_printf ' ' ${level}) ${LEFT_FLOOR} ${name}"
+                printf " %-$(($left_width-1))s" "$(_cpt_symbol_printf ' ' ${level}) ${symbol} ${name}"
             fi
         else
             printf " %-$(($left_width-1))s" " "
