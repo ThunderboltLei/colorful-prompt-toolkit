@@ -14,19 +14,21 @@ MY_COLORFUL_PROMPT_REFRESH_DATETIME=0
 # === 定义菜单项 ===
 # MENU_ITEMS: 左侧，菜单项
 # ORDER_ITEMS: 右侧，菜单项对应的命令
+# === 菜单项名称:层数:类型
 MENU_ITEMS=(
-    # "<自定义菜单项名称>"
-    "System Info"
-    "Disk Usage"
-    "Memory Status"
-    "Network Info"
-    "Running Processes"
-    "Show Prompt Style"
-    "Dirs & Docs"
-    "Git Log Graph"
+    "System:1:Dir"
+        "System Info:2:MenuItem"
+        "Disk Usage:2:MenuItem"
+        "Memory Status:2:MenuItem"
+        "Network Info:2:MenuItem"
+        "Running Processes:2:MenuItem"
+        "Show Prompt Style:2:MenuItem"
+    "Files:1:Dir"
+        "Dirs & Docs:2:MenuItem"
+        "Git Log Graph:2:MenuItem"
 )
+# <自定义菜单项对应的脚本>
 ORDER_ITEMS=(
-    # "<自定义菜单项对应的脚本>"
     "system_info.zsh"
     "disk_usage.zsh"
     "memory_status.zsh"

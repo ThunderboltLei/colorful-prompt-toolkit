@@ -8,15 +8,51 @@ fi
 
 # 加载配置
 source $MY_COLORFUL_PROMPT_ROOT_PATH/configs/prompt-settings.zsh
+source $MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-emojis.zsh
+source $MY_COLORFUL_PROMPT_ROOT_PATH/consts/prompt-symbols.zsh
+source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-common-funcs.zsh
 
 #===========================================
 # 全局变量
 #===========================================
 
 # 菜单数据
+
+# 定义函数
+parse_menu_item() {
+    local index=$1
+    local menu_infos="${MENU_ITEMS[$index]}"
+    local parts=(${(s/:/)menu_infos})
+
+    print -r -- "${parts[1]}"
+    print -r -- "${parts[2]}"
+    print -r -- "${parts[3]}"
+}
+
 typeset -A details
+local item_counter=1  # 用于跟踪 MenuItem 的索引
 for i in {1..${#MENU_ITEMS[@]}}; do
-    details[${MENU_ITEMS[$i]}]="source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[i]} menu_item"
+    # details[${MENU_ITEMS[$i]}]="source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[$i]} menu_item"
+    # print -n ">>>>> i: $i\n"
+
+    # local menu_infos="${MENU_ITEMS[$i]}"
+    # local parts=(${(s/:/)menu_infos})
+    # local name="${parts[1]}"
+    # local level="${parts[2]}"
+    # local type="${parts[3]}"
+
+    local result=(${(f)"$(parse_menu_item $i)"})
+    local name="${result[1]}"
+    local level="${result[2]}"
+    local type="${result[3]}"
+
+    if [[ "$type" == "MenuItem" ]]; then
+        details[$name]="source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/menu_items/${ORDER_ITEMS[$item_counter]} menu_item"
+
+        ((item_counter++))  # 每遇到一个 MenuItem 就增加
+    else
+        details[$name]="echo \"$name-$level-$type\""
+    fi
 done
 
 # 滚动状态
@@ -34,6 +70,7 @@ typeset -i current_width=0
 # UI 状态
 typeset -i selected=1
 typeset -i need_redraw=1
+typeset -g _selected_menu_item="System"
 
 #===========================================
 # ANSI 转义序列常量
@@ -189,6 +226,7 @@ draw_vertical_scrollbar() {
 #   Param2: 可见宽度
 #   Param3: y坐标
 # Result: 
+# 
 draw_horizontal_scrollbar() {
     local content_width=$1 visible_width=$2 y=$3
     
@@ -222,14 +260,16 @@ draw_horizontal_scrollbar() {
 #   Param1: 左宽
 #   Param2: 右宽
 # Result: 
+# 
 draw_title_bar() {
     local left_width=$1 right_width=$2
     
     printf "${COLOR_TITLE}"
     printf " %-$(($left_width-1))s" "MENU"
-    printf "│"
+    printf "${VERTICAL_LINE}"
     printf " %-$(($right_width-1))s" "DETAILS"
-    printf "${COLOR_RESET}\n"
+    printf "${COLOR_RESET}"
+    printf "\n"
 }
 
 # Description: 绘制边框
@@ -237,13 +277,15 @@ draw_title_bar() {
 #   Param1: 左宽
 #   Param2: 右宽
 # Result: 
+# 
 draw_border_line() {
     local left_width=$1 right_width=$2
     
     printf "${COLOR_BORDER}"
-    for ((i=0; i<left_width; i++)); do printf '─'; done
-    printf "┼"
-    for ((i=0; i<right_width; i++)); do printf '─'; done
+    for ((i=0; i<left_width; i++)); do printf "${HORIZON_LINE}"; done
+    # printf "┼"
+    printf "${CROSS}"
+    for ((i=0; i<right_width; i++)); do printf "${HORIZON_LINE}"; done
     printf "${COLOR_RESET}\n"
 }
 
@@ -255,25 +297,56 @@ draw_border_line() {
 #   Param3: 左边框
 #   Param4: 左边框
 # Result: 
+# 
 draw_menu_items() {
-    local selected_idx=$1 left_width=$2 start_line=$3 visible_lines=$4
-    
+    # local selected_idx=$1 left_width=$2 start_line=$3 visible_lines=$4
+    local selected_idx=$(($1 + 1)) left_width=$2 start_line=$3 visible_lines=$4
+
     for ((line=0; line<visible_lines; line++)); do
         move_cursor $((start_line + line)) 1
-        
+
         # if (( line < ${#MENU_ITEMS[@]} )); then
-        if (( line < ${#details[@]} )); then
+        # if (( line < ${#details[@]} )); then
+        if (( line < $(( ${#details[@]} + 1 )) )); then
             local i=$((line + 1))
+
+            if [[ $line -eq 0 ]]; then
+                printf " %-$(($left_width-2))s" "${E_LADY_BUG} Menu"
+                printf "${VERTICAL_LINE}"
+                continue
+            fi
+
+            # local menu_infos="${MENU_ITEMS[$line]}"
+            # local parts=(${(s/:/)menu_infos})
+            # local name="${parts[1]}"
+            # local level="${parts[2]}"
+            # local type="${parts[3]}"
+
+            local result=(${(f)"$(parse_menu_item $line)"})
+            local name="${result[1]}"
+            local level="${result[2]}"
+            local type="${result[3]}"
+
             if (( i == selected_idx )); then
-                printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "${MENU_ITEMS[i]}"
+                # printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "${MENU_ITEMS[i]}"
+
+                # printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "${first}"
+
+                _selected_menu_item="${name}"
+                printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "$(_cpt_symbol_printf ' ' ${level}) ${LEFT_FLOOR} ${name}"
             else
-                printf " %-$(($left_width-1))s" "${MENU_ITEMS[i]}"
+                # printf " %-$(($left_width-1))s" "${MENU_ITEMS[i]}"
+
+                # printf " %-$(($left_width-1))s" "${first}"
+
+                printf " %-$(($left_width-1))s" "$(_cpt_symbol_printf ' ' ${level}) ${LEFT_FLOOR} ${name}"
             fi
         else
             printf " %-$(($left_width-1))s" " "
         fi
         
-        printf "│"
+        # printf "│"
+        printf "${VERTICAL_LINE}"
         clear_to_end
     done
 }
@@ -286,6 +359,7 @@ draw_menu_items() {
 #   Param3: 
 #   Param4: 
 # Result: 
+# 
 draw_content() {
     local right_start=$1 right_width=$2 content_start=$3 content_height=$4
     
@@ -337,9 +411,9 @@ draw_bottom() {
     move_cursor $((term_height - 1)) 1
     clear_line
     printf "${COLOR_BORDER}"
-    for ((i=0; i<left_width; i++)); do printf '─'; done
-    printf "┼"
-    for ((i=0; i<right_width; i++)); do printf '─'; done
+    for ((i=0; i<left_width; i++)); do printf "${HORIZON_LINE}"; done
+    printf "${CROSS}"
+    for ((i=0; i<right_width; i++)); do printf "${HORIZON_LINE}"; done
     printf "${COLOR_RESET}"
     
     # 横向滚动条
@@ -350,13 +424,13 @@ draw_bottom() {
     move_cursor $term_height 1
     clear_line
     printf "${COLOR_BORDER}"
-    printf "↑/↓:menu  ←/→:scroll  PgUp/PgDn:page  Home/End:top/bottom  q:quit"
+    printf "${UP}${SLASH}${DOWN}:menu  ${LEFT}${SLASH}${RIGHT}:scroll  PgUp${SLASH}PgDn:page  Home${SLASH}End:top${SLASH}bottom  q:quit"
     
     # 状态信息
     (( total_lines > content_height )) && \
-        printf " [Y: %d/%d]" $scroll_offset_y $max_scroll_y
+        printf " [Y: %d${SLASH}%d]" $scroll_offset_y $max_scroll_y
     (( max_line_length > right_width )) && \
-        printf " [X: %d/%d]" $scroll_offset_x $max_scroll_x
+        printf " [X: %d${SLASH}%d]" $scroll_offset_x $max_scroll_x
     
     printf "${COLOR_RESET}"
 }
@@ -386,16 +460,20 @@ draw() {
     # prepare_detail_lines "$_menu_item_content"
 
     # 修复：使用引号保护内容
-    local cmd="${details[${MENU_ITEMS[$selected_idx]}]}"
-    local _menu_item_content
-    _menu_item_content=$(eval "$cmd" 2>&1)  # 捕获 stderr 也
+    # local cmd="${details[${MENU_ITEMS[$selected_idx]}]}"
+    # local _menu_item_content
+    # _menu_item_content=$(eval "$cmd" 2>&1)  # 捕获 stderr
+
+    local cmd="${details[${_selected_menu_item}]}"
+    local _menu_item_content="$(eval "$cmd" 2>&1)"
     
     # 修复：传递时加引号
     prepare_detail_lines "$_menu_item_content"
     
     # 计算可视区域
     local content_start=3
-    local content_height=$((current_height - 5))
+    # local content_height=$((current_height - 5))
+    local content_height=$((current_height - 4))
     (( content_height < 1 )) && content_height=1
     local total_lines=${#detail_lines[@]}
     
@@ -450,6 +528,11 @@ handle_arrow_keys() {
                 ((selected--))
                 scroll_offset_y=0
                 scroll_offset_x=0
+
+                # 添加这两行
+                local result=(${(f)"$(parse_menu_item $selected)"})
+                _selected_menu_item="${result[1]}"
+
                 draw $selected
             }
             ;;
@@ -459,6 +542,11 @@ handle_arrow_keys() {
                 ((selected++))
                 scroll_offset_y=0
                 scroll_offset_x=0
+
+                # 添加这两行
+                local result=(${(f)"$(parse_menu_item $selected)"})
+                _selected_menu_item="${result[1]}"
+
                 draw $selected
             }
             ;;
