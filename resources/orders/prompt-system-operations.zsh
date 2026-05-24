@@ -7,6 +7,7 @@
 #   param2: 
 # Result: 
 # 
+
 _cpt_clear() {
     unset G_ZSH_LAST_COMMAND_START
     unset G_PROMPT_EOL_MARK
@@ -49,5 +50,4 @@ _cpt_list() {
     } 2>/dev/null | grep -v '^total'
 }
 alias ll=_cpt_list
-
 

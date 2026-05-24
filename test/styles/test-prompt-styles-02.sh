@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+
 RESET="\033[0m"
 
 hex_to_rgb() {
