@@ -22,9 +22,11 @@ assemble_colorful_prompt() {
     # 定义左侧提示符
     print -n "%B"
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING_DOUBLET}%f"
-    print -n "%F{${colors[COLOR_06]}}${MEDIUM_LEFT_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_LEFT}%f"
+    print -n "%F{${colors[COLOR_02]}}%n%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}} ${COLON} %f"
     print -n "%F{${colors[COLOR_02]}}%~%f"
-    print -n "%F{${colors[COLOR_06]}}${MEDIUM_RIGHT_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_RIGHT}%f"
 
     local branch=""
     # 不在 Git 仓库时静默返回空
@@ -32,20 +34,20 @@ assemble_colorful_prompt() {
 
     if [[ "$branch" != "" ]]; then
         print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
-        print -n "%F{${colors[COLOR_06]}}${MEDIUM_LEFT_DOUBLET}%f"
+        print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_LEFT}%f"
         print -n "%F{${colors[COLOR_03]}}$(__git_ps1 "%s")%f"
-        print -n "%F{${colors[COLOR_06]}}${MEDIUM_RIGHT_DOUBLET}%f"
+        print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_RIGHT}%f"
     fi
     print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
-    print -n "%F{${colors[COLOR_06]}}${MEDIUM_LEFT_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_LEFT}%f"
     print -n "%F{${colors[COLOR_04]}}$(_cpt_format_time)%f"
-    print -n "%F{${colors[COLOR_06]}}${MEDIUM_RIGHT_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_RIGHT}%f"
 
     print -n "\n"
     print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR_DOUBLET}%f"
-    print -n "%F{${colors[COLOR_06]}}${MEDIUM_LEFT_DOUBLET}%f"
+    print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_LEFT}%f"
     print -n "%F{${colors[COLOR_05]}}${SNOW}%f"
-    print -n "%F{${colors[COLOR_06]}}${MEDIUM_RIGHT_DOUBLET} %f"
+    print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_RIGHT} %f"
 
     print -n "%b"
 }

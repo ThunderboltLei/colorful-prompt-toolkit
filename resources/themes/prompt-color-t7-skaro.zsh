@@ -23,6 +23,8 @@ assemble_colorful_prompt() {
     print -n "%B"
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
     print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
+    print -n "%F{${colors[COLOR_02]}}%n%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}} ${COLON} %f"
     print -n "%F{${colors[COLOR_02]}}%~%f"
     print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_RIGHT}%f"
 
