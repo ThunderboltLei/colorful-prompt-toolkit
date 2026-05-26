@@ -27,7 +27,7 @@ assemble_colorful_prompt() {
     print -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_01]}}${RIGHT_ARROW}${colors[RESET]}"
     print -n "%K{${colors[COLOR_02]}}%F{${SYSTEM_MODE}}${RIGHT_ARROW}${colors[RESET]}"
     # === path ===
-    print -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_06]}} ${E_DOCUMENT} %c ${colors[RESET]}"
+    print -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_06]}}${EMPTY}${E_DOCUMENT}${EMPTY}%c${EMPTY}${colors[RESET]}"
 
     # === github ===
     local branch=""
@@ -47,11 +47,12 @@ assemble_colorful_prompt() {
     fi
 
     # === datetime ===
-    print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}} ${E_WATCH} $(_cpt_format_time) ${colors[RESET]}"
-    print -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT} %f"
-    print -n $'\n'
-    print -n "%F{${colors[COLOR_05]}}%B${ANGLE_RIGHT}${TRIANGLE_RIGHT}%b%f"
-    print -n " "
+    print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_06]}}${EMPTY}${E_WATCH}${EMPTY}$(_cpt_format_time)${EMPTY}${colors[RESET]}"
+    print -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT}${EMPTY}%f"
+    print -n "${NEW_LINE}"
+    print -n "%F{${colors[COLOR_05]}}%B${ANGLE_RIGHT}%b%f"
+    print -n "%F{${colors[COLOR_05]}}%B${TRIANGLE_RIGHT}%b%f"
+    print -n "${EMPTY}"
 }
 
 

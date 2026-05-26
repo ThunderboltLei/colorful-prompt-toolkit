@@ -22,13 +22,16 @@ assemble_colorful_prompt() {
     # 定义左侧提示符
     # 第一行
     print -n "%B"
-    print -n " "
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
     print -n "%K{${colors[COLOR_06]}}%F{${colors[COLOR_01]}}${SQUARE_LEFT}$(_cpt_format_time)${SQUARE_RIGHT}${colors[RESET]}"
     print -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_06]}}${RIGHT_ARROW}${colors[RESET]}"
-    print -n " "
+    print -n "${EMPTY}"
+    print -n "%F{${colors[COLOR_02]}}%n%f"
+    print -n "${EMPTY}"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${COLON}%f"
+    print -n "${EMPTY}"
     print -n "%F{${colors[COLOR_02]}}%~%f"
-    print -n " "
+    print -n "${EMPTY}"
 
     local branch=""
     # 不在 Git 仓库时静默返回空
@@ -42,13 +45,14 @@ assemble_colorful_prompt() {
         print -n "%K{${SYSTEM_MODE}}%F{${colors[COLOR_03]}}${RIGHT_ARROW}${colors[RESET]}"
     fi
     # 换行
-    print -n "\n"
+    print -n "%b"
+    print -n "${NEW_LINE}"
+    print -n "%B"
     # 第二行
-    print -n " "
     print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
     print -n "%F{${colors[COLOR_04]}}${ANGLE_RIGHT}${TRIANGLE_RIGHT}%f"
-    print -n " "
     print -n "%b"
+    print -n "${EMPTY}"
 }
 
 

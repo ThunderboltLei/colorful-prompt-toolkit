@@ -49,9 +49,9 @@ assemble_colorful_prompt() {
     print -n "%F{${colors[COLOR_03]}}${ROUND_RIGHT} %f"
 
     # === 第二行 ===
-    print -n $'\n'
+    print -n "${NEW_LINE}"
     print -n " %F{${colors[COLOR_05]}}%B${ANGLE_RIGHT}${TRIANGLE_RIGHT}%b%f"
-    print -n " "
+    print -n "${EMPTY}"
 }
 
 

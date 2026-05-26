@@ -13,6 +13,7 @@
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
+autoload -U colors && colors
 
 # === 1.启用 zsh 的 PROMPT_SUBST 选项 ===
 # 让提示符中的 $(命令) 能被动态执行 ===

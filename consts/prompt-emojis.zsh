@@ -12,6 +12,9 @@ E_WATCH="⏱️"
 E_DOCUMENT="📂"
 E_USER="👤"
 
+E_TRIDENT="🔱"
+E_SAILBOAT="⛵"
+
 # colors
 E_GREEN="🟢"
 E_RED="🔴"

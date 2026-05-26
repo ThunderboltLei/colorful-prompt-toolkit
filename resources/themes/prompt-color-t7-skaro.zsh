@@ -24,7 +24,9 @@ assemble_colorful_prompt() {
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
     print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
     print -n "%F{${colors[COLOR_02]}}%n%f"
-    print -n "%F{${REVERSE_SYSTEM_MODE}} ${COLON} %f"
+    print -n "${EMPTY}"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${COLON}%f"
+    print -n "${EMPTY}"
     print -n "%F{${colors[COLOR_02]}}%~%f"
     print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_RIGHT}%f"
 
@@ -42,12 +44,14 @@ assemble_colorful_prompt() {
     print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
     print -n "%F{${colors[COLOR_04]}}$(_cpt_format_time)%f"
     print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_RIGHT}%f"
-
-    print -n "\n"
-    print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
-    print -n "%F{${REVERSE_SYSTEM_MODE}}${ANGLE_RIGHT}%f"
-    print -n "%F{${REVERSE_SYSTEM_MODE}}${ARROW} %f"
     print -n "%b"
+    print -n "${NEW_LINE}"
+    print -n "%B"
+    print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${HELM}%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${ARROW}%f"
+    print -n "%b"
+    print -n "${EMPTY}"
 }
 
 

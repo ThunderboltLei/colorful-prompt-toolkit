@@ -38,11 +38,12 @@ assemble_colorful_prompt() {
     fi
     print -n "%F{${REVERSE_SYSTEM_MODE}} as%f"
     print -n "%F{${colors[COLOR_05]}} ${SQUARE_LEFT}$(_cpt_format_time)${SQUARE_RIGHT}%f"
-
-    print -n "\n"
-    print -n "%F{${REVERSE_SYSTEM_MODE}} ${TRIANGLE_RIGHT} %f"
-
     print -n "%b"
+    print -n "${NEW_LINE}"
+    print -n "%B"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${TRIANGLE_RIGHT}%f"
+    print -n "%b"
+    print -n "${EMPTY}"
 }
 
 

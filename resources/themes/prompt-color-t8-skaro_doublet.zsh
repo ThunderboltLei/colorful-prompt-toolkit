@@ -42,14 +42,15 @@ assemble_colorful_prompt() {
     print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_LEFT}%f"
     print -n "%F{${colors[COLOR_04]}}$(_cpt_format_time)%f"
     print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_RIGHT}%f"
-
-    print -n "\n"
+    print -n "%b"
+    print -n "${NEW_LINE}"
+    print -n "%B"
     print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR_DOUBLET}%f"
     print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_LEFT}%f"
     print -n "%F{${colors[COLOR_05]}}${SNOW}%f"
-    print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_RIGHT} %f"
-
+    print -n "%F{${colors[COLOR_06]}}${MEDIUM_FLATTENED_RIGHT}%f"
     print -n "%b"
+    print -n "${EMPTY}"
 }
 
 
