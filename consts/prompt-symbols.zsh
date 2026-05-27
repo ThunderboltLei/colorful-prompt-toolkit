@@ -92,3 +92,7 @@ SLASH="/"
 ARROW="➤"
 
 WIDTH_CURSOR="█"
+
+BRACE_UP="⎧"
+BRACE_MIDDLE="⎨"
+BRACE_DOWN="⎩"

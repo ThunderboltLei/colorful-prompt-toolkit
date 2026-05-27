@@ -83,6 +83,9 @@ case $MY_COLORFUL_PROMPT_TYPE in
 8)
     source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/themes/prompt-color-t8-skaro_doublet.zsh
     ;;
+9)
+    source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/themes/prompt-color-t9-tripart.zsh
+    ;;
 *)
     source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/themes/prompt-color-t1-ninja.zsh
     ;;

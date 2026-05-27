@@ -2,6 +2,11 @@
 # fruits
 E_APPLE="🍏"
 
+# foods
+E_COOKIE="🍪"
+E_DONUT="🍩"
+E_COFFEE="☕"
+
 # bugs
 E_LADY_BUG="🐞"
 
@@ -21,3 +26,17 @@ E_RED="🔴"
 
 # git
 E_GITHUB="🔃"
+
+# signs of the zodiac
+E_ARIES="♈"
+E_TAURUS="♉"
+E_GEMINI="♊"
+E_CANCER="♋"
+E_LEO="♌"
+E_VIRGO="♍"
+E_LIBRA="♎"
+E_SCORPIO="♏"
+E_SAGITTARIUS="♐"
+E_CAPRICORN="♑"
+E_AQUARIUS="♒"
+E_PISCES="♓"

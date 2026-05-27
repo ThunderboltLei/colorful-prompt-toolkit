@@ -3,7 +3,7 @@
 # ========== 配置项 ==========
 
 # === 设置提示符样式 ===
-MY_COLORFUL_PROMPT_TYPE=7
+MY_COLORFUL_PROMPT_TYPE=9
 
 # === 提示符使用的颜色组合的行号 ===
 MY_COLORFUL_PROMPT_COLOR_NUMBER=9
