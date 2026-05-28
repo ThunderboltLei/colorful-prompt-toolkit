@@ -22,6 +22,14 @@ assemble_colorful_prompt() {
     # 定义左侧提示符
     print -n "%B"
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING}%f"
+    print -n "%K{${REVERSE_SYSTEM_MODE}}"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
+    print -n "%F{${colors[COLOR_04]}}$(_cpt_format_time)%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_RIGHT}%f"
+    print -n "%k"
+    print -n "${EMPTY}"
+    print -n "%F{${colors[COLOR_01]}}${AT}%f"
+    print -n "${EMPTY}"
     print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
     print -n "%F{${colors[COLOR_02]}}%n%f"
     print -n "${EMPTY}"
@@ -33,25 +41,18 @@ assemble_colorful_prompt() {
     local branch=""
     # 不在 Git 仓库时静默返回空
     branch=`__git_ps1 "%s" 2>/dev/null`
-
     if [[ "$branch" != "" ]]; then
         print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
         print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
         print -n "%F{${colors[COLOR_03]}}$(__git_ps1 "%s")%f"
         print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_RIGHT}%f"
     fi
-    print -n "%F{${colors[COLOR_01]}} ${TRANSVERSE_LINE} %f"
-    print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_LEFT}%f"
-    print -n "%F{${colors[COLOR_04]}}$(_cpt_format_time)%f"
-    print -n "%F{${REVERSE_SYSTEM_MODE}}${SQUARE_RIGHT}%f"
     print -n "%b"
     print -n "${NEW_LINE}"
     print -n "%B"
     print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
-    print -n "%F{${REVERSE_SYSTEM_MODE}}${MEDIUM_RIGHT}%f"
-    print -n "%F{${REVERSE_SYSTEM_MODE}}${TRIANGLE_RIGHT}%f"
+    print -n "%F{${colors[COLOR_01]}}${DOLLAR}%f"
     print -n "%b"
-    print -n "${EMPTY}"
 }
 
 

@@ -17,6 +17,7 @@ E_WATCH="⏱️"
 E_DOCUMENT="📂"
 E_USER="👤"
 
+E_MONEYBAG="💰"
 E_TRIDENT="🔱"
 E_SAILBOAT="⛵"
 

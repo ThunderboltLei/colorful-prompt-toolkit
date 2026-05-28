@@ -24,6 +24,7 @@ MENU_ITEMS=(
         "Running Processes:2:MenuItem"
         "Self-difinition:2:Dir"
             "Show Prompt Style:3:MenuItem"
+        "Activity Monitor:2:MenuItem"
     "Files:1:Dir"
         "Dirs & Docs:2:MenuItem"
         "Git Log Graph:2:MenuItem"
@@ -36,6 +37,7 @@ ORDER_ITEMS=(
     "network_info.zsh"
     "running_processes.zsh"
     "show_prompt_style.zsh"
+    "activity_monitor.zsh"
     "dirs_and_docs.zsh"
     "git_log_graph.zsh"
 )

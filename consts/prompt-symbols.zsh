@@ -26,7 +26,8 @@ SPADE="♠"
 CLUB="♣"
 REFERENCE_MARK="※"
 HELM="☸"
-
+DOLLAR="💲"
+AT="@"
 
 TRIANGLE_LEFT="◀"
 TRIANGLE_RIGHT="▶"
