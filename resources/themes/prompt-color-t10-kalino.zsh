@@ -22,7 +22,6 @@ assemble_colorful_prompt() {
     # 定义左侧提示符
     print -n "%B"
     print -n "%F{${colors[COLOR_01]}}${LEFT_CEILING_DOUBLET}%f"
-    print -n "${EMPTY}"
     print -n "%K{${REVERSE_SYSTEM_MODE}}%F{${colors[COLOR_04]}}$(_cpt_format_time)%f%k"
     print -n "${EMPTY}"
     print -n "%F{${colors[COLOR_06]}}${MEDIUM_LEFT}%f"

@@ -29,28 +29,19 @@ _cpt_format_time() {
 # Result: 
 # 
 refresh_prompt_datetime() {
-    
-    # 自动刷新提示符的函数
-    refresh_prompt() {
-        # 刷新显示
-        zle reset-prompt
-    }
 
-    # 设置定时器（秒为单位）
-    TMOUT=1
-    # 触发刷新
-    TRAPALRM() {
+    _refresh_loop() {
+
         zle reset-prompt 2>/dev/null || {
             # === 重新生成完整提示符 ===
             PROMPT='$(assemble_colorful_prompt)'
             RPROMPT='$(assemble_colorful_prompt_right)'
-
-            # 刷新显示
-            zle reset-prompt
         }
 
-        TMOUT=1  # 重新设置定时器
+        sched +1 _refresh_loop
     }
+
+    _refresh_loop
 }
 
 
