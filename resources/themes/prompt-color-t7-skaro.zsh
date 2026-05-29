@@ -53,6 +53,7 @@ assemble_colorful_prompt() {
     print -n "%F{${colors[COLOR_01]}}${LEFT_FLOOR}%f"
     print -n "%F{${colors[COLOR_01]}}${DOLLAR}%f"
     print -n "%b"
+    print -n "${EMPTY}"
 }
 
 
