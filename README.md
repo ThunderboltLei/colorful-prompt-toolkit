@@ -5,7 +5,7 @@
 </p>
 
 # Colorful Prompt Toolkit
-[![workflow name](https://github.com/ThunderboltLei/colorful-prompt-toolkit/actions/workflows/WORKFLOW_FILE.yml/badge.svg)](https://github.com/ThunderboltLei/colorful-prompt-toolkit/actions/workflows/WORKFLOW_FILE.yml)
+[![workflow name](https://github.com/ThunderboltLei/colorful-prompt-toolkit/actions/workflows/colorful-prompt-toolkit.yml/badge.svg)](https://github.com/ThunderboltLei/colorful-prompt-toolkit/actions/workflows/colorful-prompt-toolkit.yml)
 
 Colorful Prompt Toolkit is an open-source project dedicated to beautifying terminal prompts. It transforms the plain command line into an intuitive and visually appealing interface by offering rich color schemes, custom icons, and dynamic information such as Git branches, execution time, and current directory. Compatible with various shells like Bash and Zsh, users can easily adjust themes to enhance both the development experience and visual enjoyment. Ideal for daily development, system administration, and presentation scenarios, it makes command-line operations more efficient and personalized.
 
