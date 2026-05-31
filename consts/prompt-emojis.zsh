@@ -1,6 +1,6 @@
 
 # fruits
-E_APPLE="🍏"
+E_GREEN_APPLE="🍏"
 E_RED_APPLE="🍎"
 
 # foods

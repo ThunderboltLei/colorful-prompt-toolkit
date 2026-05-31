@@ -20,7 +20,7 @@ assemble_colorful_prompt() {
     _cpt_get_prompt_color
 
     # 定义左侧提示符
-    print -n " ${E_APPLE} "
+    print -n " ${E_GREEN_APPLE} "
     print -n "%F{${colors[COLOR_01]}}${ROUND_LEFT}%f" # 圆角边缘
     # === user ===
     print -n "%K{${colors[COLOR_01]}}%F{${colors[COLOR_06]}} ${E_USER} %n ${colors[RESET]}"
