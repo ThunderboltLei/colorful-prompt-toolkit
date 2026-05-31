@@ -7,6 +7,8 @@
 # 
 
 
+MAC=""
+
 # 定义颜色和形状字符
 LEFT_ARROW=""  # 向左实心箭头
 RIGHT_ARROW=""  # 向右实心箭头 (需要 Powerline 字体)
@@ -15,12 +17,12 @@ ROUND_RIGHT=""  # 右侧圆角右边缘
 
 CORRECT="✔"
 WRONG="✘"
-HEART="❤"
-STAR="★"
+SOLID_HEART="❤"
+SOLID_STAR="★"
 FLOWER="❀"
 SNOW="❅"
 HOLLOW_STAR="☆"
-RED_HEART="♥"
+HOLLOW_HEART="♥"
 DIAMOND="♦"
 SPADE="♠"
 CLUB="♣"

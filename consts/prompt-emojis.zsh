@@ -1,6 +1,7 @@
 
 # fruits
 E_APPLE="🍏"
+E_RED_APPLE="🍎"
 
 # foods
 E_COOKIE="🍪"
