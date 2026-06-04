@@ -89,7 +89,7 @@ process_file_content() {
         process_color_line "$line"
         
         # 行间分隔符
-        symbol_printf "-" 80
+        _cpt_symbol_printf "-" 80
         
     done < "$file"
 }

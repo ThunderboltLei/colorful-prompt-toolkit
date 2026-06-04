@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 # 检查 zsh 版本
 if [[ $ZSH_VERSION != 5.9* ]]; then
     echo "Warning: designed for zsh 5.9, current version $ZSH_VERSION"
@@ -69,6 +68,9 @@ typeset -i selected=1
 typeset -i need_redraw=1
 # 菜单-初始值（第一个）
 typeset -g _selected_menu_item="${${(f)"$(parse_menu_item 1)"}[1]}"
+
+# 控制是否显示右侧内容
+typeset -i show_detail=0  # 1: 显示内容, 0: 不显示内容（默认不显示）
 
 #===========================================
 # ANSI 转义序列常量
@@ -149,7 +151,7 @@ prepare_detail_lines() {
     while IFS= read -r line || [[ -n "$line" ]]; do
         lines+=("$line")
         (( ${#line} > max_line_length )) && max_line_length=${#line}
-    done < <(printf "%s\n" "$content")
+    done < <(printf "%s${NEW_LINE}" "$content")
     
     # 如果没有换行符，content 作为单行处理
     if (( ${#lines[@]} == 0 )); then
@@ -163,30 +165,30 @@ prepare_detail_lines() {
     (( ${#detail_lines[@]} == 0 )) && detail_lines=("")
 }
 
+
 #===========================================
 # 滚动条绘制
 #===========================================
 
 # Description: 绘制纵向滚动条
-# Param
-#   Param1: 当前行
-#   Param2: 总行数
-#   Param3: 是否可见
-#   Param4: x坐标
-#   Param5: y坐标
-# Result: 
 draw_vertical_scrollbar() {
     local current=$1 total=$2 visible=$3 x=$4 y=$5
     
     (( total <= visible )) && return
     
-    local thumb_size=$(( (visible * visible) / total ))
-    (( thumb_size < 1 )) && thumb_size=1
+    local thumb_size=1
+    if (( visible < total )); then
+        thumb_size=$(( (visible * visible) / total ))
+        (( thumb_size < 1 )) && thumb_size=1
+    fi
     
     local max_pos=$((total - visible))
     local thumb_pos=0
-    (( max_pos > 0 )) && thumb_pos=$(( (current * (visible - thumb_size)) / max_pos ))
+    if (( max_pos > 0 )); then
+        thumb_pos=$(( (current * (visible - thumb_size)) / max_pos ))
+    fi
     
+    local i
     for ((i=0; i<visible; i++)); do
         move_cursor $((y + i)) $x
         if (( i >= thumb_pos && i < thumb_pos + thumb_size )); then
@@ -197,28 +199,28 @@ draw_vertical_scrollbar() {
     done
 }
 
-
 # Description: 绘制横向滚动条
-# Param
-#   Param1: 当前行内容的宽度
-#   Param2: 可见宽度
-#   Param3: y坐标
-# Result: 
-# 
 draw_horizontal_scrollbar() {
     local content_width=$1 visible_width=$2 y=$3
     
     (( content_width <= visible_width )) && return
     
-    local thumb_size=$(( (visible_width * visible_width) / content_width ))
-    (( thumb_size < 1 )) && thumb_size=1
+    local thumb_size=1
+    if (( visible_width < content_width )); then
+        thumb_size=$(( (visible_width * visible_width) / content_width ))
+        (( thumb_size < 1 )) && thumb_size=1
+    fi
     
     local max_scroll=$((content_width - visible_width))
-    local thumb_pos=$(( (scroll_offset_x * (visible_width - thumb_size)) / max_scroll ))
+    local thumb_pos=0
+    if (( max_scroll > 0 )); then
+        thumb_pos=$(( (scroll_offset_x * (visible_width - thumb_size)) / max_scroll ))
+    fi
     
     move_cursor $y 1
     clear_line
     printf "${COLOR_BORDER}"
+    local i
     for ((i=0; i<visible_width; i++)); do
         if (( i >= thumb_pos && i < thumb_pos + thumb_size )); then
             printf "${COLOR_SCROLLBAR}─${COLOR_RESET}"
@@ -233,115 +235,139 @@ draw_horizontal_scrollbar() {
 # 界面绘制
 #===========================================
 
+# Description: 绘制完整的分隔线
+draw_full_line() {
+    local width=$1
+    local i
+    for ((i=0; i<width; i++)); do
+        printf "${HORIZON_LINE}"
+    done
+}
+
+# Description: 绘制带分隔符的行
+draw_separator_line() {
+    local left_width=$1 right_width=$2
+    local y_pos=$3
+    
+    if (( y_pos > 0 )); then
+        move_cursor $y_pos 1
+    fi
+    
+    printf "${COLOR_BORDER}"
+    draw_full_line $left_width
+    printf "${CROSS}"
+    draw_full_line $right_width
+    printf "${COLOR_RESET}"
+    if (( y_pos == 0 )); then
+        printf "${NEW_LINE}"
+    fi
+}
+
 # Description: 标题栏
-# Param
-#   Param1: 左宽
-#   Param2: 右宽
-# Result: 
-# 
 draw_title_bar() {
     local left_width=$1 right_width=$2
     
     printf "${COLOR_TITLE}"
     printf " %-$(($left_width-1))s" "MENU"
-    printf "${VERTICAL_LINE}"
-    printf " %-$(($right_width-1))s" "DETAILS"
-    printf "${COLOR_RESET}"
-    printf "\n"
-}
-
-# Description: 绘制边框
-# Param
-#   Param1: 左宽
-#   Param2: 右宽
-# Result: 
-# 
-draw_border_line() {
-    local left_width=$1 right_width=$2
+    printf "${COLOR_BORDER}${VERTICAL_LINE}${COLOR_TITLE}"
     
-    printf "${COLOR_BORDER}"
-    for ((i=0; i<left_width; i++)); do printf "${HORIZON_LINE}"; done
-    printf "${CROSS}"
-    for ((i=0; i<right_width; i++)); do printf "${HORIZON_LINE}"; done
-    printf "${COLOR_RESET}\n"
+    if (( show_detail == 0 )); then
+        printf " %-$(($right_width-1))s" ""
+    else
+        printf " %-$(($right_width-1))s" "DETAILS"
+    fi
+    printf "${COLOR_RESET}"
+    printf "${NEW_LINE}"
 }
-
 
 # Description: 绘制菜单项
-# Param
-#   Param1: 所选的行
-#   Param2: 左边框
-#   Param3: 左边框
-#   Param4: 左边框
-# Result: 
-# 
 draw_menu_items() {
-    # local selected_idx=$1 left_width=$2 start_line=$3 visible_lines=$4
     local selected_idx=$(($1 + 1)) left_width=$2 start_line=$3 visible_lines=$4
 
+    local line
     for ((line=0; line<visible_lines; line++)); do
         move_cursor $((start_line + line)) 1
 
-        # if (( line < ${#MENU_ITEMS[@]} )); then
-        # if (( line < ${#details[@]} )); then
         if (( line < $(( ${#details[@]} + 1 )) )); then
             local i=$((line + 1))
 
             # 菜单-根节点
             if [[ $line -eq 0 ]]; then
                 printf " %-$(($left_width-2))s" "${E_LADY_BUG} Menu"
-                printf "${VERTICAL_LINE}"
+                printf "${COLOR_BORDER}${VERTICAL_LINE}${COLOR_RESET}"
                 continue
             fi
 
             local result=(${(f)"$(parse_menu_item $line)"})
-            local name="${result[1]}"   # 菜单名称
-            local level=${result[2]}    # 菜单层级，用于处理缩进
-            local type="${result[3]}"   # 菜单类型，用于显示节点图标 
+            local name="${result[1]}"
+            local level=${result[2]}
+            local type="${result[3]}"
             local symbol="$([[ $type == "MenuItem" ]] && echo "${LEFT_FLOOR}" || echo "${TRIANGLE_RIGHT}")"
 
             if (( i == selected_idx )); then
                 _selected_menu_item="${name}"
                 printf "${COLOR_SELECTED} %-$(($left_width-1))s${COLOR_RESET}" "$(_cpt_symbol_printf ' ' ${level}) ${symbol} ${name}"
+                printf "${COLOR_BORDER}${VERTICAL_LINE}${COLOR_RESET}"
             else
                 printf " %-$(($left_width-1))s" "$(_cpt_symbol_printf ' ' ${level}) ${symbol} ${name}"
+                printf "${COLOR_BORDER}${VERTICAL_LINE}${COLOR_RESET}"
             fi
         else
             printf " %-$(($left_width-1))s" " "
+            printf "${COLOR_BORDER}${VERTICAL_LINE}${COLOR_RESET}"
         fi
         
-        # printf "│"
-        printf "${VERTICAL_LINE}"
         clear_to_end
     done
 }
 
-
 # Description: 绘制内容
-# Param
-#   Param1: 
-#   Param2: 
-#   Param3: 
-#   Param4: 
-# Result: 
-# 
 draw_content() {
     local right_start=$1 right_width=$2 content_start=$3 content_height=$4
     
+    # 确保 right_width 有效
+    if (( right_width < 5 )); then
+        right_width=10
+    fi
+    
+    # 如果不显示内容，直接清空右侧区域
+    if (( show_detail == 0 )); then
+        local i
+        for ((i=0; i<content_height; i++)); do
+            local line_num=$((i + content_start))
+            move_cursor $line_num $right_start
+            printf "%${right_width}s" ""
+            clear_to_end
+        done
+        return
+    fi
+    
+    # 确保 detail_lines 有内容
+    if (( ${#detail_lines[@]} == 0 )); then
+        detail_lines[1]="(无内容)"
+        max_line_length=10
+    fi
+    
     local start_line=$scroll_offset_y
     local end_line=$((start_line + content_height))
-    (( end_line > ${#detail_lines[@]} )) && end_line=${#detail_lines[@]}
+    if (( end_line > ${#detail_lines[@]} )); then
+        end_line=${#detail_lines[@]}
+    fi
     
     disable_wrap
     
+    local i
     for ((i=start_line; i<end_line; i++)); do
         local line_num=$((i - start_line + content_start))
         move_cursor $line_num $right_start
         
         local display_line="${detail_lines[i+1]}"
-        (( ${#display_line} > scroll_offset_x )) && \
-            display_line="${display_line:$scroll_offset_x:$right_width}" || \
+        local line_len=${#display_line}
+        if (( line_len > scroll_offset_x )); then
+            display_line="${display_line:$scroll_offset_x:$right_width}"
+        else
             display_line=""
+        fi
         
         printf "%-${right_width}s" "$display_line"
     done
@@ -356,13 +382,7 @@ draw_content() {
     enable_wrap
 }
 
-
 # Description: 绘制底部
-# Param
-#   Param1: 
-#   Param2: 
-#   Param3: 
-# Result: 
 draw_bottom() {
     local term_height=$1 left_width=$2 right_width=$3
     local total_lines=${#detail_lines[@]}
@@ -373,29 +393,28 @@ draw_bottom() {
     (( max_scroll_x < 0 )) && max_scroll_x=0
     
     # 底部边框
-    move_cursor $((term_height - 1)) 1
-    clear_line
-    printf "${COLOR_BORDER}"
-    for ((i=0; i<left_width; i++)); do printf "${HORIZON_LINE}"; done
-    printf "${CROSS}"
-    for ((i=0; i<right_width; i++)); do printf "${HORIZON_LINE}"; done
-    printf "${COLOR_RESET}"
+    draw_separator_line $left_width $right_width $((term_height - 1))
     
-    # 横向滚动条
-    (( max_line_length > right_width )) && \
+    # 横向滚动条（仅在显示内容时显示）
+    if (( show_detail == 1 && max_line_length > right_width )); then
         draw_horizontal_scrollbar $max_line_length $right_width $((term_height - 1))
+    fi
     
     # 提示行
     move_cursor $term_height 1
     clear_line
     printf "${COLOR_BORDER}"
-    printf "${UP}${SLASH}${DOWN}:menu  ${LEFT}${SLASH}${RIGHT}:scroll  PgUp${SLASH}PgDn:page  Home${SLASH}End:top${SLASH}bottom  q:quit"
+    printf "${UP}${SLASH}${DOWN}:menu  ${LEFT}${SLASH}${RIGHT}:scroll  PgUp${SLASH}PgDn:page  Home${SLASH}End:top${SLASH}bottom  Enter:show  q:quit"
     
-    # 状态信息
-    (( total_lines > content_height )) && \
-        printf " [Y: %d${SLASH}%d]" $scroll_offset_y $max_scroll_y
-    (( max_line_length > right_width )) && \
-        printf " [X: %d${SLASH}%d]" $scroll_offset_x $max_scroll_x
+    # 状态信息（仅在显示内容时显示）
+    if (( show_detail == 1 )); then
+        if (( total_lines > content_height )); then
+            printf " [Y: %d${SLASH}%d]" $scroll_offset_y $max_scroll_y
+        fi
+        if (( max_line_length > right_width )); then
+            printf " [X: %d${SLASH}%d]" $scroll_offset_x $max_scroll_x
+        fi
+    fi
     
     printf "${COLOR_RESET}"
 }
@@ -405,9 +424,6 @@ draw_bottom() {
 #===========================================
 
 # Description: 主绘制函数
-# Param
-#   Param1: 所选的行
-# Result: 
 draw() {
     local selected_idx=$1
     
@@ -416,42 +432,42 @@ draw() {
     local left_width=30
     local right_start=$((left_width + 2))
     local right_width=$((current_width - left_width - 5))
-    (( right_width < 10 )) && right_width=10
-    
-    # # 准备内容
-    # # local _menu_item_content=$(${details[\"${MENU_ITEMS[selected_idx]}\"]})
-    # local _menu_item_content=$(eval "${details[${MENU_ITEMS[$selected_idx]}]}")
-    # # printf "--->>> _menu_item_content: %s\n"  $_menu_item_content
-    # prepare_detail_lines "$_menu_item_content"
-
-    # 修复：使用引号保护内容
-    # local cmd="${details[${MENU_ITEMS[$selected_idx]}]}"
-    # local _menu_item_content
-    # _menu_item_content=$(eval "$cmd" 2>&1)  # 捕获 stderr
-
-    local cmd="${details[${_selected_menu_item}]}"
-    local _menu_item_content="$(eval "$cmd" 2>&1)"
-    
-    # 修复：传递时加引号
-    prepare_detail_lines "$_menu_item_content"
+    if (( right_width < 10 )); then
+        right_width=10
+    fi
     
     # 计算可视区域
     local content_start=3
-    # local content_height=$((current_height - 5))
     local content_height=$((current_height - 4))
-    (( content_height < 1 )) && content_height=1
+    if (( content_height < 1 )); then
+        content_height=1
+    fi
     local total_lines=${#detail_lines[@]}
     
-    # 调整滚动位置
-    local max_scroll_y=$((total_lines - content_height))
-    (( max_scroll_y < 0 )) && max_scroll_y=0
-    (( scroll_offset_y > max_scroll_y )) && scroll_offset_y=$max_scroll_y
-    (( scroll_offset_y < 0 )) && scroll_offset_y=0
-    
-    local max_scroll_x=$((max_line_length - right_width))
-    (( max_scroll_x < 0 )) && max_scroll_x=0
-    (( scroll_offset_x > max_scroll_x )) && scroll_offset_x=$max_scroll_x
-    (( scroll_offset_x < 0 )) && scroll_offset_x=0
+    # 只在显示内容时调整滚动位置
+    if (( show_detail == 1 )); then
+        local max_scroll_y=$((total_lines - content_height))
+        if (( max_scroll_y < 0 )); then
+            max_scroll_y=0
+        fi
+        if (( scroll_offset_y > max_scroll_y )); then
+            scroll_offset_y=$max_scroll_y
+        fi
+        if (( scroll_offset_y < 0 )); then
+            scroll_offset_y=0
+        fi
+        
+        local max_scroll_x=$((max_line_length - right_width))
+        if (( max_scroll_x < 0 )); then
+            max_scroll_x=0
+        fi
+        if (( scroll_offset_x > max_scroll_x )); then
+            scroll_offset_x=$max_scroll_x
+        fi
+        if (( scroll_offset_x < 0 )); then
+            scroll_offset_x=0
+        fi
+    fi
     
     # 绘制界面
     clear_screen
@@ -460,15 +476,16 @@ draw() {
     disable_wrap
     
     draw_title_bar $left_width $right_width
-    draw_border_line $left_width $right_width
+    draw_separator_line $left_width $right_width 2
     draw_menu_items $selected_idx $left_width $content_start $content_height
     
     draw_content $right_start $right_width $content_start $content_height
     
-    # 垂直滚动条
-    (( total_lines > content_height )) && \
+    # 垂直滚动条（仅在显示内容时显示）
+    if (( show_detail == 1 && total_lines > content_height )); then
         draw_vertical_scrollbar $scroll_offset_y $total_lines $content_height \
             $((right_start + right_width + 1)) $content_start
+    fi
     
     draw_bottom $current_height $left_width $right_width
     
@@ -480,102 +497,132 @@ draw() {
 # 输入处理
 #===========================================
 
+# Description: 显示当前选中的菜单项内容
+show_current_content() {
+    # 获取当前选中项的内容
+    local cmd="${details[${_selected_menu_item}]}"
+    
+    if [[ -n "$cmd" ]]; then
+        # 执行命令并获取输出
+        local output
+        output=$(eval "$cmd" 2>&1)
+        prepare_detail_lines "$output"
+    else
+        prepare_detail_lines "错误: 未找到命令 '${_selected_menu_item}'"
+    fi
+    
+    # 设置为显示模式
+    show_detail=1
+    scroll_offset_y=0
+    scroll_offset_x=0
+    
+    # 重新绘制界面
+    draw $selected
+}
+
 # Description: 方向键输入函数
-# Param
-#   Param1: 
-# Result: 
 handle_arrow_keys() {
     local key=$1
     
     case $key in
         'A')  # 上
-            (( selected > 1 )) && {
+            if (( selected > 1 )); then
                 ((selected--))
                 scroll_offset_y=0
                 scroll_offset_x=0
+                show_detail=0
 
-                # 添加这两行
                 local result=(${(f)"$(parse_menu_item $selected)"})
                 _selected_menu_item="${result[1]}"
 
                 draw $selected
-            }
+            fi
             ;;
         'B')  # 下
-            # (( selected < ${#MENU_ITEMS[@]} )) && {
-            (( selected < ${#details[@]} )) && {
+            if (( selected < ${#details[@]} )); then
                 ((selected++))
                 scroll_offset_y=0
                 scroll_offset_x=0
+                show_detail=0
 
-                # 添加这两行
                 local result=(${(f)"$(parse_menu_item $selected)"})
                 _selected_menu_item="${result[1]}"
 
                 draw $selected
-            }
+            fi
             ;;
         'C')  # 右
-            local right_width=$((current_width - 30 - 5))
-            (( right_width < 10 )) && right_width=10
-            local max_scroll=$((max_line_length - right_width))
-            (( max_scroll > 0 && scroll_offset_x < max_scroll )) && {
-                ((scroll_offset_x++))
-                draw $selected
-            }
+            if (( show_detail == 1 )); then
+                local right_width=$((current_width - 30 - 5))
+                if (( right_width < 10 )); then
+                    right_width=10
+                fi
+                local max_scroll=$((max_line_length - right_width))
+                if (( max_scroll > 0 && scroll_offset_x < max_scroll )); then
+                    ((scroll_offset_x++))
+                    draw $selected
+                fi
+            fi
             ;;
         'D')  # 左
-            (( scroll_offset_x > 0 )) && {
+            if (( show_detail == 1 && scroll_offset_x > 0 )); then
                 ((scroll_offset_x--))
                 draw $selected
-            }
+            fi
             ;;
     esac
 }
 
-
 # Description: PgUp/PgDown/Home/End键输入函数
-# Param
-#   Param1: 
-# Result: 
 handle_page_keys() {
     local key=$1
     
+    if (( show_detail == 0 )); then
+        return
+    fi
+    
+    local content_height=$((current_height - 5))
+    local step=$((content_height - 1))
+    if (( step < 1 )); then
+        step=1
+    fi
+    
     case $key in
-        '5')  # Page Up
-            local content_height=$((current_height - 5))
-            local step=$((content_height - 1))
-            (( step < 1 )) && step=1
+        '5')
             scroll_offset_y=$((scroll_offset_y - step))
-            (( scroll_offset_y < 0 )) && scroll_offset_y=0
+            if (( scroll_offset_y < 0 )); then
+                scroll_offset_y=0
+            fi
             draw $selected
             ;;
-        '6')  # Page Down
-            local content_height=$((current_height - 5))
+        '6')
             local total_lines=${#detail_lines[@]}
             local max_scroll=$((total_lines - content_height))
-            (( max_scroll < 0 )) && max_scroll=0
-            local step=$((content_height - 1))
-            (( step < 1 )) && step=1
+            if (( max_scroll < 0 )); then
+                max_scroll=0
+            fi
             scroll_offset_y=$((scroll_offset_y + step))
-            (( scroll_offset_y > max_scroll )) && scroll_offset_y=$max_scroll
+            if (( scroll_offset_y > max_scroll )); then
+                scroll_offset_y=$max_scroll
+            fi
             draw $selected
             ;;
-        'H')  # Home
+        'H')
             scroll_offset_y=0
             draw $selected
             ;;
-        'F')  # End
-            local content_height=$((current_height - 5))
+        'F')
             local total_lines=${#detail_lines[@]}
+            local content_height=$((current_height - 5))
             local max_scroll=$((total_lines - content_height))
-            (( max_scroll < 0 )) && max_scroll=0
+            if (( max_scroll < 0 )); then
+                max_scroll=0
+            fi
             scroll_offset_y=$max_scroll
             draw $selected
             ;;
     esac
 }
-
 
 #===========================================
 # 主循环
@@ -594,25 +641,35 @@ while true; do
     
     if (( current_height != old_height || current_width != old_width )); then
         draw $selected
+        continue
     fi
     
     # 读取按键
-    read -s -k -t 0.05 key 2>/dev/null
-    (( $? != 0 )) && continue
+    read -s -k key
     
+    # 处理按键
     case $key in
-        $'\x1b')  # ESC 序列
+        $'\n'|$'\r')
+            # 回车键 - 显示内容
+            show_current_content
+            ;;
+        $'\x1b')
+            # ESC 序列（方向键等）
             read -s -k -t 0.05 seq1
-            [[ $seq1 == '[' ]] && {
+            if [[ $seq1 == '[' ]]; then
                 read -s -k -t 0.05 seq2
                 case $seq2 in
-                    [ABCD]) handle_arrow_keys $seq2 ;;
-                    [56])   handle_page_keys $seq2 ;;
-                    [HF])   handle_page_keys $seq2 ;;
+                    [ABCD])
+                        handle_arrow_keys $seq2
+                        ;;
+                    [56]|H|F)
+                        handle_page_keys $seq2
+                        ;;
                 esac
-            }
+            fi
             ;;
-        [qQ])   # 退出
+        [qQ])
+            # 退出
             clear_screen
             show_cursor
             enable_wrap
