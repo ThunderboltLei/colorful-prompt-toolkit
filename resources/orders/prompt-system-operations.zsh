@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+### MyStudios
+export MyStudios="/Users/raymondlei/Studios"
 
 # Description: 当执行 clear 或 history-c 时，清空提示符结束标记
 # Params:
