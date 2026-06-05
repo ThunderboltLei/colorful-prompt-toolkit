@@ -47,7 +47,7 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-init.zsh
 
 
 # 加载命令脚本
-source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/orders/prompt-orders.zsh
+source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/prompt-runtime-configs.zsh
 
 
 # === 时间：初始化 ===
