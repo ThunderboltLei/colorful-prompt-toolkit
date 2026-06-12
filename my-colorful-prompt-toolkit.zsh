@@ -16,7 +16,5 @@
 target_path="${0:a:h}"
 [[ "${MY_COLORFUL_PROMPT_ROOT_PATH}" != "$target_path" ]] && export MY_COLORFUL_PROMPT_ROOT_PATH="$target_path"
 
-
 # === 自定义提示符样式 ===
 source $MY_COLORFUL_PROMPT_ROOT_PATH/libs/prompt-themes-selector.zsh
-
