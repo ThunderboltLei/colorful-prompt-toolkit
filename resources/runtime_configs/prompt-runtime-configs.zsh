@@ -20,3 +20,6 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/prompt-github.zsh
 
 # java
 source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/prompt-java.zsh
+
+# maven
+source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/prompt-maven.zsh
