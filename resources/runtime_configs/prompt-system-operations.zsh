@@ -35,8 +35,12 @@ alias history-c=_cpt_clean_history
 # 
 _cpt_list() {
     {
-        if [[ -z '$1' ]]; then
-            $1="."
+        local CPT_PATH="$1"
+        if [[ -z "${CPT_PATH}" ]]; then
+            CPT_PATH="./"
+        fi
+        if [[ "${CPT_PATH}" != */ ]]; then
+            CPT_PATH="${CPT_PATH}/"
         fi
         # 定义颜色变量
         local RED='\033[0;31m'
@@ -48,10 +52,10 @@ _cpt_list() {
         local BOLD='\033[1m'
 
         printf "${GREEN} >>> ${RED}${BOLD}Directory List:${RESET}\n"
-        ([[ -n `ls -ld -- "$1"*(N/) 2>/dev/null` ]] && ls -ld -- "$1"*(N/) | sort -k6r -k7r -k8r -k9r || printf "No Directory Here ...\n"); # 先列目录
+        ([[ -n `ls -ld -- $CPT_PATH*(N/) 2>/dev/null` ]] && ls -ld -- $CPT_PATH*(N/) | sort -k6r -k7r -k8r -k9r || printf "No Directory Here ...\n"); # 先列目录
         echo;
         printf "${GREEN} >>> ${CYAN}${BOLD}Document List:${RESET}\n";
-        ([[ -n `ls -ld -- "$1"*(N.) 2>/dev/null` ]] && ls -ld -- "$1"*(N.) | sort -k6r -k7r -k8r -k9r || printf "No Document Here ...\n"); # 再列文件
+        ([[ -n `ls -ld -- $CPT_PATH*(N.) 2>/dev/null` ]] && ls -ld -- $CPT_PATH*(N.) | sort -k6r -k7r -k8r -k9r || printf "No Document Here ...\n"); # 再列文件
     } 2>/dev/null | grep -v '^total'
 }
 alias ll=_cpt_list
