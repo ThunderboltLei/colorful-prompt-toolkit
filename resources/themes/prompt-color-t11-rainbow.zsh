@@ -20,7 +20,7 @@ assemble_colorful_prompt() {
     _cpt_get_prompt_color
 
     # 定义左侧提示符
-    # print -n " ${E_GREEN_APPLE} "
+    # print -n "${EMPTY}${E_GREEN_APPLE}${EMPTY}"
     print -n "${EMPTY}"
     print -n "%F{${colors[COLOR_01]}}${ROUND_LEFT}%f" # 圆角边缘
     # === user ===
@@ -48,11 +48,9 @@ assemble_colorful_prompt() {
     fi
 
     # === datetime ===
-    print -n "%K{${colors[COLOR_06]}}%F{${SYSTEM_MODE}}${EMPTY}${WATCH}${EMPTY}$(_cpt_format_time)${EMPTY}${colors[RESET]}"
+    print -n "%K{${colors[COLOR_06]}}%F{${REVERSE_SYSTEM_MODE}}${EMPTY}${WATCH}${EMPTY}$(_cpt_format_time)${EMPTY}${colors[RESET]}"
     print -n "%F{${colors[COLOR_06]}}${ROUND_RIGHT}${EMPTY}%f"
-    # print -n "${NEW_LINE}"
-    print -n "%F{${colors[COLOR_05]}}%B${ANGLE_RIGHT}%b%f"
-    # print -n "%F{${colors[COLOR_05]}}%B${TRIANGLE_RIGHT}%b%f"
+    print -n "%F{${REVERSE_SYSTEM_MODE}}%B${ANGLE_RIGHT}%b%f"
     print -n "${EMPTY}"
 }
 
