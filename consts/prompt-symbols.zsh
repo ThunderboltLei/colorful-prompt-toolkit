@@ -10,6 +10,7 @@
 APPLE=""
 WATCH="⏲"
 DOCUMENT="⎗"
+GITHUB="⚿"
 
 # 定义颜色和形状字符
 LEFT_ARROW=""  # 向左实心箭头

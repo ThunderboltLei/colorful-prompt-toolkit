@@ -40,7 +40,7 @@ assemble_colorful_prompt() {
     else
         print -n "%K{${colors[COLOR_04]}}%F{${colors[COLOR_03]}}${RIGHT_ARROW}${colors[RESET]}"
         print -n "%K{${colors[COLOR_05]}}%F{${colors[COLOR_04]}}${RIGHT_ARROW}${colors[RESET]}"
-        print -n "%K{${colors[COLOR_05]}}%F{${REVERSE_SYSTEM_MODE}}${EMPTY}${E_GITHUB}${EMPTY}git%B${SQUARE_LEFT}%b${colors[RESET]}"
+        print -n "%K{${colors[COLOR_05]}}%F{${REVERSE_SYSTEM_MODE}}${EMPTY}${GITHUB}${EMPTY}git%B${SQUARE_LEFT}%b${colors[RESET]}"
         print -n "%K{${colors[COLOR_05]}}%F{${REVERSE_SYSTEM_MODE}}$(__git_ps1 "%s")${colors[RESET]}"
         print -n "%K{${colors[COLOR_05]}}%F{${REVERSE_SYSTEM_MODE}}%B${SQUARE_RIGHT}%b${colors[RESET]}"
         print -n "%K{${colors[COLOR_01]}}%F{${colors[COLOR_05]}}${RIGHT_ARROW}${colors[RESET]}"
