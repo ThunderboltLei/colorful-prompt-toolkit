@@ -89,6 +89,9 @@ case $MY_COLORFUL_PROMPT_TYPE in
 10)
     source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/themes/prompt-color-t10-kalino.zsh
     ;;
+11)
+    source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/themes/prompt-color-t11-rainbow.zsh
+    ;;
 *)
     source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/themes/prompt-color-t1-ninja.zsh
     ;;
