@@ -28,6 +28,7 @@ MENU_ITEMS=(
     "Files:1:Dir"
         "Dirs & Docs:2:MenuItem"
         "Git Log Graph:2:MenuItem"
+        "Macos Auto Update Script:2:MenuItem"
 )
 # <自定义菜单项对应的脚本>
 ORDER_ITEMS=(
@@ -40,5 +41,6 @@ ORDER_ITEMS=(
     "activity_monitor.zsh"
     "dirs_and_docs.zsh"
     "git_log_graph.zsh"
+    "macos_auto_update_script.zsh"
 )
 

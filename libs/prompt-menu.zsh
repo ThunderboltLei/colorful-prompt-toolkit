@@ -526,8 +526,12 @@ handle_arrow_keys() {
     
     case $key in
         'A')  # 上
-            if (( selected > 1 )); then
-                ((selected--))
+            if (( ${#details[@]} > 0 )); then
+                if (( selected > 1 )); then
+                    ((selected--))
+                else
+                    selected=${#details[@]}  # 跳到最后一个
+                fi
                 scroll_offset_y=0
                 scroll_offset_x=0
                 show_detail=0
@@ -539,8 +543,12 @@ handle_arrow_keys() {
             fi
             ;;
         'B')  # 下
-            if (( selected < ${#details[@]} )); then
-                ((selected++))
+            if (( ${#details[@]} > 0 )); then
+                if (( selected < ${#details[@]} )); then
+                    ((selected++))
+                else
+                    selected=1  # 跳到第一个
+                fi
                 scroll_offset_y=0
                 scroll_offset_x=0
                 show_detail=0

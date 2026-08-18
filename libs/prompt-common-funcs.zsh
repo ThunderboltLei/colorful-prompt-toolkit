@@ -64,7 +64,7 @@ _cpt_print_color() {
 # 
 _cpt_simple_print() {
     local color_code=$1
-    print -n "$1"; echo
+    print -n -- "$1"; echo
 }
 
 
