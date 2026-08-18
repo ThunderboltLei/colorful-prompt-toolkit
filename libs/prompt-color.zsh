@@ -131,9 +131,9 @@ _cpt_get_prompt_color() {
         colors[COLOR_01]="magenta"
         colors[COLOR_02]="cyan"
         colors[COLOR_03]="#079992"
-        colors[COLOR_04]="#98FB98}"
+        colors[COLOR_04]="#98FB98"
         colors[COLOR_05]="#C74D55"
-        colors[COLOR_06]="#FFFDCB}" # bg_color
+        colors[COLOR_06]="#FFFDCB" # bg_color
         colors[LEFT_COLOR]="#FFFDCB"
         colors[RIGHT_COLOR]="#FFFDCB"
         colors[RESET]="%f%k"
