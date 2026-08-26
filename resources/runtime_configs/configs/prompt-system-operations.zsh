@@ -16,7 +16,7 @@ _cpt_clear() {
     unset G_ZSH_COMMAND_DURATION
     command clear
 }
-alias clear=_cpt_clear
+alias cpt.clear=_cpt_clear
 
 _cpt_clean_history() {
     # 清除记录
@@ -24,7 +24,7 @@ _cpt_clean_history() {
 
     _cpt_clear
 }
-alias history-c=_cpt_clean_history
+alias cpt.history-c=_cpt_clean_history
 
 
 # Description: 检索当前目录下的文件夹列表和文件列表
@@ -58,5 +58,5 @@ _cpt_list() {
         ([[ -n `ls -ld -- $CPT_PATH*(N.) 2>/dev/null` ]] && ls -ld -- $CPT_PATH*(N.) | sort -k6r -k7r -k8r -k9r || printf "No Document Here ...\n"); # 再列文件
     } 2>/dev/null | grep -v '^total'
 }
-alias ll=_cpt_list
+alias cpt.ll=_cpt_list
 
