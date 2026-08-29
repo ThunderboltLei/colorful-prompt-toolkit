@@ -84,3 +84,20 @@ _cpt_sentents_printf() {
     echo
 }
 
+
+# 
+# Description: 输出指定数量的符号
+# Params:
+#   param1: symbol
+#   param2: count
+# Result: 
+# 
+function _cpt_clickable_pwd() {
+    local url="file://${PWD}"
+    local display_name="${PWD##*/}"
+    [[ -z "$display_name" ]] && display_name="/"
+
+    # print -n "$display_name"
+    # printf "%s" "$display_name"
+    print -n "%{\e]8;;file://${PWD}\e\ %}%U$display_name%u %{\e]8;;\e\ %}"
+}

@@ -28,7 +28,8 @@ assemble_colorful_prompt() {
     print -n "%K{${colors[COLOR_02]}}%F{${colors[COLOR_01]}}${RIGHT_ARROW}${colors[RESET]}"
     print -n "%K{${colors[COLOR_03]}}%F{${colors[COLOR_02]}}${RIGHT_ARROW}${colors[RESET]}"
     # === path ===
-    print -n "%K{${colors[COLOR_03]}}%F{${REVERSE_SYSTEM_MODE}}${EMPTY}${DOCUMENT}${EMPTY}%c${EMPTY}${colors[RESET]}"
+    # print -n "%K{${colors[COLOR_03]}}%F{${REVERSE_SYSTEM_MODE}}${EMPTY}${DOCUMENT}${EMPTY}%c${EMPTY}${colors[RESET]}"
+    print -n "%K{${colors[COLOR_03]}}%F{${REVERSE_SYSTEM_MODE}}${EMPTY}${DOCUMENT}${EMPTY}$(_cpt_clickable_pwd)${EMPTY}${colors[RESET]}"
 
     # === github ===
     local branch=""
