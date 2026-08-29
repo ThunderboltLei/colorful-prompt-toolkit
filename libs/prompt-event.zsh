@@ -25,6 +25,7 @@ _cpt_show_menu() {
     # text="$USER"
 }
 
+
 # 绑定到 F1 键或某个组合键
 _cpt_run_menu_widget() {
     # 记录第一次按下的时间
@@ -42,3 +43,24 @@ _cpt_run_menu_widget() {
 }
 zle -N _cpt_run_menu_widget
 bindkey 'h' _cpt_run_menu_widget # shift+u 键
+
+
+# 
+# Description: 目录处点击弹出窗口的功能
+# Params:
+#   param1: symbol
+#   param2: count
+# Result: 
+# 
+function _cpt_clickable_pwd() {
+    local url="file://${PWD}"
+    local display_name="${PWD##*/}"
+    [[ -z "$display_name" ]] && display_name="/"
+
+    ### 说明：\e\\不能显示出${EMPTY}这个空格，同时在命令补全时会多出第一个字母。
+    # print -n "%{\e]8;;file://${PWD}\e\\%}%U$display_name%u%{\e]8;;\e\\%}"
+    ### 备注：\a使用此语句，不会出现上述问题。
+    print -n "%{\e]8;;file://${PWD}\a%}%U$display_name%u%{\e]8;;\a%}"
+}
+
+
