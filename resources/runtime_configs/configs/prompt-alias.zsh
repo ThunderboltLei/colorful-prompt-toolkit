@@ -5,6 +5,7 @@
 #alias history-c='clear && history -p'
 alias cpt.brew-c='brew cleanup && brew cleanup --prune=all'
 alias cpt.conda-c='conda clean -t -y && conda clean --packages -y'
+alias cpt.log-erase='sudo log erase --all'
 
 # alias scripts
 local _CPT_APACHE_COMPONETS_PATH="/Users/raymondlei/Studios/developments/workspace/thunderboltlei/apache"
