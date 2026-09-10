@@ -2,6 +2,10 @@
 
 ### alias
 
+alias cpt.clear=_cpt_clear
+alias cpt.history-c=_cpt_clean_history
+alias cpt.ll=_cpt_list
+
 #alias history-c='clear && history -p'
 alias cpt.brew-c='brew cleanup && brew cleanup --prune=all'
 alias cpt.conda-c='conda clean -t -y && conda clean --packages -y'

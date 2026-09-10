@@ -3,11 +3,11 @@
 # terminal
 source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-terminal.zsh
 
-# alias
-source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-alias.zsh
-
 # 加载系统操作命令
 source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-system-operations.zsh
+
+# alias
+source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-alias.zsh
 
 # 加载 homebrew 命令
 source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-homebrew.zsh
