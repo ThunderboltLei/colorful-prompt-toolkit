@@ -1,5 +1,5 @@
 ### homebrew
-export HOMEBREW_PREFIX="$MyStudios/developments/homebrew"
+export HOMEBREW_PREFIX="/opt/homebrew"
 export PATH="$HOMEBREW_PREFIX/bin:$PATH"
 export HOMEBREW_REPOSITORY="$(brew --repository)"
 
