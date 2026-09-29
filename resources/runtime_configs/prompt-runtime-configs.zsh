@@ -9,9 +9,6 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-sy
 # alias
 source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-alias.zsh
 
-# 加载 homebrew 命令
-source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-homebrew.zsh
-
 # miniconda
 source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-miniconda.zsh
 
@@ -23,3 +20,6 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-ja
 
 # maven
 source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-maven.zsh
+
+# 加载 homebrew 命令
+source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-homebrew.zsh

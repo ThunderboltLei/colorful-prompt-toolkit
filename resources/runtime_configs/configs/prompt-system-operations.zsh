@@ -9,7 +9,6 @@ export MyStudios="/Users/raymondlei/Studios"
 #   param2: 
 # Result: 
 # 
-
 _cpt_clear() {
     unset G_ZSH_LAST_COMMAND_START
     unset G_PROMPT_EOL_MARK
@@ -23,6 +22,27 @@ _cpt_clean_history() {
     fc -p
 
     _cpt_clear
+}
+
+
+# Description: brew 清理操作的函数
+# Params:
+#   param1: 
+#   param2: 
+# Result: 
+# 
+_cpt_brew_reset_update_lock() {
+    printf "${GREEN} >>> ${RED}${BOLD} Running brew cleanup: ${RESET}\n"
+    brew cleanup
+    brew cleanup --prune=all
+
+    printf "${GREEN} >>> ${RED}${BOLD} Listing lock files: ${RESET}\n"
+    ls -la "$(brew --prefix)/var/homebrew/locks/"
+
+    printf "${GREEN} >>> ${RED}${BOLD} Removing update lock: ${RESET}\n"
+    rm -f "$(brew --prefix)/var/homebrew/locks/update"
+
+    printf "${GREEN} >>> ${RED}${BOLD} Done.${RESET}\n"
 }
 
 
