@@ -23,3 +23,6 @@ source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-ma
 
 # 加载 homebrew 命令
 source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-homebrew.zsh
+
+# 加载 nodejs 命令
+source $MY_COLORFUL_PROMPT_ROOT_PATH/resources/runtime_configs/configs/prompt-nodejs.zsh
